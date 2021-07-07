@@ -1,0 +1,5 @@
+.DS_STORE
+*.log
+/example
+.idea/
+.vscode
