@@ -3,7 +3,7 @@ import { Resizable, ResizeCallbackData } from 'react-resizable';
 import classnames from 'classnames';
 import 'react-resizable/css/styles.css';
 
-import './index.less';
+import styles from './index.module.less';
 
 type ComponentProp = {
   width: number;
@@ -53,7 +53,7 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   };
 
   return (
-    <th className={classnames(classNames, 'resizable-container')}>
+    <th className={classnames(classNames, styles['resizable-container'])}>
       <Resizable
         className="resizable-box"
         width={resizeWidth}

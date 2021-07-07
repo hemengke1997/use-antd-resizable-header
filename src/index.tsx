@@ -1,7 +1,7 @@
 import React from 'react';
 import ResizableHeader from './ResizableHeader';
-import { ProColumns } from '@ant-design/pro-table';
-import { usePersistFn } from 'ahooks';
+import type { ProColumns } from '@ant-design/pro-table';
+import usePersistFn from 'ahooks/es/usePersistFn';
 
 function useTableResizableHeader<T = any>(
   columns: ProColumns<T>[] | undefined,
@@ -33,7 +33,7 @@ function useTableResizableHeader<T = any>(
       }),
     })) as ProColumns[];
     setResizableColumns(t);
-  }, [columns]);
+  }, []);
 
   // 设置表格宽度
   React.useEffect(() => {

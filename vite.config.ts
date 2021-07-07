@@ -3,7 +3,6 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import typescript2 from 'rollup-plugin-typescript2';
 import path from 'path';
 
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -30,9 +29,16 @@ export default defineConfig({
       '~': path.resolve(__dirname, 'node_modules'),
     },
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
   build: {
     outDir: 'dist',
-    minify: true,
+    minify: false,
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'antd-resizable-header',
@@ -40,8 +46,9 @@ export default defineConfig({
       formats: ['es', 'umd'],
     },
     terserOptions: {
-      compress: {},
+      compress: false,
     },
+    cssCodeSplit: false,
     // watch: {},
     rollupOptions: {
       external: ['react', 'react-dom'],

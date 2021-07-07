@@ -27,7 +27,8 @@
   "include": [
     "src/**/*",
     ".eslintrc.js",
-    ".prettierrc.js"
+    ".prettierrc.js",
+    "./global.d.ts"
   ],
   "exclude": [
     "node_modules",
