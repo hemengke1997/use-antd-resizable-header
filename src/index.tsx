@@ -39,6 +39,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
       }),
     })) as ColumnType[];
     setResizableColumns(t);
+    triggerMount.current += 1;
   }, [columns]);
 
   React.useEffect(() => {
