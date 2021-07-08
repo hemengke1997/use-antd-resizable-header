@@ -36,7 +36,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    minify: false,
+    minify: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'antd-resizable-header',
@@ -44,7 +44,7 @@ export default defineConfig({
       formats: ['es', 'umd'],
     },
     terserOptions: {
-      compress: false,
+      compress: {},
     },
     cssCodeSplit: false,
     // watch: {},
