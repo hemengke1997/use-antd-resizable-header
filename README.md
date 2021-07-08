@@ -36,3 +36,5 @@ function App() {
 ```
 
 ## MIT
+
+[LICENSE](https://github.com/hemengke1997/useATRH/blob/master/LICENSE)
