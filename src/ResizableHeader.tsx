@@ -1,35 +1,68 @@
 import React from 'react';
 import { Resizable, ResizeCallbackData } from 'react-resizable';
+import useThrottleFn from './utils/useThrottleFn';
+import useUpdateEffect from './utils/useUpdateEffect';
 import classnames from 'classnames';
 
-import './index.less';
+import './index.css';
 
 type ComponentProp = {
-  onResize: (index: number) => (width: number) => void;
+  onResize: (width: number) => void;
+  onMount: (width: number) => void;
+  triggerMount: number;
+  throttleWait?: number;
+  width: number;
   handlerClassName?: string;
   lineColor?: string;
-};
+} & Record<string, any>;
 
-const AntdResizableHeader: React.FC<ComponentProp & any> = (props) => {
-  const { width, onResize, handlerClassName, lineColor, className, style, ...rest } = props;
+const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
+  const {
+    width,
+    throttleWait,
+    onResize,
+    onMount,
+    triggerMount,
+    handlerClassName,
+    lineColor,
+    className,
+    style,
+    ...rest
+  } = props;
+
+  const thRef = React.createRef<HTMLTableHeaderCellElement>();
 
   const [resizeWidth, setResizeWidth] = React.useState<number>(width);
 
+  const { run: throttleSetResizeWidth } = useThrottleFn(setResizeWidth, {
+    leading: false,
+    trailing: false,
+    wait: throttleWait,
+  });
+
   React.useEffect(() => {
-    setResizeWidth(width);
+    const domWidth = thRef.current?.getBoundingClientRect().width || width;
+    const w = domWidth > width ? domWidth : width;
+    setResizeWidth(w);
+    onMount?.(w);
+  }, [triggerMount]);
+
+  useUpdateEffect(() => {
+    throttleSetResizeWidth(width);
   }, [width]);
 
   if (!width || Number.isNaN(Number(width))) {
     return <th {...rest} style={style} className={className}></th>;
   }
 
-  const setBodyUserSelect = (canSelect: boolean) => {
-    document.body.style.userSelect = canSelect ? '' : 'none';
+  const setBodyStyle = (active: boolean) => {
+    document.body.style.userSelect = active ? 'none' : '';
+    document.body.style.cursor = active ? 'col-resize' : '';
   };
 
   const onStart = (_: any, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width);
-    setBodyUserSelect(false);
+    setBodyStyle(true);
   };
 
   const onSelfResize = (_: any, data: ResizeCallbackData) => {
@@ -39,11 +72,11 @@ const AntdResizableHeader: React.FC<ComponentProp & any> = (props) => {
   const onStop = () => {
     if (resizeWidth <= 0) return;
     onResize(resizeWidth);
-    setBodyUserSelect(true);
+    setBodyStyle(false);
   };
 
   return (
-    <th className={classnames(className, 'resizable-container')} style={style}>
+    <th className={classnames(className, 'resizable-container')} style={style} ref={thRef}>
       <Resizable
         className="resizable-box"
         width={resizeWidth}

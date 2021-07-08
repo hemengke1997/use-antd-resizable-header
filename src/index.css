@@ -1,16 +1,17 @@
 @import "react-resizable/css/styles.css";
-@primary-color: #1890ff;
+
 
 .resizable-container {
+  --primary-color: #1890ff;
   position: relative;
 
-  .resizable-box {
+  & .resizable-box {
     position: absolute;
     left: 0;
     top: 0;
     background-clip: padding-box;
 
-    .resizable-handler {
+    & .resizable-handler {
       position: absolute;
       right: -5px;
       bottom: 0;
@@ -21,7 +22,7 @@
       height: 100%;
       cursor: col-resize;
 
-      .resizable-line {
+      & .resizable-line {
         width: 4px;
         height: 100%;
         border-radius: 8px;
@@ -31,13 +32,13 @@
       &:active {
         cursor: col-resize;
 
-        .resizable-line {
-          background: @primary-color;
+        & .resizable-line {
+          background: var(--primary-color);
         }
       }
     }
 
-    .resizable-fake-box {
+    & .resizable-fake-box {
       width: 100%;
       height: 100%;
     }

@@ -28,7 +28,8 @@
     "src/**/*",
     ".eslintrc.js",
     ".prettierrc.js",
-    "./global.d.ts"
+    "./global.d.ts",
+    "./postcss.config.js"
   ],
   "exclude": [
     "node_modules",

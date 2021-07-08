@@ -24,27 +24,21 @@ export default defineConfig({
       apply: 'build',
     },
   ],
-  resolve: {
-    alias: [{ find: /^~/, replacement: '' }],
-  },
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-      },
-    },
-  },
   build: {
     outDir: 'dist',
     minify: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
-      name: 'antd-resizable-header',
+      name: 'use-antd-resizable-header',
       fileName: 'index',
       formats: ['es', 'umd'],
     },
     terserOptions: {
-      compress: {},
+      compress: {
+        keep_infinity: true,
+        // Used to delete console in production environment
+        drop_console: true,
+      },
     },
     cssCodeSplit: false,
     // watch: {},
