@@ -25,9 +25,7 @@ export default defineConfig({
     },
   ],
   resolve: {
-    alias: {
-      '~': path.resolve(__dirname, 'node_modules'),
-    },
+    alias: [{ find: /^~/, replacement: '' }],
   },
   css: {
     preprocessorOptions: {

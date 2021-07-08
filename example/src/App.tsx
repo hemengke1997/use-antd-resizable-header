@@ -4,8 +4,9 @@ import { Table } from 'antd';
 import ProTable from '@ant-design/pro-table';
 import './App.css';
 import useATRH from 'use-antd-resizable-header';
-import 'antd/dist/antd.css';
-import 'use-antd-resizable-header/src/index.less';
+import 'use-antd-resizable-header/dist/style.css';
+import 'antd/es/table/style/index.css';
+// import './index.less';
 
 const data = [];
 for (let i = 0; i < 100; i++) {
@@ -99,12 +100,12 @@ function App() {
 
   return (
     <div className="App">
-      <ProTable
+      <Table
         columns={resizableColumns}
         components={components}
         dataSource={data}
         scroll={{ x: tableWidth }}
-      ></ProTable>
+      ></Table>
     </div>
   );
 }

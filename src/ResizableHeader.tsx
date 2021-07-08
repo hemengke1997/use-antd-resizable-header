@@ -1,36 +1,23 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { Resizable, ResizeCallbackData } from 'react-resizable';
 import classnames from 'classnames';
-import 'react-resizable/css/styles.css';
 
-import styles from './index.module.less';
+import './index.less';
 
 type ComponentProp = {
   width: number;
   onResize: (index: number) => (width: number) => void;
-  classNames?: string;
-  style?: CSSProperties;
   handlerClassName?: string;
   lineColor?: string;
-  antdHeaderClassName?: string;
 };
 
-const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
-  const {
-    width,
-    onResize,
-    style,
-    classNames,
-    handlerClassName,
-    lineColor,
-    antdHeaderClassName,
-    ...rest
-  } = props;
+const AntdResizableHeader: React.FC<ComponentProp & any> = (props) => {
+  const { width, onResize, style, handlerClassName, lineColor, className, ...rest } = props;
 
   const [resizeWidth, setResizeWidth] = React.useState<number>(width);
 
-  if (!width) {
-    return <th {...rest}></th>;
+  if (!width || Number.isNaN(Number(width))) {
+    return <th {...rest} style={style} className={className}></th>;
   }
 
   const setBodyUserSelect = (canSelect: boolean) => {
@@ -47,13 +34,13 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   };
 
   const onStop = () => {
-    if (width <= 0) return;
-    onResize(width);
+    if (resizeWidth <= 0) return;
+    onResize(resizeWidth);
     setBodyUserSelect(true);
   };
 
   return (
-    <th className={classnames(classNames, styles['resizable-container'])}>
+    <th className={classnames(className, 'resizable-container')} style={style}>
       <Resizable
         className="resizable-box"
         width={resizeWidth}
@@ -73,9 +60,9 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
         onResize={onSelfResize}
         onResizeStop={onStop}
       >
-        <div className="resizable-fake-box"></div>
+        <div style={{ width: resizeWidth, height: '100%' }}></div>
       </Resizable>
-      <div {...rest} className={classnames(antdHeaderClassName)}></div>
+      <div {...rest}></div>
     </th>
   );
 };
