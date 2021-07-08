@@ -15,6 +15,10 @@ const AntdResizableHeader: React.FC<ComponentProp & any> = (props) => {
 
   const [resizeWidth, setResizeWidth] = React.useState<number>(width);
 
+  React.useEffect(() => {
+    setResizeWidth(width);
+  }, [width]);
+
   if (!width || Number.isNaN(Number(width))) {
     return <th {...rest} style={style} className={className}></th>;
   }
