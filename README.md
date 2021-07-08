@@ -10,9 +10,15 @@ yarn add use-antd-resizable-header
 
 ## Example
 
+## 注意事项
+
+- **columns为常量时，提到组件外，或使用 `React.useMemo`, `React.Ref` 包裹常量**
+
 ```tsx
 import useATRH from 'use-antd-resizable-header';
 import 'use-antd-resizable-header/dist/style.css';
+
+const columns = []
 
 function App() {
   const { components, resizableColumns, tableWidth } = useATRH(columns);

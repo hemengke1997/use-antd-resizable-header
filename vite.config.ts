@@ -9,7 +9,7 @@ export default defineConfig({
     reactRefresh(),
     {
       ...typescript2({
-        check: false,
+        check: true,
         tsconfig: path.resolve(__dirname, `tsconfig.json`),
         tsconfigOverride: {
           compilerOptions: {
