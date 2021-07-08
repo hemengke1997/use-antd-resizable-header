@@ -9,12 +9,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
-  },
   "repository": "https://github.com/hemengke1997/useATRH",
   "keywords": [
     "react",
