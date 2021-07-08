@@ -3,15 +3,9 @@
   "version": "0.0.0",
   "description": "antd resizable header column hook",
   "author": "hemengke1997 <23536175@qq.com>",
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
-  },
+  "types": "dist/index.d.ts",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
   "files": ["dist"],
   "keywords": [
     "react",
@@ -37,14 +31,12 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "ahooks": "^2.10.7",
     "classnames": "^2.3.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-resizable": "^3.0.4"
   },
   "devDependencies": {
-    "@ant-design/pro-table": "^2.43.4",
     "@types/node": "^16.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

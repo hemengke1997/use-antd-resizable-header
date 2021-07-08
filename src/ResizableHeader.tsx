@@ -5,14 +5,13 @@ import classnames from 'classnames';
 import './index.less';
 
 type ComponentProp = {
-  width: number;
   onResize: (index: number) => (width: number) => void;
   handlerClassName?: string;
   lineColor?: string;
 };
 
 const AntdResizableHeader: React.FC<ComponentProp & any> = (props) => {
-  const { width, onResize, style, handlerClassName, lineColor, className, ...rest } = props;
+  const { width, onResize, handlerClassName, lineColor, className, style, ...rest } = props;
 
   const [resizeWidth, setResizeWidth] = React.useState<number>(width);
 

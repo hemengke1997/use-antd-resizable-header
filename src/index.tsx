@@ -1,17 +1,16 @@
 import React from 'react';
 import ResizableHeader from './ResizableHeader';
-import type { ProColumns } from '@ant-design/pro-table';
-import usePersistFn from 'ahooks/es/usePersistFn';
+import useFunction from './utils/useFunction';
 
-function useTableResizableHeader<T = any>(
-  columns: ProColumns<T>[] | undefined,
+function useTableResizableHeader<ColumnType extends Record<string, any>>(
+  columns: ColumnType[] | undefined,
   defaultWidth: number = 120,
 ) {
-  const [resizableColumns, setResizableColumns] = React.useState<ProColumns<T>[]>([]);
+  const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>([]);
 
   const [tableWidth, setTableWidth] = React.useState<number>();
 
-  const onResize = usePersistFn((index: number) => (width: number) => {
+  const onResize = useFunction((index: number) => (width: number) => {
     if (width) {
       setResizableColumns((t) => {
         const nextColumns = [...t];
@@ -27,15 +26,14 @@ function useTableResizableHeader<T = any>(
   React.useEffect(() => {
     const t = columns?.map((col, index) => ({
       ...col,
-      onHeaderCell: (column: ProColumns) => ({
+      onHeaderCell: (column: ColumnType) => ({
         width: column.width,
         onResize: onResize(index),
       }),
-    })) as ProColumns[];
+    })) as ColumnType[];
     setResizableColumns(t);
   }, []);
 
-  // 设置表格宽度
   React.useEffect(() => {
     const width = resizableColumns.reduce((total, current) => {
       return total + (Number(current.width) || defaultWidth);
