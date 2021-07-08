@@ -24,7 +24,8 @@ function App() {
         components={components}
         dataSource={data}
         scroll={{ x: tableWidth }}
-      ></Table>;<ProTable
+      ></Table>
+      <ProTable
         columns={resizableColumns}
         components={components}
         dataSource={data}
