@@ -1,12 +1,13 @@
 {
   "name": "use-antd-resizable-header",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "antd resizable header column hook",
   "author": "hemengke1997 <23536175@qq.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "files": ["dist"],
+  "repository": "https://github.com/hemengke1997/useATRH",
   "keywords": [
     "react",
     "antd",
