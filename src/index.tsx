@@ -32,7 +32,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
       }),
     })) as ColumnType[];
     setResizableColumns(t);
-  }, []);
+  }, [columns]);
 
   React.useEffect(() => {
     const width = resizableColumns.reduce((total, current) => {
