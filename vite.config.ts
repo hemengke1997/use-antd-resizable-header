@@ -9,13 +9,14 @@ export default defineConfig({
     reactRefresh(),
     {
       ...typescript2({
-        check: true,
+        check: false,
         tsconfig: path.resolve(__dirname, `tsconfig.json`),
         tsconfigOverride: {
           compilerOptions: {
             sourceMap: false,
             declaration: true,
             declarationMap: false,
+            allowJs: false
           },
           include: ['src/**/*'],
         },

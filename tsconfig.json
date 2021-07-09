@@ -1,17 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "target": "ESNext",
     "lib": [
       "DOM",
       "ESNext"
     ],
-    "allowJs": false,
-    "skipLibCheck": false,
-    "declaration": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "forceConsistentCasingInFileNames": true,
@@ -22,7 +15,15 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "strictNullChecks": true,
+    "target": "ES5",
+    "allowJs": true,
+    "esModuleInterop": true,
     "downlevelIteration": true,
+    "sourceMap": true,
   },
   "include": [
     "src/**/*",

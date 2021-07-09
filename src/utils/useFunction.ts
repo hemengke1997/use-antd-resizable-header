@@ -1,13 +1,20 @@
-import React from 'react';
+import { useRef } from 'react';
 
-function useFunction<T extends (...args: any[]) => any>(fn: T) {
-  const ref = React.useRef<Function>(() => {
-    throw new Error('Cannot call function while rendering.');
-  });
+export type noop = (...args: any[]) => any;
 
-  ref.current = fn;
+function usePersistFn<T extends noop>(fn: T) {
+  const fnRef = useRef<T>(fn);
+  fnRef.current = fn;
 
-  return React.useCallback(ref.current as T, [ref]);
+  const persistFn = useRef<T>();
+  if (!persistFn.current) {
+    persistFn.current = function (...args) {
+      // eslint-disable-next-line @typescript-eslint/no-invalid-this
+      return fnRef.current!.apply(this, args);
+    } as T;
+  }
+
+  return persistFn.current!;
 }
 
-export default useFunction;
+export default usePersistFn;
