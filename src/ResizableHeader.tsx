@@ -4,7 +4,7 @@ import { Resizable, ResizeCallbackData } from 'react-resizable';
 import useFunction from './utils/useFunction';
 import classnames from 'classnames';
 
-import './index.less';
+import './index.css';
 
 type ComponentProp = {
   onResize: (width: number) => void;
