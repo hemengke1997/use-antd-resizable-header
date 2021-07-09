@@ -1,16 +1,16 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 import { Resizable, ResizeCallbackData } from 'react-resizable';
-import useThrottleFn from './utils/useThrottleFn';
-import useUpdateEffect from './utils/useUpdateEffect';
+import useFunction from './utils/useFunction';
 import classnames from 'classnames';
 
-import './index.css';
+import './index.less';
 
 type ComponentProp = {
   onResize: (width: number) => void;
   onMount: (width: number) => void;
+  isLast: boolean;
   triggerMount: number;
-  throttleWait?: number;
   width: number;
   handlerClassName?: string;
   lineColor?: string;
@@ -19,9 +19,9 @@ type ComponentProp = {
 const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   const {
     width,
-    throttleWait,
     onResize,
     onMount,
+    isLast,
     triggerMount,
     handlerClassName,
     lineColor,
@@ -30,50 +30,49 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
     ...rest
   } = props;
 
-  const thRef = React.createRef<HTMLTableHeaderCellElement>();
+  const thRef = React.useRef<HTMLTableHeaderCellElement>(null);
 
-  const [resizeWidth, setResizeWidth] = React.useState<number>(width);
-
-  const { run: throttleSetResizeWidth } = useThrottleFn(setResizeWidth, {
-    leading: false,
-    trailing: false,
-    wait: throttleWait,
-  });
+  const [resizeWidth, setResizeWidth] = React.useState<number>(0);
 
   React.useEffect(() => {
-    const domWidth = thRef.current?.getBoundingClientRect().width || width;
-    const w = domWidth > width ? domWidth : width;
-    setResizeWidth(w);
-    onMount?.(w);
+    if (width && !isLast) {
+      const domWidth = thRef.current?.getBoundingClientRect().width || width;
+      const w = domWidth > width ? domWidth : width;
+      setResizeWidth(w);
+      onMount?.(w);
+    }
   }, [triggerMount]);
 
-  useUpdateEffect(() => {
-    throttleSetResizeWidth(width);
+  React.useEffect(() => {
+    if (width) {
+      setResizeWidth(width);
+    }
   }, [width]);
 
-  if (!width || Number.isNaN(Number(width))) {
+  if (!width || Number.isNaN(Number(width)) || isLast) {
     return <th {...rest} style={style} className={className}></th>;
   }
 
-  const setBodyStyle = (active: boolean) => {
+  const setBodyStyle = useFunction((active: boolean) => {
     document.body.style.userSelect = active ? 'none' : '';
     document.body.style.cursor = active ? 'col-resize' : '';
-  };
+  });
 
-  const onStart = (_: any, data: ResizeCallbackData) => {
+  const onStart = useFunction((_: any, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width);
     setBodyStyle(true);
-  };
+  });
 
-  const onSelfResize = (_: any, data: ResizeCallbackData) => {
+  const onSelfResize = useFunction((_: any, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width);
-  };
+  });
 
-  const onStop = () => {
+  const onStop = useFunction(() => {
     if (resizeWidth <= 0) return;
+
     onResize(resizeWidth);
     setBodyStyle(false);
-  };
+  });
 
   return (
     <th className={classnames(className, 'resizable-container')} style={style} ref={thRef}>

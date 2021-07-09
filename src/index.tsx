@@ -4,8 +4,8 @@ import useFunction from './utils/useFunction';
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   columns: ColumnType[] | undefined,
+  /** @description 最后一列不能拖动，设置最后一列的最小展示宽度 */
   defaultWidth: number = 120,
-  throttleWait?: number,
 ) {
   const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>([]);
 
@@ -13,7 +13,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [triggerMount, forceRender] = React.useReducer((s) => s + 1, 0);
 
-  const onResize = useFunction((index: number) => (width: number) => {
+  const onMount = useFunction((index: number) => (width: number) => {
     if (width) {
       setResizableColumns((t) => {
         const nextColumns = [...t];
@@ -26,19 +26,31 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     }
   });
 
+  const onResize = onMount;
+
   React.useEffect(() => {
-    const t = columns?.map((col, index) => ({
-      ...col,
-      onHeaderCell: (column: ColumnType) => ({
-        throttleWait,
-        width: column.width,
-        onMount: onResize(index),
-        onResize: onResize(index),
-        triggerMount,
-      }),
-    })) as ColumnType[];
+    forceRender();
+  }, [columns]);
+
+  React.useEffect(() => {
+    const t = columns?.map((col, index) => {
+      const isLast = index === columns.length - 1;
+      return {
+        ...col,
+        onHeaderCell: (column: ColumnType) => {
+          return {
+            width: column.width,
+            onMount: onMount(index),
+            onResize: onResize(index),
+            triggerMount,
+            isLast,
+          };
+        },
+        width: isLast ? undefined : col.width,
+      };
+    }) as ColumnType[];
     setResizableColumns(t);
-  }, [columns, triggerMount]);
+  }, [triggerMount]);
 
   React.useEffect(() => {
     window.addEventListener('resize', forceRender);
@@ -49,7 +61,12 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   React.useEffect(() => {
     const width = resizableColumns.reduce((total, current) => {
-      return total + (Number(current.width) || defaultWidth);
+      return (
+        total +
+        (Number(current.width) ||
+          resizableColumns[resizableColumns.length - 1].width ||
+          defaultWidth)
+      );
     }, 0);
     setTableWidth(width);
   }, [resizableColumns]);
