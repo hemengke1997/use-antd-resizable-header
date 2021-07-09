@@ -1,7 +1,5 @@
 import React from 'react';
-import { useRef } from 'react';
 import ResizableHeader from './ResizableHeader';
-import useDebounceFn from './utils/useDebounceFn';
 import useFunction from './utils/useFunction';
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
@@ -13,7 +11,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [tableWidth, setTableWidth] = React.useState<number>();
 
-  const triggerMount = useRef<number>(0);
+  const [triggerMount, forceRender] = React.useReducer((s) => s + 1, 0);
 
   const onResize = useFunction((index: number) => (width: number) => {
     if (width) {
@@ -36,21 +34,16 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
         width: column.width,
         onMount: onResize(index),
         onResize: onResize(index),
-        triggerMount: triggerMount.current,
+        triggerMount,
       }),
     })) as ColumnType[];
     setResizableColumns(t);
-    triggerMount.current += 1;
-  }, [columns]);
-
-  const { run: onWindowResize } = useDebounceFn(() => {
-    triggerMount.current += 1;
-  });
+  }, [columns, triggerMount]);
 
   React.useEffect(() => {
-    window.addEventListener('resize', onWindowResize);
+    window.addEventListener('resize', forceRender);
     return () => {
-      window.removeEventListener('resize', onWindowResize);
+      window.removeEventListener('resize', forceRender);
     };
   }, []);
 
