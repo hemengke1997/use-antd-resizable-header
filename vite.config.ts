@@ -3,6 +3,8 @@ import reactRefresh from '@vitejs/plugin-react-refresh';
 import typescript2 from 'rollup-plugin-typescript2';
 import path from 'path';
 
+const env = process.env.NODE_ENV;
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -25,9 +27,12 @@ export default defineConfig({
       apply: 'build',
     },
   ],
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(env || 'development')
+  },
   build: {
     outDir: 'dist',
-    minify: true,
+    minify: false,
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'use-antd-resizable-header',

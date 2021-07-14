@@ -2,7 +2,6 @@
 
 
 .resizable-container {
-  --primary-color: #1890ff;
   position: relative;
 
   & .resizable-box {

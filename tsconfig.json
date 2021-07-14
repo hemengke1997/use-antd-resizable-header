@@ -19,11 +19,11 @@
     "skipLibCheck": true,
     "declaration": false,
     "strictNullChecks": true,
-    "target": "ES5",
+    "target": "esnext",
     "allowJs": true,
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "sourceMap": true,
+    "sourceMap": false,
   },
   "include": [
     "src/**/*",

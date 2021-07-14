@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 import { Resizable, ResizeCallbackData } from 'react-resizable';
-import useFunction from './utils/useFunction';
 import classnames from 'classnames';
 
 import './index.css';
@@ -53,26 +51,26 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
     return <th {...rest} style={style} className={className}></th>;
   }
 
-  const setBodyStyle = useFunction((active: boolean) => {
+  const setBodyStyle = (active: boolean) => {
     document.body.style.userSelect = active ? 'none' : '';
     document.body.style.cursor = active ? 'col-resize' : '';
-  });
+  };
 
-  const onStart = useFunction((_: any, data: ResizeCallbackData) => {
+  const onStart = (_: any, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width);
     setBodyStyle(true);
-  });
+  };
 
-  const onSelfResize = useFunction((_: any, data: ResizeCallbackData) => {
+  const onSelfResize = (_: any, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width);
-  });
+  };
 
-  const onStop = useFunction(() => {
+  const onStop = () => {
     if (resizeWidth <= 0) return;
 
     onResize(resizeWidth);
     setBodyStyle(false);
-  });
+  };
 
   return (
     <th className={classnames(className, 'resizable-container')} style={style} ref={thRef}>
