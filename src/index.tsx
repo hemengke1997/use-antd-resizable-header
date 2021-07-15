@@ -1,6 +1,5 @@
 import React from 'react';
 import ResizableHeader from './ResizableHeader';
-import useFunction from './utils/useFunction';
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   columns: ColumnType[] | undefined,
@@ -13,26 +12,29 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [triggerMount, forceRender] = React.useReducer((s) => s + 1, 0);
 
-  const onMount = useFunction((index: number) => (width: number) => {
-    if (width) {
-      setResizableColumns((t) => {
-        const nextColumns = [...t];
-        nextColumns[index] = {
-          ...nextColumns[index],
-          width,
-        };
-        return nextColumns;
-      });
-    }
-  });
+  const onMount = React.useCallback(
+    (index: number) => (width: number) => {
+      if (width) {
+        setResizableColumns((t) => {
+          const nextColumns = [...t];
+          nextColumns[index] = {
+            ...nextColumns[index],
+            width,
+          };
+          return nextColumns;
+        });
+      }
+    },
+    [],
+  );
 
   const onResize = onMount;
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     forceRender();
   }, [columns]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const t = columns?.map((col, index) => {
       const isLast = index === columns.length - 1;
       return {
@@ -52,14 +54,14 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     setResizableColumns(t);
   }, [triggerMount]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     window.addEventListener('resize', forceRender);
     return () => {
       window.removeEventListener('resize', forceRender);
     };
   }, []);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const width = resizableColumns.reduce((total, current) => {
       return (
         total +
