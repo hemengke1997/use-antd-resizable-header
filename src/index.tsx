@@ -48,7 +48,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             isLast,
           };
         },
-        width: isLast ? undefined : col.width,
+        width: col.width,
       };
     }) as ColumnType[];
     setResizableColumns(t);
