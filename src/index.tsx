@@ -48,7 +48,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             isLast,
           };
         },
-        width: col.width,
+        width: isLast && !col.fixed ? undefined : col.width,
       };
     }) as ColumnType[];
     setResizableColumns(t);
@@ -63,12 +63,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   React.useLayoutEffect(() => {
     const width = resizableColumns.reduce((total, current) => {
-      return (
-        total +
-        (Number(current.width) ||
-          resizableColumns[resizableColumns.length - 1].width ||
-          defaultWidth)
-      );
+      return total + (Number(current.width) || columns?.[columns.length - 1].width || defaultWidth);
     }, 0);
     setTableWidth(width);
   }, [resizableColumns]);
