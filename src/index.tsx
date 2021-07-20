@@ -62,7 +62,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
   }, []);
 
   React.useLayoutEffect(() => {
-    const width = resizableColumns.reduce((total, current) => {
+    const width = resizableColumns?.reduce((total, current) => {
       return total + (Number(current.width) || columns?.[columns.length - 1].width || defaultWidth);
     }, 0);
     setTableWidth(width);
