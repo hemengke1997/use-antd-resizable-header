@@ -32,7 +32,7 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
 
   const [resizeWidth, setResizeWidth] = React.useState<number>(0);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (width && !isLast) {
       const domWidth = thRef.current?.getBoundingClientRect().width || width;
       const w = domWidth > width ? domWidth : width;
@@ -41,7 +41,7 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
     }
   }, [triggerMount]);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (width) {
       setResizeWidth(width);
     }
