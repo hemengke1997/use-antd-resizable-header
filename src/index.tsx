@@ -30,11 +30,11 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const onResize = onMount;
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     forceRender();
   }, [columns]);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const t = columns?.map((col, index) => {
       const isLast = index === columns.length - 1;
       return {
@@ -54,7 +54,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     setResizableColumns(t);
   }, [triggerMount]);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('resize', forceRender);
     return () => {
       window.removeEventListener('resize', forceRender);
