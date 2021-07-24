@@ -1,5 +1,4 @@
-@import "react-resizable/css/styles.css";
-
+@import 'react-resizable/css/styles.css';
 
 .resizable-container {
   position: relative;
@@ -28,7 +27,8 @@
         transition: background-color 0.2s;
       }
 
-      &:active, &:hover {
+      &:active,
+      &:hover {
         cursor: col-resize;
 
         & .resizable-line {
@@ -41,5 +41,11 @@
       width: 100%;
       height: 100%;
     }
+  }
+
+  & .resizable-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }

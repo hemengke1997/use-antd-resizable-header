@@ -95,7 +95,7 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }}></div>
       </Resizable>
-      <div {...rest}></div>
+      <div {...rest} className="resizable-title"></div>
     </th>
   );
 };
