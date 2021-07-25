@@ -2,6 +2,10 @@
 
 > antd 表格头拖拽 Hook，兼容 Table ProTable
 
+## 预览
+
+![preview](./image/preview.gif)
+
 ## 安装
 
 ```bash
@@ -42,6 +46,10 @@ function App() {
   );
 }
 ```
+
+## TODO
+
+[ ] Header Title 提示
 
 ## MIT
 
