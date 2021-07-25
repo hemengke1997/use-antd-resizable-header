@@ -8,19 +8,19 @@ type ComponentProp = {
   onResize: (width: number) => void;
   onMount: (width: number) => void;
   isLast: boolean;
-  triggerMount: number;
+  triggerRender: number;
   width: number;
   handlerClassName?: string;
   lineColor?: string;
 } & Record<string, any>;
 
-const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
+const ResizableHeader: React.FC<ComponentProp> = (props) => {
   const {
     width,
     onResize,
     onMount,
     isLast,
-    triggerMount,
+    triggerRender,
     handlerClassName,
     lineColor,
     className,
@@ -39,7 +39,7 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
       setResizeWidth(w);
       onMount?.(w);
     }
-  }, [triggerMount]);
+  }, [triggerRender]);
 
   React.useEffect(() => {
     if (width) {
@@ -100,4 +100,4 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   );
 };
 
-export default React.memo(AntdResizableHeader);
+export default React.memo(ResizableHeader);

@@ -10,7 +10,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [tableWidth, setTableWidth] = React.useState<number>();
 
-  const [triggerMount, forceRender] = React.useReducer((s) => s + 1, 0);
+  const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
 
   const onMount = React.useCallback(
     (index: number) => (width: number) => {
@@ -30,13 +30,9 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const onResize = onMount;
 
-  React.useEffect(() => {
-    forceRender();
-  }, [columns]);
-
-  React.useEffect(() => {
-    const t = columns?.map((col, index) => {
-      const isLast = index === columns.length - 1;
+  const getColumns = (list: ColumnType[]) => {
+    const t = list?.map((col, index) => {
+      const isLast = index === list.length - 1;
       return {
         ...col,
         onHeaderCell: (column: ColumnType) => {
@@ -44,15 +40,27 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             width: column.width,
             onMount: onMount(index),
             onResize: onResize(index),
-            triggerMount,
+            triggerRender,
             isLast,
           };
         },
         width: isLast && !col.fixed ? undefined : col.width,
       };
     }) as ColumnType[];
+    return t;
+  };
+
+  React.useEffect(() => {
+    if (columns) {
+      const c = getColumns(columns);
+      setResizableColumns(c);
+    }
+  }, [columns]);
+
+  React.useEffect(() => {
+    const t = getColumns(resizableColumns);
     setResizableColumns(t);
-  }, [triggerMount]);
+  }, [triggerRender]);
 
   React.useEffect(() => {
     window.addEventListener('resize', forceRender);
@@ -61,7 +69,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     };
   }, []);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const width = resizableColumns?.reduce((total, current) => {
       return total + (Number(current.width) || columns?.[columns.length - 1].width || defaultWidth);
     }, 0);
