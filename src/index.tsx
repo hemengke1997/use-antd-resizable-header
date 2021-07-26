@@ -6,7 +6,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
   /** @description 最后一列不能拖动，设置最后一列的最小展示宽度 */
   defaultWidth: number = 120,
 ) {
-  const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>([]);
+  const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>(columns || []);
 
   const [tableWidth, setTableWidth] = React.useState<number>();
 
