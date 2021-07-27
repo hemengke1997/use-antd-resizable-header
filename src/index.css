@@ -32,7 +32,7 @@
         cursor: col-resize;
 
         & .resizable-line {
-          background: var(--primary-color, '#000');
+          background: var(--atrh-color, #000);
         }
       }
     }

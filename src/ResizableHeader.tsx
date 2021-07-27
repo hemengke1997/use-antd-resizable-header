@@ -10,23 +10,10 @@ type ComponentProp = {
   isLast: boolean;
   triggerRender: number;
   width: number;
-  handlerClassName?: string;
-  lineColor?: string;
 } & Record<string, any>;
 
 const ResizableHeader: React.FC<ComponentProp> = (props) => {
-  const {
-    width,
-    onResize,
-    onMount,
-    isLast,
-    triggerRender,
-    handlerClassName,
-    lineColor,
-    className,
-    style,
-    ...rest
-  } = props;
+  const { width, onResize, onMount, isLast, triggerRender, className, style, ...rest } = props;
 
   const thRef = React.useRef<HTMLTableHeaderCellElement>(null);
 
@@ -80,12 +67,12 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
         height={0}
         handle={
           <div
-            className={classnames(handlerClassName, 'resizable-handler')}
+            className="resizable-handler"
             onClick={(e) => {
               e.stopPropagation();
             }}
           >
-            <div className="resizable-line" style={{ backgroundColor: lineColor }}></div>
+            <div className="resizable-line"></div>
           </div>
         }
         draggableOpts={{ enableUserSelectHack: false }}

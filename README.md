@@ -15,6 +15,7 @@ yarn add use-antd-resizable-header
 ## 注意事项
 
 - **columns 为常量时，提到组件外，或使用 `React.useMemo`, `React.Ref` 包裹常量**
+- **默认拖动颜色为`#000`，可通过`global`或设置css变量`--atrh-color`设置颜色**
 - **最后一列不能拖动，[请保持最后一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)，若最后一列传入宽度，会把传入的宽度作为最小宽度（默认 120）**
 
 ## Example
@@ -47,9 +48,153 @@ function App() {
 }
 ```
 
-## TODO
+## 基本用例
 
-- [ ] Header Title 提示
+```css
+/* index.css */
+--atrh-color: red;
+```
+
+```tsx
+import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
+import useATRH from 'use-antd-resizable-header';
+
+import 'use-antd-resizable-header/dist/style.css';
+import './index.css';
+
+const columns: ProColumns[] = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+    width: 300,
+  },
+  {
+    title: 'name',
+    dataIndex: 'name',
+  },
+];
+
+const dataSource = [
+  {
+    id: 1,
+    name: 'zhangsan',
+  },
+  {
+    id: 2,
+    name: 'lisi',
+  },
+];
+
+function App() {
+  const { resizableColumns, components, tableWidth } = useATRH(columns);
+
+  return (
+    <ProTable
+      columns={resizableColumns}
+      components={components}
+      scroll={{ x: tableWidth }}
+      dataSource={dataSource}
+    ></ProTable>
+  );
+}
+
+export default App;
+```
+
+## 基本用例 - 搭配 Typography 实现 title 溢出时 tooltip
+
+```css
+/* index.css */
+--atrh-color: red;
+```
+
+```tsx
+// utils.tsx
+export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: boolean) => {
+  let _text = isNil(text) ? '' : String(text);
+
+  if ([null, undefined, ''].includes(text)) _text = '-';
+
+  return (
+    <Typography.Text
+      style={{
+        width: '100%',
+        margin: 0,
+        padding: 0,
+        color: 'inherit',
+      }}
+      onClick={(e) => (stopPropagation ? e?.stopPropagation() : null)}
+      title=" "
+      copyable={
+        copyable && text
+          ? {
+              text,
+              tooltips: ['', ''],
+            }
+          : undefined
+      }
+      ellipsis={text ? { tooltip: text } : false}
+    >
+      {_text}
+    </Typography.Text>
+  );
+};
+```
+
+```tsx
+// index.tsx
+import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
+import useATRH from 'use-antd-resizable-header';
+import { genEllipsis } from './utils.tsx';
+
+import 'use-antd-resizable-header/dist/style.css';
+import './index.css';
+
+const columns: ProColumns[] = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+    width: 300,
+  },
+  {
+    title: 'name',
+    dataIndex: 'name',
+  },
+];
+
+const dataSource = [
+  {
+    id: 1,
+    name: 'zhangsan',
+  },
+  {
+    id: 2,
+    name: 'lisi',
+  },
+];
+
+function App() {
+  const { resizableColumns, components, tableWidth } = useATRH(columns);
+
+  let cols = [...resizableColumns];
+
+  cols = columns.map((item) => ({
+    ...item,
+    title: genEllipsis(item.title as string, false, true),
+  }));
+
+  return (
+    <ProTable
+      columns={cols}
+      components={components}
+      scroll={{ x: tableWidth }}
+      dataSource={dataSource}
+    ></ProTable>
+  );
+}
+
+export default App;
+```
 
 ## MIT
 
