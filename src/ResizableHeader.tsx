@@ -10,10 +10,22 @@ type ComponentProp = {
   isLast: boolean;
   triggerRender: number;
   width: number;
+  titleTip?: string;
 } & Record<string, any>;
 
-const ResizableHeader: React.FC<ComponentProp> = (props) => {
-  const { width, onResize, onMount, isLast, triggerRender, className, style, ...rest } = props;
+const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
+  const {
+    width,
+    onResize,
+    onMount,
+    isLast,
+    triggerRender,
+    className,
+    style,
+    titleTip,
+    onClick,
+    ...rest
+  } = props;
 
   const thRef = React.useRef<HTMLTableHeaderCellElement>(null);
 
@@ -29,13 +41,13 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
   }, [triggerRender]);
 
   React.useEffect(() => {
-    if (width) {
+    if (width && !isLast) {
       setResizeWidth(width);
     }
   }, [width]);
 
   if (!width || Number.isNaN(Number(width)) || isLast) {
-    return <th {...rest} style={style} className={className}></th>;
+    return <th {...rest} style={style} className={className} title={titleTip}></th>;
   }
 
   const setBodyStyle = (active: boolean) => {
@@ -60,7 +72,12 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
   };
 
   return (
-    <th className={classnames(className, 'resizable-container')} style={style} ref={thRef}>
+    <th
+      className={classnames(className, 'resizable-container')}
+      style={style}
+      ref={thRef}
+      onClick={onClick}
+    >
       <Resizable
         className="resizable-box"
         width={resizeWidth}
@@ -82,9 +99,9 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }}></div>
       </Resizable>
-      <div {...rest} className="resizable-title"></div>
+      <div {...rest} className="resizable-title" title={titleTip}></div>
     </th>
   );
 };
 
-export default React.memo(ResizableHeader);
+export default React.memo(AntdResizableHeader);

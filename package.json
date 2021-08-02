@@ -34,6 +34,8 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-resizable": "^3.0.4"

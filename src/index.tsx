@@ -1,5 +1,10 @@
 import React from 'react';
+import { useCallback } from 'react';
 import ResizableHeader from './ResizableHeader';
+import { option } from './config';
+import { useEffect } from 'react';
+import useThrottleEffect from './utils/useThrottleEffect';
+import useDebounceFn from './utils/useDebounceFn';
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   columns: ColumnType[] | undefined,
@@ -12,7 +17,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
 
-  const onMount = React.useCallback(
+  const onMount = useCallback(
     (index: number) => (width: number) => {
       if (width) {
         setResizableColumns((t) => {
@@ -30,51 +35,61 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const onResize = onMount;
 
-  const getColumns = (list: ColumnType[]) => {
-    const t = list?.map((col, index) => {
-      const isLast = index === list.length - 1;
-      return {
-        ...col,
-        onHeaderCell: (column: ColumnType) => {
-          return {
-            width: column.width,
-            onMount: onMount(index),
-            onResize: onResize(index),
-            triggerRender,
-            isLast,
-          };
-        },
-        width: isLast && !col.fixed ? undefined : col.width,
-      };
-    }) as ColumnType[];
-    return t;
-  };
+  const getColumns = React.useCallback(
+    (list: ColumnType[]) => {
+      const t = list?.map((col, index) => {
+        const isLast = index === list.length - 1;
+        return {
+          ...col,
+          onHeaderCell: (column: ColumnType) => {
+            return {
+              titleTip: column.titleTip,
+              width: column.width,
+              onMount: onMount(index),
+              onResize: onResize(index),
+              triggerRender,
+              isLast,
+            };
+          },
+          width: isLast && !col.fixed ? undefined : col.width,
+        };
+      }) as ColumnType[];
+      return t;
+    },
+    [onMount, onResize],
+  );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (columns) {
       const c = getColumns(columns);
       setResizableColumns(c);
     }
   }, [columns]);
 
-  React.useEffect(() => {
-    const t = getColumns(resizableColumns);
-    setResizableColumns(t);
-  }, [triggerRender]);
+  useThrottleEffect(
+    () => {
+      const t = getColumns(resizableColumns);
+      setResizableColumns(t);
+    },
+    [triggerRender],
+    option,
+  );
 
-  React.useEffect(() => {
-    window.addEventListener('resize', forceRender);
-    return () => {
-      window.removeEventListener('resize', forceRender);
-    };
-  }, []);
-
-  React.useEffect(() => {
+  useEffect(() => {
     const width = resizableColumns?.reduce((total, current) => {
       return total + (Number(current.width) || columns?.[columns.length - 1].width || defaultWidth);
     }, 0);
     setTableWidth(width);
   }, [resizableColumns]);
+
+  const { run: debounceRender } = useDebounceFn(forceRender);
+
+  React.useEffect(() => {
+    window.addEventListener('resize', debounceRender);
+    return () => {
+      window.removeEventListener('resize', debounceRender);
+    };
+  }, []);
 
   const components = React.useMemo(() => {
     return {
