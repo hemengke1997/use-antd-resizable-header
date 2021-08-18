@@ -45,6 +45,8 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             return {
               titleTip: column.titleTip,
               width: column.width,
+              minWidth: column.minWidth,
+              maxWidth: column.maxWidth,
               onMount: onMount(index),
               onResize: onResize(index),
               triggerRender,
