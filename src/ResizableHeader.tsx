@@ -10,12 +10,16 @@ type ComponentProp = {
   isLast: boolean;
   triggerRender: number;
   width: number;
+  minWidth?: number;
+  maxWidth?: number;
   titleTip?: string;
 } & Record<string, any>;
 
 const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   const {
     width,
+    minWidth = 120,
+    maxWidth = Infinity,
     onResize,
     onMount,
     isLast,
@@ -81,6 +85,8 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
       <Resizable
         className="resizable-box"
         width={resizeWidth}
+        minConstraints={[minWidth, 0]}
+        maxConstraints={[maxWidth, 0]}
         height={0}
         handle={
           <div
