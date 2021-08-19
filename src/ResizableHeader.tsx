@@ -58,7 +58,8 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
 
   const setBodyStyle = (active: boolean) => {
     document.body.style.userSelect = active ? 'none' : '';
-    document.body.style.cursor = active ? 'col-resize' : '';
+    document.body.style.pointerEvents = active ? 'none' : '';
+    document.documentElement.style.cursor = active ? 'col-resize' : '';
   };
 
   const onStart = (_: any, data: ResizeCallbackData) => {
