@@ -10,16 +10,16 @@ type ComponentProp = {
   isLast: boolean;
   triggerRender: number;
   width: number;
-  minWidth?: number;
-  maxWidth?: number;
+  minWidth: number;
+  maxWidth: number;
   titleTip?: string;
 } & Record<string, any>;
 
-const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
+const ResizableHeader: React.FC<ComponentProp> = (props) => {
   const {
     width,
-    minWidth = 120,
-    maxWidth = Infinity,
+    minWidth,
+    maxWidth,
     onResize,
     onMount,
     isLast,
@@ -113,4 +113,4 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   );
 };
 
-export default React.memo(AntdResizableHeader);
+export default React.memo(ResizableHeader);

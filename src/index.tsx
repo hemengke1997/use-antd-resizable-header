@@ -5,11 +5,28 @@ import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import isEmpty from 'lodash.isempty';
 
+type useTableResizableHeaderProps<ColumnType> = {
+  columns: ColumnType[] | undefined;
+  /** @description 最后一列不能拖动，设置最后一列的最小展示宽度，默认120 */
+  defaultWidth?: number;
+  /** @description 拖动最小宽度 默认120 */
+  minConstraints?: number;
+  /** @description 拖动最大宽度 默认无穷 */
+  maxConstraints?: number;
+};
+
+const WIDTH = 120;
+
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
-  columns: ColumnType[] | undefined,
-  /** @description 最后一列不能拖动，设置最后一列的最小展示宽度 */
-  defaultWidth: number = 120,
+  props: useTableResizableHeaderProps<ColumnType>,
 ) {
+  const {
+    columns,
+    defaultWidth = WIDTH,
+    minConstraints = WIDTH,
+    maxConstraints = Infinity,
+  } = props;
+
   const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>(columns || []);
 
   const [tableWidth, setTableWidth] = React.useState<number>();
@@ -44,15 +61,17 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             ...col,
             onHeaderCell: (column: ColumnType) => {
               return {
-                titleTip: column.titleTip,
-                width: column.width,
+                titleTip: column?.titleTip,
+                width: column?.width,
                 onMount: onMount(index),
                 onResize: onResize(index),
+                minWidth: minConstraints,
+                maxWidth: maxConstraints,
                 triggerRender,
                 isLast,
               };
             },
-            width: isLast && !col.fixed ? undefined : col.width,
+            width: isLast && !col?.fixed ? undefined : col?.width,
           };
         }) as ColumnType[];
       return t;
