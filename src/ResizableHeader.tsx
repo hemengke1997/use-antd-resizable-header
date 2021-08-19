@@ -51,7 +51,9 @@ const AntdResizableHeader: React.FC<ComponentProp> = (props) => {
   }, [width]);
 
   if (!width || Number.isNaN(Number(width)) || isLast) {
-    return <th {...rest} style={style} className={className} title={titleTip}></th>;
+    return (
+      <th {...rest} style={style} className={className} title={titleTip} onClick={onClick}></th>
+    );
   }
 
   const setBodyStyle = (active: boolean) => {
