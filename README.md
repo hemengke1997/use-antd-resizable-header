@@ -27,7 +27,7 @@ import 'use-antd-resizable-header/dist/style.css';
 const columns = [];
 
 function App() {
-  const { components, resizableColumns, tableWidth } = useATRH(columns);
+  const { components, resizableColumns, tableWidth } = useATRH({columns});
 
   return (
     <>
@@ -86,7 +86,7 @@ const dataSource = [
 ];
 
 function App() {
-  const { resizableColumns, components, tableWidth } = useATRH(columns);
+  const { resizableColumns, components, tableWidth } = useATRH({columns});
 
   return (
     <ProTable
@@ -174,7 +174,7 @@ const dataSource = [
 ];
 
 function App() {
-  const { resizableColumns, components, tableWidth } = useATRH(columns);
+  const { resizableColumns, components, tableWidth } = useATRH({columns});
 
   let cols = [...resizableColumns];
 
