@@ -13,6 +13,7 @@ specifiers:
   husky: ^7.0.1
   lint-staged: ^11.0.0
   lodash.debounce: ^4.0.8
+  lodash.isempty: 4.4.0
   lodash.throttle: ^4.1.1
   postcss-nesting: ^8.0.1
   prettier: ^2.3.2
@@ -27,6 +28,7 @@ specifiers:
 dependencies:
   classnames: 2.3.1
   lodash.debounce: 4.0.8
+  lodash.isempty: 4.4.0
   lodash.throttle: 4.1.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -4439,6 +4441,10 @@ packages:
   /lodash.get/4.4.2:
     resolution: {integrity: sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=}
     dev: true
+
+  /lodash.isempty/4.4.0:
+    resolution: {integrity: sha1-b4bL7di+TsmHvpqvM8loTbGzHn4=}
+    dev: false
 
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=}

@@ -1,10 +1,9 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ResizableHeader from './ResizableHeader';
 import { option } from './config';
-import { useEffect } from 'react';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
+import isEmpty from 'lodash.isempty';
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   columns: ColumnType[] | undefined,
@@ -37,25 +36,25 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const getColumns = React.useCallback(
     (list: ColumnType[]) => {
-      const t = list?.map((col, index) => {
-        const isLast = index === list.length - 1;
-        return {
-          ...col,
-          onHeaderCell: (column: ColumnType) => {
-            return {
-              titleTip: column.titleTip,
-              width: column.width,
-              minWidth: column.minWidth,
-              maxWidth: column.maxWidth,
-              onMount: onMount(index),
-              onResize: onResize(index),
-              triggerRender,
-              isLast,
-            };
-          },
-          width: isLast && !col.fixed ? undefined : col.width,
-        };
-      }) as ColumnType[];
+      const t = list
+        ?.filter((item) => !isEmpty(item))
+        .map((col, index) => {
+          const isLast = index === list.length - 1;
+          return {
+            ...col,
+            onHeaderCell: (column: ColumnType) => {
+              return {
+                titleTip: column.titleTip,
+                width: column.width,
+                onMount: onMount(index),
+                onResize: onResize(index),
+                triggerRender,
+                isLast,
+              };
+            },
+            width: isLast && !col.fixed ? undefined : col.width,
+          };
+        }) as ColumnType[];
       return t;
     },
     [onMount, onResize],
@@ -86,7 +85,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const { run: debounceRender } = useDebounceFn(forceRender);
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('resize', debounceRender);
     return () => {
       window.removeEventListener('resize', debounceRender);
