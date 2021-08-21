@@ -33,6 +33,9 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
 
+  // column的宽度缓存，避免render导致columns宽度重置
+  const widthCache = React.useRef<number[]>([]);
+
   const onMount = useCallback(
     (index: number) => (width: number) => {
       if (width) {
@@ -42,11 +45,12 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             ...nextColumns[index],
             width,
           };
+          widthCache.current[index] = width;
           return nextColumns;
         });
       }
     },
-    [],
+    [widthCache.current],
   );
 
   const onResize = onMount;
@@ -62,7 +66,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             onHeaderCell: (column: ColumnType) => {
               return {
                 titleTip: column?.titleTip,
-                width: column?.width,
+                width: widthCache.current?.[index] || column?.width,
                 onMount: onMount(index),
                 onResize: onResize(index),
                 minWidth: minConstraints,
@@ -71,12 +75,12 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
                 isLast,
               };
             },
-            width: isLast && !col?.fixed ? undefined : col?.width,
+            width: isLast && !col?.fixed ? undefined : widthCache.current?.[index] || col?.width,
           };
         }) as ColumnType[];
       return t;
     },
-    [onMount, onResize],
+    [onMount, onResize, widthCache.current],
   );
 
   useEffect(() => {
