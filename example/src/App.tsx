@@ -3,7 +3,7 @@ import { Table, TableColumnType } from 'antd';
 import ProTable, { ProColumns } from '@ant-design/pro-table';
 import './App.css';
 import useATRH from 'use-antd-resizable-header';
-import 'use-antd-resizable-header/dist/index.css';
+import 'use-antd-resizable-header/dist/style.css';
 import 'antd/es/table/style/index.css';
 
 const data: any[] = [];
@@ -174,13 +174,13 @@ const proColumns: ProColumns<any>[] = [
 ];
 
 function App() {
-  const { components, resizableColumns, tableWidth } = useATRH(columns);
+  const { components, resizableColumns, tableWidth } = useATRH({columns});
 
   const {
     components: proComponents,
     resizableColumns: proResizableColumns,
     tableWidth: proTableWidth,
-  } = useATRH(proColumns);
+  } = useATRH({columns: proColumns});
 
   return (
     <div className="App">

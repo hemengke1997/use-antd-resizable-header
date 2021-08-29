@@ -28,6 +28,9 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     style,
     titleTip,
     onClick,
+    children,
+    rowSpan,
+    colSpan,
     ...rest
   } = props;
 
@@ -37,10 +40,8 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 
   React.useEffect(() => {
     if (width && !isLast) {
-      const domWidth = thRef.current?.getBoundingClientRect().width || width;
-      const w = domWidth > width ? domWidth : width;
-      setResizeWidth(w);
-      onMount?.(w);
+      setResizeWidth(width);
+      onMount?.(width);
     }
   }, [triggerRender]);
 
@@ -52,7 +53,17 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 
   if (!width || Number.isNaN(Number(width)) || isLast) {
     return (
-      <th {...rest} style={style} className={className} title={titleTip} onClick={onClick}></th>
+      <th
+        {...rest}
+        style={style}
+        className={className}
+        title={titleTip}
+        onClick={onClick}
+        rowSpan={rowSpan}
+        colSpan={colSpan}
+      >
+        <span title={titleTip}>{children}</span>
+      </th>
     );
   }
 
@@ -84,6 +95,8 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
       style={style}
       ref={thRef}
       onClick={onClick}
+      rowSpan={rowSpan}
+      colSpan={colSpan}
     >
       <Resizable
         className="resizable-box"
@@ -108,7 +121,9 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }}></div>
       </Resizable>
-      <div {...rest} className="resizable-title" title={titleTip}></div>
+      <div {...rest} className="resizable-title" title={titleTip}>
+        {children}
+      </div>
     </th>
   );
 };

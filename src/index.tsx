@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import ResizableHeader from './ResizableHeader';
 import { option } from './config';
+import { useUniqueId } from './utils/useUniqueId';
+import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
-import isEmpty from 'lodash.isempty';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
@@ -15,7 +16,38 @@ type useTableResizableHeaderProps<ColumnType> = {
   maxConstraints?: number;
 };
 
+type CacheType = { width: number; index: number };
+
 const WIDTH = 120;
+
+const getKey = 'dataIndex';
+
+function depthFirstSearch<T extends Record<string, any> & { children?: T[] }>(
+  children: T[],
+  condition: (column: T) => boolean,
+  width: number,
+) {
+  const c = [...children];
+
+  (function find(cls: T[] | undefined) {
+    if (!cls) return;
+    for (let i = 0; i < cls?.length; i++) {
+      if (condition(cls[i])) {
+        // eslint-disable-next-line no-param-reassign
+        cls[i] = {
+          ...cls[i],
+          width,
+        };
+        return;
+      }
+      if (cls[i].children) {
+        find(cls[i].children);
+      }
+    }
+  })(c);
+
+  return c;
+}
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   props: useTableResizableHeaderProps<ColumnType>,
@@ -27,58 +59,77 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     maxConstraints = Infinity,
   } = props;
 
+  // column的宽度缓存，避免render导致columns宽度重置
+  const widthCache = React.useRef<Map<React.Key, CacheType>>(new Map());
+
+  const uniqueId = useUniqueId('resizable-table-id');
+
   const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>(columns || []);
 
   const [tableWidth, setTableWidth] = React.useState<number>();
 
   const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
 
-  // column的宽度缓存，避免render导致columns宽度重置
-  const widthCache = React.useRef<number[]>([]);
-
   const onMount = useCallback(
-    (index: number) => (width: number) => {
+    (id: string) => (width: number) => {
       if (width) {
         setResizableColumns((t) => {
-          const nextColumns = [...t];
-          nextColumns[index] = {
-            ...nextColumns[index],
-            width,
-          };
-          widthCache.current[index] = width;
+          const nextColumns = depthFirstSearch(t, (col) => col[getKey] === id, width);
+
+          const kvMap = new Map<React.Key, CacheType>();
+
+          function dig(cols: ColumnType[]) {
+            cols.forEach((col, i) => {
+              const key = col[getKey];
+              kvMap.set(key, { width: col?.width, index: i });
+              if (col?.children) {
+                dig(col.children);
+              }
+            });
+          }
+
+          dig(nextColumns);
+
+          widthCache.current = kvMap;
+
           return nextColumns;
         });
       }
     },
-    [widthCache.current],
+    [widthCache.current, resizableColumns],
   );
 
   const onResize = onMount;
 
   const getColumns = React.useCallback(
     (list: ColumnType[]) => {
-      const t = list
+      const c = list
         ?.filter((item) => !isEmpty(item))
         .map((col, index) => {
           const isLast = index === list.length - 1;
           return {
             ...col,
+            children: col?.children?.length ? getColumns(col.children) : undefined,
             onHeaderCell: (column: ColumnType) => {
               return {
                 titleTip: column?.titleTip,
-                width: widthCache.current?.[index] || column?.width,
-                onMount: onMount(index),
-                onResize: onResize(index),
+                width: widthCache.current?.get(column[getKey])?.width || column?.width,
+                onMount: onMount(column?.[getKey]),
+                onResize: onResize(column?.[getKey]),
                 minWidth: minConstraints,
                 maxWidth: maxConstraints,
                 triggerRender,
                 isLast,
               };
             },
-            width: isLast && !col?.fixed ? undefined : widthCache.current?.[index] || col?.width,
+            width:
+              isLast && !col?.fixed
+                ? undefined
+                : widthCache.current?.get(col[getKey])?.width || col?.width,
+            [getKey]: col[getKey] || uniqueId,
           };
         }) as ColumnType[];
-      return t;
+      return c;
     },
     [onMount, onResize, widthCache.current],
   );
