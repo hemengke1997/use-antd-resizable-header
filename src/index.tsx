@@ -60,6 +60,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
   } = props;
 
   // column的宽度缓存，避免render导致columns宽度重置
+  // add column width cache to avoid column's width reset after render
   const widthCache = React.useRef<Map<React.Key, CacheType>>(new Map());
 
   const uniqueId = useUniqueId('resizable-table-id');
