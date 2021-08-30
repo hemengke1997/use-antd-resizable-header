@@ -1,6 +1,6 @@
 {
   "name": "use-antd-resizable-header",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "antd resizable header column hook",
   "author": "hemengke1997 <23536175@qq.com>",
   "types": "dist/index.d.ts",
