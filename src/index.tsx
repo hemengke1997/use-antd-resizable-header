@@ -152,9 +152,17 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
   );
 
   useEffect(() => {
-    const width = resizableColumns?.reduce((total, current) => {
-      return total + (Number(current.width) || columns?.[columns.length - 1].width || defaultWidth);
-    }, 0);
+    let width = 0;
+
+    (function loop(cls: ColumnType[]) {
+      for (let i = 0; i < cls.length; i++) {
+        width += Number(cls[i].width) || columns?.[columns.length - 1].width || defaultWidth;
+        if (cls[i].children) {
+          loop(cls[i].children);
+        }
+      }
+    })(resizableColumns);
+
     setTableWidth(width);
   }, [resizableColumns]);
 
