@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ThHTMLAttributes } from 'react';
 import { Resizable, ResizeCallbackData } from 'react-resizable';
 import classnames from 'classnames';
 
@@ -7,13 +7,12 @@ import './index.css';
 type ComponentProp = {
   onResize: (width: number) => void;
   onMount: (width: number) => void;
-  isLast: boolean;
   triggerRender: number;
   width: number;
   minWidth: number;
   maxWidth: number;
   titleTip?: string;
-} & Record<string, any>;
+} & ThHTMLAttributes<HTMLTableCellElement>;
 
 const ResizableHeader: React.FC<ComponentProp> = (props) => {
   const {
@@ -22,7 +21,6 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     maxWidth,
     onResize,
     onMount,
-    isLast,
     triggerRender,
     className,
     style,
@@ -39,19 +37,19 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
   const [resizeWidth, setResizeWidth] = React.useState<number>(0);
 
   React.useEffect(() => {
-    if (width && !isLast) {
+    if (width) {
       setResizeWidth(width);
       onMount?.(width);
     }
   }, [triggerRender]);
 
   React.useEffect(() => {
-    if (width && !isLast) {
+    if (width) {
       setResizeWidth(width);
     }
   }, [width]);
 
-  if (!width || Number.isNaN(Number(width)) || isLast) {
+  if (!width || Number.isNaN(Number(width))) {
     return (
       <th
         {...rest}

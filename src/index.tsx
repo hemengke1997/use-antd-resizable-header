@@ -106,8 +106,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     (list: ColumnType[]) => {
       const c = list
         ?.filter((item) => !isEmpty(item))
-        .map((col, index) => {
-          const isLast = index === list.length - 1;
+        .map((col) => {
           return {
             ...col,
             children: col?.children?.length ? getColumns(col.children) : undefined,
@@ -120,13 +119,9 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
                 minWidth: minConstraints,
                 maxWidth: maxConstraints,
                 triggerRender,
-                isLast,
               };
             },
-            width:
-              isLast && !col?.fixed
-                ? undefined
-                : widthCache.current?.get(col[getKey])?.width || col?.width,
+            width: widthCache.current?.get(col[getKey])?.width || col?.width,
             [getKey]: col[getKey] || uniqueId,
           };
         }) as ColumnType[];

@@ -16,8 +16,7 @@ yarn add use-antd-resizable-header
 
 - **columns 为常量时，提到组件外，或使用 `React.useMemo`, `React.Ref` 包裹常量**
 - **默认拖动颜色为`#000`，可通过`global`或设置css变量`--atrh-color`设置颜色**
-- **最后一列不能拖动，[请保持最后一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)，若最后一列传入宽度，会把传入的宽度作为最小宽度（默认 120）**
-- **行合并暂未找到合适方案**
+- **至少一列不能拖动（width不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
 
 ## Example
 
