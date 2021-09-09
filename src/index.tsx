@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import ResizableHeader from './ResizableHeader';
 import { option } from './config';
-import { useUniqueId } from './utils/useUniqueId';
 import isEmpty from 'lodash.isempty';
+import uniqueId from 'lodash.uniqueid';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 
@@ -21,6 +21,8 @@ type CacheType = { width: number; index: number };
 const WIDTH = 120;
 
 const getKey = 'dataIndex';
+
+const idPrefix = 'resizable-table-id';
 
 function depthFirstSearch<T extends Record<string, any> & { children?: T[] }>(
   children: T[],
@@ -62,8 +64,6 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
   // column的宽度缓存，避免render导致columns宽度重置
   // add column width cache to avoid column's width reset after render
   const widthCache = React.useRef<Map<React.Key, CacheType>>(new Map());
-
-  const uniqueId = useUniqueId('resizable-table-id');
 
   const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>(columns || []);
 
@@ -122,7 +122,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
               };
             },
             width: widthCache.current?.get(col[getKey])?.width || col?.width,
-            [getKey]: col[getKey] || uniqueId,
+            [getKey]: col[getKey] || uniqueId(idPrefix),
           };
         }) as ColumnType[];
       return c;
