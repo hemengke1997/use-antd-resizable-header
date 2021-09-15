@@ -15,8 +15,9 @@ yarn add use-antd-resizable-header
 ## 注意事项
 
 - **columns 为常量时，提到组件外，或使用 `React.useMemo`, `React.Ref` 包裹常量**
-- **默认拖动颜色为`#000`，可通过`global`或设置css变量`--atrh-color`设置颜色**
-- **至少一列不能拖动（width不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
+- **默认拖动颜色为`#000`，可通过`global`或设置 css 变量`--atrh-color`设置颜色**
+- **至少一列不能拖动（width 不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
+- **若 column 未传入`dataIndex`，请传入一个唯一的`key`**
 
 ## Example
 
@@ -27,7 +28,7 @@ import 'use-antd-resizable-header/dist/style.css';
 const columns = [];
 
 function App() {
-  const { components, resizableColumns, tableWidth } = useATRH({columns});
+  const { components, resizableColumns, tableWidth } = useATRH({ columns });
 
   return (
     <>
@@ -72,6 +73,12 @@ const columns: ProColumns[] = [
     title: 'name',
     dataIndex: 'name',
   },
+  // 没有 dataIndex 时
+  {
+    key: 'uniquekey',
+    title: '没有dataIndex',
+    width: 400
+  }
 ];
 
 const dataSource = [
@@ -86,7 +93,7 @@ const dataSource = [
 ];
 
 function App() {
-  const { resizableColumns, components, tableWidth } = useATRH({columns});
+  const { resizableColumns, components, tableWidth } = useATRH({ columns });
 
   return (
     <ProTable
@@ -174,7 +181,7 @@ const dataSource = [
 ];
 
 function App() {
-  const { resizableColumns, components, tableWidth } = useATRH({columns});
+  const { resizableColumns, components, tableWidth } = useATRH({ columns });
 
   let cols = [...resizableColumns];
 
@@ -195,6 +202,10 @@ function App() {
 
 export default App;
 ```
+
+## TODO
+
+[ ] 添加 `CodeSandBox`
 
 ## MIT
 
