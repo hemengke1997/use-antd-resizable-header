@@ -205,7 +205,7 @@ export default App;
 
 ## TODO
 
-[ ] 添加 `CodeSandBox`
+- [ ] 添加 `CodeSandBox`
 
 ## MIT
 
