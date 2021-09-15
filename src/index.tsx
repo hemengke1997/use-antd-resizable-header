@@ -4,6 +4,7 @@ import { option } from './config';
 import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
+import { depthFirstSearch, getUniqueId } from './utils';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
@@ -20,33 +21,6 @@ type CacheType = { width: number; index: number };
 const WIDTH = 120;
 
 const getKey = 'dataIndex';
-
-function depthFirstSearch<T extends Record<string, any> & { children?: T[] }>(
-  children: T[],
-  condition: (column: T) => boolean,
-  width: number,
-) {
-  const c = [...children];
-
-  (function find(cls: T[] | undefined) {
-    if (!cls) return;
-    for (let i = 0; i < cls?.length; i++) {
-      if (condition(cls[i])) {
-        // eslint-disable-next-line no-param-reassign
-        cls[i] = {
-          ...cls[i],
-          width,
-        };
-        return;
-      }
-      if (cls[i].children) {
-        find(cls[i].children);
-      }
-    }
-  })(c);
-
-  return c;
-}
 
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   props: useTableResizableHeaderProps<ColumnType>,
@@ -103,7 +77,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     (list: ColumnType[]) => {
       const c = list
         ?.filter((item) => !isEmpty(item))
-        .map((col) => {
+        .map((col, index) => {
           return {
             ...col,
             children: col?.children?.length ? getColumns(col.children) : undefined,
@@ -119,7 +93,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
               };
             },
             width: widthCache.current?.get(col[getKey])?.width || col?.width,
-            [getKey]: col[getKey] || col['key'],
+            [getKey]: col[getKey] || col['key'] || getUniqueId(index),
           };
         }) as ColumnType[];
       return c;
