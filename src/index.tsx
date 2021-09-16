@@ -83,7 +83,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
             children: col?.children?.length ? getColumns(col.children) : undefined,
             onHeaderCell: (column: ColumnType) => {
               return {
-                titleTip: column?.titleTip,
+                title: typeof col?.title === 'string' ? col?.title : '',
                 width: widthCache.current?.get(column[getKey])?.width || column?.width,
                 onMount: onMount(column?.[getKey]),
                 onResize: onResize(column?.[getKey]),
@@ -93,6 +93,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
               };
             },
             width: widthCache.current?.get(col[getKey])?.width || col?.width,
+            ellipsis: typeof col.ellipsis !== 'undefined' ? col.ellipsis : true,
             [getKey]: col[getKey] || col['key'] || getUniqueId(index),
           };
         }) as ColumnType[];

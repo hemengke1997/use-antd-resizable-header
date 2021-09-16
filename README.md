@@ -6,18 +6,46 @@
 
 ![preview](./image/preview.gif)
 
+## 在线地址
+
 ## 安装
 
 ```bash
 yarn add use-antd-resizable-header
 ```
 
+## 最佳实践
+
+为了规避循环渲染问题，建议：
+
+- columns 为常量时，提到组件外，或使用 `React.useMemo`, `React.useRef` 包裹常量
+- 更建议， 封装 table 组件，把 columns 作为 prop 传入
+
+```tsx
+function ResizableTable<DataType extends Record<string, any>>(props: TableProps<DataType>) {
+  const { columns: columnsProp, scroll, ...rest } = props;
+
+  const { resizableColumns, components, tableWidth } = useATRH({
+    columns: columnsProp,
+    minConstraints: 50,
+  });
+
+  return (
+    <Table
+      columns={columns}
+      scroll={{ ...scroll, x: tableWidth }}
+      components={components}
+      {...rest}
+    ></Table>
+  );
+}
+```
+
 ## 注意事项
 
-- **columns 为常量时，提到组件外，或使用 `React.useMemo`, `React.Ref` 包裹常量**
 - **默认拖动颜色为`#000`，可通过`global`或设置 css 变量`--atrh-color`设置颜色**
 - **至少一列不能拖动（width 不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
-- **若 column 未传入`dataIndex`，请传入一个唯一的`key`**
+- **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
 
 ## Example
 
@@ -57,55 +85,121 @@ function App() {
 ```
 
 ```tsx
-import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
+import React, { useReducer } from 'react';
+import { Table, Tag, Space } from 'antd';
 import useATRH from 'use-antd-resizable-header';
-
+import 'antd/dist/antd.css';
 import 'use-antd-resizable-header/dist/style.css';
-import './index.css';
 
-const columns: ProColumns[] = [
+const data = [
   {
-    title: 'id',
-    dataIndex: 'id',
-    width: 300,
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer'],
   },
   {
-    title: 'name',
-    dataIndex: 'name',
-  },
-  // 没有 dataIndex 时
-  {
-    key: 'uniquekey',
-    title: '没有dataIndex',
-    width: 400
-  }
-];
-
-const dataSource = [
-  {
-    id: 1,
-    name: 'zhangsan',
+    key: '2',
+    name: 'Jim Green',
+    age: 42,
+    address: 'London No. 1 Lake Park',
+    tags: ['loser'],
   },
   {
-    id: 2,
-    name: 'lisi',
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
   },
 ];
 
-function App() {
-  const { resizableColumns, components, tableWidth } = useATRH({ columns });
+const Hello: React.FC = () => {
+  const [, forceRender] = useReducer((s) => s + 1, 0);
+
+  const columns = React.useMemo(() => {
+    return [
+      {
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+        width: 300,
+        ellipsis: true,
+        render: (text) => <a>{text}</a>,
+      },
+      {
+        title: 'Age',
+        dataIndex: 'age',
+        key: 'age',
+        ellipsis: true,
+        width: 200,
+      },
+      {
+        title: 'Address',
+        dataIndex: 'address',
+        key: 'address',
+        ellipsis: true,
+        width: 200,
+      },
+      {
+        title: 'Tags',
+        key: 'tags',
+        dataIndex: 'tags',
+        width: 200,
+        ellipsis: true,
+        render: (tags) => (
+          <>
+            {tags.map((tag) => {
+              let color = tag.length > 5 ? 'geekblue' : 'green';
+              if (tag === 'loser') {
+                color = 'volcano';
+              }
+              return (
+                <Tag color={color} key={tag}>
+                  {tag.toUpperCase()}
+                </Tag>
+              );
+            })}
+          </>
+        ),
+      },
+      {
+        title: 'render',
+        key: 'action',
+        render: (text, record) => (
+          <Space size="middle">
+            <a>Invite {record.name}</a>
+            <a
+              onClick={() => {
+                forceRender();
+                alert('render');
+              }}
+            >
+              render
+            </a>
+          </Space>
+        ),
+      },
+    ];
+  }, []);
+
+  const { components, resizableColumns, tableWidth } = useATRH({
+    columns,
+    minConstraints: 50,
+  });
 
   return (
-    <ProTable
+    <Table
       columns={resizableColumns}
       components={components}
+      dataSource={data}
       scroll={{ x: tableWidth }}
-      dataSource={dataSource}
-    ></ProTable>
+    />
   );
-}
+};
 
-export default App;
+export default Hello;
 ```
 
 ## 基本用例 - 搭配 Typography 实现 title 溢出时 tooltip
@@ -162,10 +256,12 @@ const columns: ProColumns[] = [
     title: 'id',
     dataIndex: 'id',
     width: 300,
+    ellipsis: true,
   },
   {
     title: 'name',
     dataIndex: 'name',
+    ellipsis: true,
   },
 ];
 
@@ -205,7 +301,7 @@ export default App;
 
 ## TODO
 
-[ ] 添加 `CodeSandBox`
+- [ ] 测试用例
 
 ## MIT
 

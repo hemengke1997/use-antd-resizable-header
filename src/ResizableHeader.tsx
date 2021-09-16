@@ -11,7 +11,6 @@ type ComponentProp = {
   width: number;
   minWidth: number;
   maxWidth: number;
-  titleTip?: string;
 } & ThHTMLAttributes<HTMLTableCellElement>;
 
 const ResizableHeader: React.FC<ComponentProp> = (props) => {
@@ -24,15 +23,15 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     triggerRender,
     className,
     style,
-    titleTip,
     onClick,
     children,
     rowSpan,
     colSpan,
+    title,
     ...rest
   } = props;
 
-  const thRef = React.useRef<HTMLTableHeaderCellElement>(null);
+  const thRef = React.useRef<HTMLTableCellElement>(null);
 
   const [resizeWidth, setResizeWidth] = React.useState<number>(0);
 
@@ -55,12 +54,12 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
         {...rest}
         style={style}
         className={className}
-        title={titleTip}
+        title={title}
         onClick={onClick}
         rowSpan={rowSpan}
         colSpan={colSpan}
       >
-        <span title={titleTip}>{children}</span>
+        <span title={title}>{children}</span>
       </th>
     );
   }
@@ -90,7 +89,10 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
   return (
     <th
       className={classnames(className, 'resizable-container')}
-      style={style}
+      style={{
+        ...style,
+        overflow: 'unset',
+      }}
       ref={thRef}
       onClick={onClick}
       rowSpan={rowSpan}
@@ -119,7 +121,7 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }}></div>
       </Resizable>
-      <div {...rest} className="resizable-title" title={titleTip}>
+      <div {...rest} className="resizable-title" title={title}>
         {children}
       </div>
     </th>
