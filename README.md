@@ -7,7 +7,7 @@
 ![preview](./image/preview.gif)
 
 ## 在线地址
-[stackblitz](https://stackblitz.com/edit/react-ts-ddjoyp?file=Hello.tsx)
+[codesandbox](https://codesandbox.io/s/divine-silence-fl6b0?file=/src/App.tsx)
 
 ## 安装
 
