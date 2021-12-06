@@ -1,6 +1,7 @@
 import React, { ThHTMLAttributes } from 'react';
 import { Resizable, ResizeCallbackData } from 'react-resizable';
 import classnames from 'classnames';
+import useSafeState from './utils/useSafeState';
 
 import './index.css';
 
@@ -33,7 +34,7 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 
   const thRef = React.useRef<HTMLTableCellElement>(null);
 
-  const [resizeWidth, setResizeWidth] = React.useState<number>(0);
+  const [resizeWidth, setResizeWidth] = useSafeState<number>(0);
 
   React.useEffect(() => {
     if (width) {
@@ -54,7 +55,6 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
         {...rest}
         style={style}
         className={className}
-        title={title}
         onClick={onClick}
         rowSpan={rowSpan}
         colSpan={colSpan}
@@ -111,7 +111,7 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
               e.stopPropagation();
             }}
           >
-            <div className="resizable-line"></div>
+            <div className="resizable-line" />
           </div>
         }
         draggableOpts={{ enableUserSelectHack: false }}
@@ -119,7 +119,7 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
         onResize={onSelfResize}
         onResizeStop={onStop}
       >
-        <div style={{ width: resizeWidth, height: '100%' }}></div>
+        <div style={{ width: resizeWidth, height: '100%' }} />
       </Resizable>
       <div {...rest} className="resizable-title">
         <span title={title}>{children}</span>

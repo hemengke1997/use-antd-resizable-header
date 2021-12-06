@@ -6,6 +6,7 @@ import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, getUniqueId, ResizableUniqIdPrefix } from './utils';
 import useDeepFnCompareEffect from './utils/useDeepFnCompareEffect';
+import useSafeState from './utils/useSafeState';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
@@ -37,9 +38,9 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
   // add column width cache to avoid column's width reset after render
   const widthCache = React.useRef<Map<React.Key, CacheType>>(new Map());
 
-  const [resizableColumns, setResizableColumns] = React.useState<ColumnType[]>(columns || []);
+  const [resizableColumns, setResizableColumns] = useSafeState<ColumnType[]>(columns || []);
 
-  const [tableWidth, setTableWidth] = React.useState<number>();
+  const [tableWidth, setTableWidth] = useSafeState<number>();
 
   const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
 
