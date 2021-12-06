@@ -5,7 +5,7 @@ import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, getUniqueId, ResizableUniqIdPrefix } from './utils';
-import useDeepFnCompareEffect from './utils/useDeepFnCompare';
+import useDeepFnCompareEffect from './utils/useDeepFnCompareEffect';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;

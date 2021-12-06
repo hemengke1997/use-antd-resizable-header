@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import typescript2 from 'rollup-plugin-typescript2';
 import path from 'path';
 
@@ -8,7 +8,7 @@ const env = process.env.NODE_ENV;
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    reactRefresh(),
+    react(),
     {
       ...typescript2({
         check: false,
