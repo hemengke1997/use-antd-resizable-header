@@ -1,6 +1,6 @@
 {
   "name": "use-antd-resizable-header",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "antd resizable header column hook",
   "author": "hemengke1997 <23536175@qq.com>",
   "types": "dist/index.d.ts",
@@ -36,12 +36,16 @@
     "classnames": "^2.3.1",
     "lodash.debounce": "^4.0.8",
     "lodash.isempty": "4.4.0",
+    "lodash.isequalwith": "^4.4.0",
+    "lodash.isfunction": "^3.0.9",
     "lodash.throttle": "^4.1.1",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-resizable": "^3.0.4"
   },
   "devDependencies": {
+    "@types/lodash.isequalwith": "^4.4.6",
+    "@types/lodash.isfunction": "^3.0.6",
     "@types/node": "^16.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

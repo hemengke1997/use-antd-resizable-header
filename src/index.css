@@ -29,14 +29,13 @@
 
       &:active,
       &:hover {
+        z-index: 5;
         cursor: col-resize;
 
         & .resizable-line {
           background: var(--atrh-color, #000);
+          pointer-events: none;
         }
-      }
-      &:active {
-        z-index: 5;
       }
     }
 

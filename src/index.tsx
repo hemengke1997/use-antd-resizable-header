@@ -5,6 +5,7 @@ import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, getUniqueId } from './utils';
+import useDeepFnCompareEffect from './utils/useDeepFnCompare';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
@@ -75,34 +76,33 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const getColumns = React.useCallback(
     (list: ColumnType[]) => {
-      const c = list
-        ?.filter((item) => !isEmpty(item))
-        .map((col, index) => {
-          return {
-            ...col,
-            children: col?.children?.length ? getColumns(col.children) : undefined,
-            onHeaderCell: (column: ColumnType) => {
-              return {
-                title: typeof col?.title === 'string' ? col?.title : '',
-                width: widthCache.current?.get(column[getKey])?.width || column?.width,
-                onMount: onMount(column?.[getKey]),
-                onResize: onResize(column?.[getKey]),
-                minWidth: minConstraints,
-                maxWidth: maxConstraints,
-                triggerRender,
-              };
-            },
-            width: widthCache.current?.get(col[getKey])?.width || col?.width,
-            ellipsis: typeof col.ellipsis !== 'undefined' ? col.ellipsis : true,
-            [getKey]: col[getKey] || col['key'] || getUniqueId(index),
-          };
-        }) as ColumnType[];
+      const trulyColumns = list?.filter((item) => !isEmpty(item));
+      const c = trulyColumns.map((col, index) => {
+        return {
+          ...col,
+          children: col?.children?.length ? getColumns(col.children) : undefined,
+          onHeaderCell: (column: ColumnType) => {
+            return {
+              title: typeof col?.title === 'string' ? col?.title : '',
+              width: widthCache.current?.get(column[getKey])?.width || column?.width,
+              onMount: onMount(column?.[getKey]),
+              onResize: onResize(column?.[getKey]),
+              minWidth: minConstraints,
+              maxWidth: maxConstraints,
+              triggerRender,
+            };
+          },
+          width: widthCache.current?.get(col[getKey])?.width || col?.width,
+          ellipsis: typeof col.ellipsis !== 'undefined' ? col.ellipsis : true,
+          [getKey]: col[getKey] || col.key || getUniqueId(index),
+        };
+      }) as ColumnType[];
       return c;
     },
     [onMount, onResize, widthCache.current],
   );
 
-  useEffect(() => {
+  useDeepFnCompareEffect(() => {
     if (columns) {
       const c = getColumns(columns);
       setResizableColumns(c);

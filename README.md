@@ -14,33 +14,6 @@
 yarn add use-antd-resizable-header
 ```
 
-## 最佳实践
-
-为了规避循环渲染问题，建议：
-
-- columns 为常量时，提到组件外，或使用 `React.useMemo`, `React.useRef` 包裹常量
-- 更建议， 封装 table 组件，把 columns 作为 prop 传入
-
-```tsx
-function ResizableTable<DataType extends Record<string, any>>(props: TableProps<DataType>) {
-  const { columns: columnsProp, scroll, ...rest } = props;
-
-  const { resizableColumns, components, tableWidth } = useATRH({
-    columns: columnsProp,
-    minConstraints: 50,
-  });
-
-  return (
-    <Table
-      columns={columns}
-      scroll={{ ...scroll, x: tableWidth }}
-      components={components}
-      {...rest}
-    ></Table>
-  );
-}
-```
-
 ## 注意事项
 
 - **默认拖动颜色为`#000`，可通过`global`或设置 css 变量`--atrh-color`设置颜色**
@@ -53,9 +26,9 @@ function ResizableTable<DataType extends Record<string, any>>(props: TableProps<
 import useATRH from 'use-antd-resizable-header';
 import 'use-antd-resizable-header/dist/style.css';
 
-const columns = [];
-
 function App() {
+  const columns = [];
+
   const { components, resizableColumns, tableWidth } = useATRH({ columns });
 
   return (
@@ -298,10 +271,6 @@ function App() {
 
 export default App;
 ```
-
-## TODO
-
-- [ ] 测试用例
 
 ## MIT
 

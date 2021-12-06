@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/lodash.isequalwith': ^4.4.6
+  '@types/lodash.isfunction': ^3.0.6
   '@types/node': ^16.0.0
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
@@ -14,6 +16,8 @@ specifiers:
   lint-staged: ^11.0.0
   lodash.debounce: ^4.0.8
   lodash.isempty: 4.4.0
+  lodash.isequalwith: ^4.4.0
+  lodash.isfunction: ^3.0.9
   lodash.throttle: ^4.1.1
   postcss-nesting: ^8.0.1
   prettier: ^2.3.2
@@ -29,12 +33,16 @@ dependencies:
   classnames: 2.3.1
   lodash.debounce: 4.0.8
   lodash.isempty: 4.4.0
+  lodash.isequalwith: 4.4.0
+  lodash.isfunction: 3.0.9
   lodash.throttle: 4.1.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-resizable: 3.0.4_react@17.0.2
 
 devDependencies:
+  '@types/lodash.isequalwith': 4.4.6
+  '@types/lodash.isfunction': 3.0.6
   '@types/node': 16.0.0
   '@types/react': 17.0.13
   '@types/react-dom': 17.0.8
@@ -1466,6 +1474,22 @@ packages:
 
   /@types/json-schema/7.0.8:
     resolution: {integrity: sha512-YSBPTLTVm2e2OoQIDYx8HaeWJ5tTToLH67kXR7zYNGupXMEHa2++G8k+DczX2cFVgalypqtyZIcU19AFcmOpmg==}
+    dev: true
+
+  /@types/lodash.isequalwith/4.4.6:
+    resolution: {integrity: sha512-55fjBOrhse+SLkqGlvUq1yQ/sDvsi93+ngLIG22DPEoeL4c/d1rtWMMK55pP4nKOjkSWv8ks1q0HaXXCgPr81w==}
+    dependencies:
+      '@types/lodash': 4.14.177
+    dev: true
+
+  /@types/lodash.isfunction/3.0.6:
+    resolution: {integrity: sha512-olhgKmBgzHnA5pxsOI6YHunzTBMSyBw1XjxIKFio8W+XhYiELGTt05FStE0suV0GWtlIMdn7V8M/UbYbSVdGYw==}
+    dependencies:
+      '@types/lodash': 4.14.177
+    dev: true
+
+  /@types/lodash/4.14.177:
+    resolution: {integrity: sha512-0fDwydE2clKe9MNfvXHBHF9WEahRuj+msTuQqOmAApNORFvhMYZKNGGJdCzuhheVjMps/ti0Ak/iJPACMaevvw==}
     dev: true
 
   /@types/mdast/3.0.4:
@@ -4444,6 +4468,14 @@ packages:
 
   /lodash.isempty/4.4.0:
     resolution: {integrity: sha1-b4bL7di+TsmHvpqvM8loTbGzHn4=}
+    dev: false
+
+  /lodash.isequalwith/4.4.0:
+    resolution: {integrity: sha1-Jmcm3dUo+FTyH06pigZWBuD7xrA=}
+    dev: false
+
+  /lodash.isfunction/3.0.9:
+    resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
     dev: false
 
   /lodash.memoize/4.1.2:

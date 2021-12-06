@@ -9,6 +9,9 @@ module.exports = {
     "react/jsx-no-undef": 2,
     "react/jsx-wrap-multilines": 2,
     "react/no-string-refs": 0,
-    "no-plusplus": 0
+    "no-plusplus": 0,
+    "react-hooks/exhaustive-deps": 0,
+    "consistent-return": 0,
+    "@typescript-eslint/consistent-type-imports": 0
   },
 };

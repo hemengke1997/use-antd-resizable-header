@@ -121,8 +121,8 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }}></div>
       </Resizable>
-      <div {...rest} className="resizable-title" title={title}>
-        {children}
+      <div {...rest} className="resizable-title">
+        <span title={title}>{children}</span>
       </div>
     </th>
   );
