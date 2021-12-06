@@ -4,7 +4,7 @@
 
 ## 预览
 
-![preview](./image/preview.gif)
+![preview](./image/new_preview.gif)
 
 ## 在线地址
 [codesandbox](https://codesandbox.io/s/divine-silence-fl6b0?file=/src/App.tsx)
