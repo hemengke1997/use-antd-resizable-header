@@ -4,7 +4,7 @@ import { option } from './config';
 import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
-import { depthFirstSearch, getUniqueId } from './utils';
+import { depthFirstSearch, getUniqueId, ResizableUniqIdPrefix } from './utils';
 import useDeepFnCompareEffect from './utils/useDeepFnCompare';
 
 type useTableResizableHeaderProps<ColumnType> = {
@@ -158,3 +158,5 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 }
 
 export default useTableResizableHeader;
+
+export { ResizableUniqIdPrefix, getUniqueId };
