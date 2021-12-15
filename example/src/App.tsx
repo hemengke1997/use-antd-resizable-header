@@ -2,11 +2,12 @@ import React from 'react';
 import { Table } from 'antd';
 import ProTable from '@ant-design/pro-table';
 import './App.css';
-import useATRH from 'use-antd-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import 'use-antd-resizable-header/dist/style.css';
 import 'antd/es/table/style/index.css';
 import { useReducer } from 'react';
 import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 const data: any[] = [];
 for (let i = 0; i < 100; i++) {
@@ -62,13 +63,14 @@ function App() {
     console.log('x', x);
   }, [x]);
 
-  const { components, resizableColumns, tableWidth } = useATRH({ columns, refreshDeps: [x] });
+
+  const { components, resizableColumns, tableWidth } = useARH({ columns: useMemo(()=>columns, [x]) });
 
   const {
     components: proComponents,
     resizableColumns: proResizableColumns,
     tableWidth: proTableWidth,
-  } = useATRH({ columns: columns });
+  } = useARH({ columns: useMemo(() => columns, [x]) });
 
   return (
     <div className="App">

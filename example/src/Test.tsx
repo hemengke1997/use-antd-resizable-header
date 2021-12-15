@@ -2,7 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import "./index.less";
 import { Table } from "antd";
-import useATRH from 'use-antd-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import 'use-antd-resizable-header/dist/style.css';
 
 const columns = [
@@ -105,7 +105,7 @@ for (let i = 0; i < 100; i++) {
 }
 
 const ResizableTable = (props) => {
-  const { components, resizableColumns, tableWidth } = useATRH({ columns });
+  const { components, resizableColumns, tableWidth } = useARH({ columns });
 
   return (
     <Table
