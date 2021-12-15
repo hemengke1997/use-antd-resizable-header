@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { DependencyList, useCallback, useEffect } from 'react';
 import ResizableHeader from './ResizableHeader';
 import { option } from './config';
 import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, getUniqueId, ResizableUniqIdPrefix } from './utils';
-import useDeepFnCompareEffect from './utils/useDeepFnCompareEffect';
+import useDeepCompareEffect from './utils/useDeepCompareEffect';
 import useSafeState from './utils/useSafeState';
 
 type useTableResizableHeaderProps<ColumnType> = {
@@ -16,6 +16,8 @@ type useTableResizableHeaderProps<ColumnType> = {
   minConstraints?: number;
   /** @description 拖动最大宽度 默认无穷 */
   maxConstraints?: number;
+  /** @description column依赖项 */
+  refreshDeps?: DependencyList;
 };
 
 type CacheType = { width: number; index: number };
@@ -32,6 +34,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     defaultWidth = WIDTH,
     minConstraints = WIDTH,
     maxConstraints = Infinity,
+    refreshDeps = [],
   } = props;
 
   // column的宽度缓存，避免render导致columns宽度重置
@@ -70,7 +73,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
         });
       }
     },
-    [widthCache.current, resizableColumns],
+    [widthCache.current],
   );
 
   const onResize = onMount;
@@ -103,12 +106,12 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     [onMount, onResize, widthCache.current],
   );
 
-  useDeepFnCompareEffect(() => {
+  useDeepCompareEffect(() => {
     if (columns) {
       const c = getColumns(columns);
       setResizableColumns(c);
     }
-  }, [columns]);
+  }, [columns, ...refreshDeps]);
 
   useThrottleEffect(
     () => {

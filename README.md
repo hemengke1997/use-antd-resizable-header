@@ -7,6 +7,7 @@
 ![preview](./image/new_preview.gif)
 
 ## 在线地址
+
 [codesandbox](https://codesandbox.io/s/divine-silence-fl6b0?file=/src/App.tsx)
 
 ## 安装
@@ -20,6 +21,7 @@ yarn add use-antd-resizable-header
 - **默认拖动颜色为`#000`，可通过`global`或设置 css 变量`--atrh-color`设置颜色**
 - **至少一列不能拖动（width 不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
 - **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
+- **若 column 有副作用，请把依赖项传入 refreshDeps 中**
 - **remenber import style**
 
 ## Example
@@ -92,76 +94,81 @@ const data = [
 
 const Hello: React.FC = () => {
   const [, forceRender] = useReducer((s) => s + 1, 0);
+  const [deps, setDeps] = useState(0);
 
-  const columns = React.useMemo(() => {
-    return [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 300,
-        ellipsis: true,
-        render: (text) => <a>{text}</a>,
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        ellipsis: true,
-        width: 200,
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-        ellipsis: true,
-        width: 200,
-      },
-      {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        width: 200,
-        ellipsis: true,
-        render: (tags) => (
-          <>
-            {tags.map((tag) => {
-              let color = tag.length > 5 ? 'geekblue' : 'green';
-              if (tag === 'loser') {
-                color = 'volcano';
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              );
-            })}
-          </>
-        ),
-      },
-      {
-        title: 'render',
-        key: 'action',
-        render: (text, record) => (
-          <Space size="middle">
-            <a>Invite {record.name}</a>
-            <a
-              onClick={() => {
-                forceRender();
-                alert('render');
-              }}
-            >
-              render
-            </a>
-          </Space>
-        ),
-      },
-    ];
-  }, []);
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: 300,
+      ellipsis: true,
+      render: (text) => (
+        <a onClick={() => setDeps((t) => t + 1)}>
+          {text}
+          {deps}
+        </a>
+      ),
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      ellipsis: true,
+      width: 200,
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+      ellipsis: true,
+      width: 200,
+    },
+    {
+      title: 'Tags',
+      key: 'tags',
+      dataIndex: 'tags',
+      width: 200,
+      ellipsis: true,
+      render: (tags) => (
+        <>
+          {tags.map((tag) => {
+            let color = tag.length > 5 ? 'geekblue' : 'green';
+            if (tag === 'loser') {
+              color = 'volcano';
+            }
+            return (
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
+    },
+    {
+      title: 'render',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a>Invite {record.name}</a>
+          <a
+            onClick={() => {
+              forceRender();
+              alert('render');
+            }}
+          >
+            render
+          </a>
+        </Space>
+      ),
+    },
+  ];
 
   const { components, resizableColumns, tableWidth } = useATRH({
     columns,
     minConstraints: 50,
+    refreshDeps: [deps]
   });
 
   return (

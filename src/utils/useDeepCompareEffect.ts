@@ -11,7 +11,7 @@ const depsEqual = (aDeps: DependencyList, bDeps: DependencyList = []) => {
   });
 };
 
-const useDeepFnCompareEffect = (effect: EffectCallback, deps: DependencyList) => {
+const useDeepCompareEffect = (effect: EffectCallback, deps: DependencyList) => {
   const ref = useRef<DependencyList>();
   const signalRef = useRef<number>(0);
 
@@ -23,4 +23,4 @@ const useDeepFnCompareEffect = (effect: EffectCallback, deps: DependencyList) =>
   useEffect(effect, [signalRef.current]);
 };
 
-export default useDeepFnCompareEffect;
+export default useDeepCompareEffect;
