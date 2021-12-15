@@ -7,6 +7,7 @@
 ![preview](./image/new_preview.gif)
 
 ## 在线地址
+
 [codesandbox](https://codesandbox.io/s/silly-dream-rq89l?file=/src/App.tsx)
 
 ## 安装
@@ -20,18 +21,21 @@ yarn add use-antd-resizable-header
 - **默认拖动颜色为`#000`，可通过`global`或设置 css 变量`--atrh-color`设置颜色**
 - **至少一列不能拖动（width 不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
 - **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
+- **若 column 有副作用，请把依赖项传入 useMemo deps 中**
 - **remenber import style**
 
 ## Example
 
 ```tsx
-import useATRH from 'use-antd-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import 'use-antd-resizable-header/dist/style.css';
 
 function App() {
   const columns = [];
 
-  const { components, resizableColumns, tableWidth } = useATRH({ columns });
+  const { components, resizableColumns, tableWidth } = useARH({
+    columns: useMemo(() => columns, []),
+  });
 
   return (
     <>
@@ -62,7 +66,7 @@ function App() {
 ```tsx
 import React, { useReducer } from 'react';
 import { Table, Tag, Space } from 'antd';
-import useATRH from 'use-antd-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import 'antd/dist/antd.css';
 import 'use-antd-resizable-header/dist/style.css';
 
@@ -92,75 +96,79 @@ const data = [
 
 const Hello: React.FC = () => {
   const [, forceRender] = useReducer((s) => s + 1, 0);
+  const [deps, setDeps] = useState(0);
 
-  const columns = React.useMemo(() => {
-    return [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 300,
-        ellipsis: true,
-        render: (text) => <a>{text}</a>,
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        ellipsis: true,
-        width: 200,
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-        ellipsis: true,
-        width: 200,
-      },
-      {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        width: 200,
-        ellipsis: true,
-        render: (tags) => (
-          <>
-            {tags.map((tag) => {
-              let color = tag.length > 5 ? 'geekblue' : 'green';
-              if (tag === 'loser') {
-                color = 'volcano';
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              );
-            })}
-          </>
-        ),
-      },
-      {
-        title: 'render',
-        key: 'action',
-        render: (text, record) => (
-          <Space size="middle">
-            <a>Invite {record.name}</a>
-            <a
-              onClick={() => {
-                forceRender();
-                alert('render');
-              }}
-            >
-              render
-            </a>
-          </Space>
-        ),
-      },
-    ];
-  }, []);
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      width: 300,
+      ellipsis: true,
+      render: (text) => (
+        <a onClick={() => setDeps((t) => t + 1)}>
+          {text}
+          {deps}
+        </a>
+      ),
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      ellipsis: true,
+      width: 200,
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+      ellipsis: true,
+      width: 200,
+    },
+    {
+      title: 'Tags',
+      key: 'tags',
+      dataIndex: 'tags',
+      width: 200,
+      ellipsis: true,
+      render: (tags) => (
+        <>
+          {tags.map((tag) => {
+            let color = tag.length > 5 ? 'geekblue' : 'green';
+            if (tag === 'loser') {
+              color = 'volcano';
+            }
+            return (
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+          })}
+        </>
+      ),
+    },
+    {
+      title: 'render',
+      key: 'action',
+      render: (text, record) => (
+        <Space size="middle">
+          <a>Invite {record.name}</a>
+          <a
+            onClick={() => {
+              forceRender();
+              alert('render');
+            }}
+          >
+            render
+          </a>
+        </Space>
+      ),
+    },
+  ];
 
-  const { components, resizableColumns, tableWidth } = useATRH({
-    columns,
+  const { components, resizableColumns, tableWidth } = useARH({
+    columns: useMemo(() => columns, [deps]),
     minConstraints: 50,
   });
 
@@ -220,7 +228,7 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
 ```tsx
 // index.tsx
 import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
-import useATRH from 'use-antd-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import { genEllipsis } from './utils.tsx';
 
 import 'use-antd-resizable-header/dist/style.css';
@@ -252,7 +260,9 @@ const dataSource = [
 ];
 
 function App() {
-  const { resizableColumns, components, tableWidth } = useATRH({ columns });
+  const { resizableColumns, components, tableWidth } = useARH({
+    columns: useMemo(() => columns, []),
+  });
 
   let cols = [...resizableColumns];
 
@@ -274,6 +284,16 @@ function App() {
 export default App;
 ```
 
+## 为什么需要 React.useMemo ?
+
+### 如果不使用 useMemo
+
+#### 组件 render => columns 引用变化 => use-antd-resiable-header render => 组件 render => columns 引用变化···
+
+## 不使用 useMemo
+
+可以采用其他阻止 render 的方案，如 `columns` 是 prop 或 常量
+
 ## MIT
 
-[LICENSE](https://github.com/hemengke1997/useATRH/blob/master/LICENSE)
+[LICENSE](https://github.com/hemengke1997/useARH/blob/master/LICENSE)

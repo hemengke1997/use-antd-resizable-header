@@ -5,8 +5,8 @@ import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, getUniqueId, ResizableUniqIdPrefix } from './utils';
-import useDeepFnCompareEffect from './utils/useDeepFnCompareEffect';
 import useSafeState from './utils/useSafeState';
+import useCreation from './utils/useCreation';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
@@ -70,7 +70,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
         });
       }
     },
-    [widthCache.current, resizableColumns],
+    [widthCache.current],
   );
 
   const onResize = onMount;
@@ -103,7 +103,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     [onMount, onResize, widthCache.current],
   );
 
-  useDeepFnCompareEffect(() => {
+  useEffect(() => {
     if (columns) {
       const c = getColumns(columns);
       setResizableColumns(c);
@@ -160,4 +160,4 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
 export default useTableResizableHeader;
 
-export { ResizableUniqIdPrefix, getUniqueId };
+export { ResizableUniqIdPrefix, getUniqueId, useCreation };
