@@ -33,7 +33,7 @@
         cursor: col-resize;
 
         & .resizable-line {
-          background: var(--atrh-color, #000);
+          background: var(--arh-color, #000);
           pointer-events: none;
         }
       }

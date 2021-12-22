@@ -9,7 +9,14 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/hemengke1997/useATRH",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemengke1997/use-antd-resizable-header.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hemengke1997/use-antd-resizable-header/issues"
+  },
+  "homepage": "https://github.com/hemengke1997/use-antd-resizable-header",
   "keywords": [
     "react",
     "antd",
