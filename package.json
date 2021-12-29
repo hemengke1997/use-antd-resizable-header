@@ -28,7 +28,8 @@
     "build": "vite build",
     "serve": "vite preview",
     "precommit": "lint-staged",
-    "prepublish": "pnpm build"
+    "prepublish": "pnpm build",
+    "prettier": "prettier -c --write \"src/**/*\""
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [

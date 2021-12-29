@@ -27,12 +27,7 @@ const getKey = 'dataIndex';
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   props: useTableResizableHeaderProps<ColumnType>,
 ) {
-  const {
-    columns,
-    defaultWidth = WIDTH,
-    minConstraints = WIDTH,
-    maxConstraints = Infinity,
-  } = props;
+  const { columns, defaultWidth = WIDTH, minConstraints = WIDTH, maxConstraints = Infinity } = props;
 
   // column的宽度缓存，避免render导致columns宽度重置
   // add column width cache to avoid column's width reset after render
