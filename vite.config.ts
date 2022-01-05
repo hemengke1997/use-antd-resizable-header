@@ -20,19 +20,18 @@ export default defineConfig({
             declarationMap: false,
             allowJs: false
           },
-          include: ['src/**/*'],
+          include: ['src/index.tsx'],
         },
-      }),
+    }),
       enforce: 'pre',
       apply: 'build',
     },
   ],
   define: {
-    'process.env.NODE_ENV': JSON.stringify(env || 'development')
+    'process.env.NODE_ENV': JSON.stringify(env || 'development'),
   },
   build: {
     outDir: 'dist',
-    minify: false,
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'use-antd-resizable-header',
@@ -55,6 +54,7 @@ export default defineConfig({
           react: 'react',
           'react-dom': 'react-dom',
         },
+        exports: 'named'
       },
     },
   },

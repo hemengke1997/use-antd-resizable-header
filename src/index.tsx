@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import ResizableHeader from './ResizableHeader';
 import { option } from './config';
 import isEmpty from 'lodash.isempty';
@@ -6,7 +6,6 @@ import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, getUniqueId, ResizableUniqIdPrefix } from './utils';
 import useSafeState from './utils/useSafeState';
-import useCreation from './utils/useCreation';
 
 type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
@@ -16,6 +15,8 @@ type useTableResizableHeaderProps<ColumnType> = {
   minConstraints?: number;
   /** @description 拖动最大宽度 默认无穷 */
   maxConstraints?: number;
+  /** @description 是否缓存columns宽度，避免rerender时宽度重置 */
+  cache?: boolean;
 };
 
 type CacheType = { width: number; index: number };
@@ -27,7 +28,7 @@ const getKey = 'dataIndex';
 function useTableResizableHeader<ColumnType extends Record<string, any>>(
   props: useTableResizableHeaderProps<ColumnType>,
 ) {
-  const { columns, defaultWidth = WIDTH, minConstraints = WIDTH, maxConstraints = Infinity } = props;
+  const { columns, defaultWidth = WIDTH, minConstraints = WIDTH, maxConstraints = Infinity, cache = true } = props;
 
   // column的宽度缓存，避免render导致columns宽度重置
   // add column width cache to avoid column's width reset after render
@@ -39,7 +40,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
 
-  const onMount = useCallback(
+  const onMount = React.useCallback(
     (id: string) => (width: number) => {
       if (width) {
         setResizableColumns((t) => {
@@ -65,7 +66,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
         });
       }
     },
-    [widthCache.current],
+    [],
   );
 
   const onResize = onMount;
@@ -80,7 +81,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
           onHeaderCell: (column: ColumnType) => {
             return {
               title: typeof col?.title === 'string' ? col?.title : '',
-              width: widthCache.current?.get(column[getKey])?.width || column?.width,
+              width: cache ? widthCache.current?.get(column[getKey])?.width || column?.width : column?.width,
               onMount: onMount(column?.[getKey]),
               onResize: onResize(column?.[getKey]),
               minWidth: minConstraints,
@@ -88,17 +89,17 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
               triggerRender,
             };
           },
-          width: widthCache.current?.get(col[getKey])?.width || col?.width,
+          width: cache ? widthCache.current?.get(col[getKey])?.width || col?.width : col?.width,
           ellipsis: typeof col.ellipsis !== 'undefined' ? col.ellipsis : true,
           [getKey]: col[getKey] || col.key || getUniqueId(index),
         };
       }) as ColumnType[];
       return c;
     },
-    [onMount, onResize, widthCache.current],
+    [onMount, onResize, widthCache.current, cache],
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (columns) {
       const c = getColumns(columns);
       setResizableColumns(c);
@@ -114,7 +115,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
     option,
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     let width = 0;
 
     (function loop(cls: ColumnType[]) {
@@ -131,7 +132,7 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
   const { run: debounceRender } = useDebounceFn(forceRender);
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('resize', debounceRender);
     return () => {
       window.removeEventListener('resize', debounceRender);
@@ -155,4 +156,4 @@ function useTableResizableHeader<ColumnType extends Record<string, any>>(
 
 export default useTableResizableHeader;
 
-export { ResizableUniqIdPrefix, getUniqueId, useCreation };
+export { ResizableUniqIdPrefix };

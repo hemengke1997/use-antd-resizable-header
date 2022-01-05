@@ -6,8 +6,8 @@ import useARH from 'use-antd-resizable-header';
 import 'use-antd-resizable-header/dist/style.css';
 import 'antd/es/table/style/index.css';
 import { useReducer } from 'react';
-import { useEffect } from 'react';
 import { useMemo } from 'react';
+import { useEffect } from 'react';
 
 const data: any[] = [];
 for (let i = 0; i < 100; i++) {
@@ -15,6 +15,8 @@ for (let i = 0; i < 100; i++) {
     key: i,
     name: `Edrward ${i}`,
     age: 32,
+    x: i,
+    y: i,
     address: `London Park no. ${i}`,
   });
 }
@@ -35,6 +37,18 @@ function App() {
       width: 100,
       dataIndex: 'age',
       key: 'age',
+    },
+    {
+      title: 'x',
+      width: 100,
+      dataIndex: 'x',
+      key: 'x',
+    },
+    {
+      title: 'y',
+      width: 100,
+      dataIndex: 'y',
+      key: 'y',
     },
     {
       title: 'Column 1',
@@ -59,12 +73,7 @@ function App() {
     },
   ];
 
-  useEffect(() => {
-    console.log('x', x);
-  }, [x]);
-
-
-  const { components, resizableColumns, tableWidth } = useARH({ columns: useMemo(()=>columns, [x]) });
+  const { components, resizableColumns, tableWidth } = useARH({ columns: useMemo(() => columns, [x]) });
 
   const {
     components: proComponents,
@@ -72,14 +81,13 @@ function App() {
     tableWidth: proTableWidth,
   } = useARH({ columns: useMemo(() => columns, [x]) });
 
+  useEffect(() => {
+    console.log(proTableWidth, 'proTableWidth');
+  }, [proTableWidth]);
+
   return (
     <div className="App">
-      <Table
-        columns={resizableColumns}
-        components={components}
-        dataSource={data}
-        scroll={{ x: tableWidth }}
-      ></Table>
+      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
 
       <ProTable
         columns={proResizableColumns}
