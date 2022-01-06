@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import typescript2 from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import path from 'path';
 
 const env = process.env.NODE_ENV;
@@ -9,23 +9,6 @@ const env = process.env.NODE_ENV;
 export default defineConfig({
   plugins: [
     react(),
-    {
-      ...typescript2({
-        check: false,
-        tsconfig: path.resolve(__dirname, `tsconfig.json`),
-        tsconfigOverride: {
-          compilerOptions: {
-            sourceMap: false,
-            declaration: true,
-            declarationMap: false,
-            allowJs: false
-          },
-          include: ['src/index.tsx'],
-        },
-    }),
-      enforce: 'pre',
-      apply: 'build',
-    },
   ],
   define: {
     'process.env.NODE_ENV': JSON.stringify(env || 'development'),
@@ -35,7 +18,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
       name: 'use-antd-resizable-header',
-      fileName: 'index',
+      fileName: (format) => `index.${format}.js`,
       formats: ['es', 'umd'],
     },
     terserOptions: {
@@ -56,6 +39,12 @@ export default defineConfig({
         },
         exports: 'named'
       },
+      plugins: [
+        typescript({
+          tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+          include: ['src/index.tsx','src/utils/index.ts']
+        }),
+      ]
     },
   },
 });
