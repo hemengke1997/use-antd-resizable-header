@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite';
-import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import typescript2 from 'rollup-plugin-typescript2';
 import path from 'path';
+
+const env = process.env.NODE_ENV;
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    reactRefresh(),
+    react(),
     {
       ...typescript2({
         check: false,
@@ -16,37 +18,32 @@ export default defineConfig({
             sourceMap: false,
             declaration: true,
             declarationMap: false,
+            allowJs: false
           },
-          include: ['src/**/*'],
+          include: ['src/index.tsx'],
         },
-      }),
+    }),
       enforce: 'pre',
       apply: 'build',
     },
   ],
-  resolve: {
-    alias: {
-      '~': path.resolve(__dirname, 'node_modules'),
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-      },
-    },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(env || 'development'),
   },
   build: {
     outDir: 'dist',
-    minify: false,
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
-      name: 'antd-resizable-header',
+      name: 'use-antd-resizable-header',
       fileName: 'index',
       formats: ['es', 'umd'],
     },
     terserOptions: {
-      compress: false,
+      compress: {
+        keep_infinity: true,
+        // Used to delete console in production environment
+        drop_console: true,
+      },
     },
     cssCodeSplit: false,
     // watch: {},
@@ -57,6 +54,7 @@ export default defineConfig({
           react: 'react',
           'react-dom': 'react-dom',
         },
+        exports: 'named'
       },
     },
   },
