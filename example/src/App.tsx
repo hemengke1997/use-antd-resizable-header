@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import { Table } from 'antd';
 import ProTable from '@ant-design/pro-table';
 import './App.css';
-import useATRH from 'use-antd-resizable-header';
-import 'antd/dist/antd.css';
-import 'use-antd-resizable-header/src/index.less';
+import useARH from 'use-antd-resizable-header';
+import 'use-antd-resizable-header/dist/style.css';
+import 'antd/es/table/style/index.css';
+import { useReducer } from 'react';
+import { useMemo } from 'react';
+import { useEffect } from 'react';
 
-const data = [];
+const data: any[] = [];
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
     name: `Edrward ${i}`,
     age: 32,
+    x: i,
+    y: i,
     address: `London Park no. ${i}`,
   });
 }
+
 function App() {
+  const [x, setX] = useReducer((s) => s + 1, 0);
+
   const columns = [
     {
       title: 'Name',
@@ -32,81 +39,64 @@ function App() {
       key: 'age',
     },
     {
+      title: 'x',
+      width: 100,
+      dataIndex: 'x',
+      key: 'x',
+    },
+    {
+      title: 'y',
+      width: 100,
+      dataIndex: 'y',
+      key: 'y',
+    },
+    {
       title: 'Column 1',
       dataIndex: 'address',
-      key: '1',
-      width: 150,
     },
     {
-      title: 'Column 2',
-      dataIndex: 'address',
-      key: '2',
-      width: 150,
+      title: 'test render',
+      dataIndex: 'testRender',
+      width: 200,
+      render: () => {
+        return <div onClick={() => setX()}>{x}</div>;
+      },
     },
-    {
-      title: 'Column 3',
-      dataIndex: 'address',
-      key: '3',
-      width: 150,
-    },
-    {
-      title: 'Column 4',
-      dataIndex: 'address',
-      key: '4',
-      width: 150,
-    },
-    {
-      title: 'Column 5',
-      dataIndex: 'address',
-      key: '5',
-      width: 150,
-    },
-    {
-      title: 'Column 6',
-      dataIndex: 'address',
-      key: '6',
-      width: 150,
-    },
-    {
-      title: 'Column 7777777777777',
-      dataIndex: 'address',
-      key: '7',
-      width: 150,
-    },
-    {
-      title: 'Column 8',
-      dataIndex: 'address',
-      key: '8',
-      width: 150,
-    },
-    {
-      title: 'Column 9',
-      dataIndex: 'address',
-      key: '9',
-      width: 150,
-    },
-    { title: 'Column 10', dataIndex: 'address', key: '10' },
     {
       title: 'Action',
       key: 'operation',
       fixed: 'right',
       width: 100,
-      render: () => <a>action</a>,
+      render: (record: any) => {
+        return <span>{record?.address || ''}</span>;
+      },
     },
   ];
 
-  const { components, resizableColumns, tableWidth } = useATRH(columns);
+  const { components, resizableColumns, tableWidth } = useARH({ columns: useMemo(() => columns, [x]) });
+
+  const {
+    components: proComponents,
+    resizableColumns: proResizableColumns,
+    tableWidth: proTableWidth,
+  } = useARH({ columns: useMemo(() => columns, [x]) });
+
+  useEffect(() => {
+    console.log(proTableWidth, 'proTableWidth');
+  }, [proTableWidth]);
 
   return (
     <div className="App">
+      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
+
       <ProTable
-        columns={resizableColumns}
-        components={components}
+        columns={proResizableColumns}
+        components={proComponents}
         dataSource={data}
-        scroll={{ x: tableWidth }}
+        scroll={{ x: proTableWidth }}
       ></ProTable>
     </div>
   );
 }
 
-export default App;
+export default React.memo(App);
