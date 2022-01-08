@@ -29,7 +29,7 @@ export type useTableResizableHeaderProps<ColumnType> = {
   columns: ColumnType[] | undefined;
   /** @description 最后一列不能拖动，设置最后一列的最小展示宽度，默认120 */
   defaultWidth?: number;
-  /** @description 拖动最小宽度 默认120 */
+  /** @description 拖动最小宽度 默认0 */
   minConstraints?: number;
   /** @description 拖动最大宽度 默认无穷 */
   maxConstraints?: number;
@@ -61,7 +61,7 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
   const {
     columns: columnsProp,
     defaultWidth = WIDTH,
-    minConstraints = WIDTH,
+    minConstraints = WIDTH / 2,
     maxConstraints = Infinity,
     cache = true,
     columnsState,

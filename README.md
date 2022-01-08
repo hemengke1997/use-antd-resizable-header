@@ -16,6 +16,28 @@
 yarn add use-antd-resizable-header
 ```
 
+## API
+
+### Properties
+
+| Name           | Type             | Default   | Description                                            |
+| -------------- | ---------------- | --------- | ------------------------------------------------------ |
+| columns        | ColumnType[]     | undefined | antd table 的 columns                                  |
+| defaultWidth   | number           | 120       | 某一列不能拖动，设置该列的最小展示宽度，默认 120 |
+| minConstraints | number           | 60       | 拖动最小宽度 默认 60                                    |
+| maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                                  |
+| cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度                     |
+| columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度                   |
+
+### Return
+
+| Name             | Description                             |
+| ---------------- | --------------------------------------- |
+| resizableColumns | 拖拽 columns，用在 Table columns        |
+| components       | 拖拽 components， 用在 Table components |
+| tableWidth       | 表格宽度                                |
+| resetColumns     | 重置宽度方法                            |
+
 ## 注意事项
 
 - **默认拖动颜色为`#000`，可通过`global`或设置 css 变量`--arh-color`设置颜色**
@@ -33,24 +55,24 @@ import 'use-antd-resizable-header/dist/style.css';
 function App() {
   const columns = [];
 
-  const { components, resizableColumns, tableWidth } = useARH({
+  const { components, resizableColumns, tableWidth, resetColumns } = useARH({
     columns: useMemo(() => columns, []),
+    // 保存拖拽宽度至本地localStorage
+    columnsState: {
+      persistenceKey: 'localKey',
+      persistenceType: 'localStorage',
+    },
   });
 
   return (
     <>
-      <Table
-        columns={resizableColumns}
-        components={components}
-        dataSource={data}
-        scroll={{ x: tableWidth }}
-      ></Table>
+      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
       <ProTable
         columns={resizableColumns}
         components={components}
         dataSource={data}
         scroll={{ x: tableWidth }}
-      ></ProTable>;
+      ></ProTable>;<Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
   );
 }
@@ -172,14 +194,7 @@ const Hello: React.FC = () => {
     minConstraints: 50,
   });
 
-  return (
-    <Table
-      columns={resizableColumns}
-      components={components}
-      dataSource={data}
-      scroll={{ x: tableWidth }}
-    />
-  );
+  return <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />;
 };
 
 export default Hello;
@@ -272,12 +287,7 @@ function App() {
   }));
 
   return (
-    <ProTable
-      columns={cols}
-      components={components}
-      scroll={{ x: tableWidth }}
-      dataSource={dataSource}
-    ></ProTable>
+    <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource}></ProTable>
   );
 }
 
