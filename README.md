@@ -35,7 +35,7 @@ yarn add use-antd-resizable-header
 | ---------------- | --------------------------------------- |
 | resizableColumns | 拖拽 columns，用在 Table columns        |
 | components       | 拖拽 components， 用在 Table components |
-| tableWidth       | 表格宽度                                |
+| tableWidth       | 表格宽度，用在 Table width              |
 | resetColumns     | 重置宽度方法                            |
 
 ## 注意事项
