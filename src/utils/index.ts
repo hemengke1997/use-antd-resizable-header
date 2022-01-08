@@ -24,5 +24,3 @@ export function depthFirstSearch<T extends Record<string, any> & { children?: T[
 
   return c;
 }
-
-export const ResizableUniqIdPrefix = 'resizable-table-id';

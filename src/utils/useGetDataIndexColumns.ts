@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
-import { ResizableUniqIdPrefix } from '.';
+import React from 'react';
 import { ColumnOriginType } from '..';
 import useMemoizedFn from './useMemoizedFn';
 
 export const GETKEY = 'dataIndex';
+
+export const ResizableUniqIdPrefix = 'resizable-table-id';
 
 export function getUniqueId(index: number) {
   return `${ResizableUniqIdPrefix}-${index}`;
@@ -27,7 +28,7 @@ function useGetDataIndexColumns<T extends ColumnOriginType<T>>(columns: T[] | un
     return c;
   });
 
-  const dataIndexColumns = useMemo(() => getColumns(columns), [getColumns]) as T[] | undefined;
+  const dataIndexColumns = React.useMemo(() => getColumns(columns), [getColumns]) as T[] | undefined;
 
   return dataIndexColumns || columns;
 }

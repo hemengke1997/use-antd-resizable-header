@@ -4,10 +4,10 @@ import { option } from './config';
 import isEmpty from 'lodash.isempty';
 import useThrottleEffect from './utils/useThrottleEffect';
 import useDebounceFn from './utils/useDebounceFn';
-import { depthFirstSearch, ResizableUniqIdPrefix } from './utils';
+import { depthFirstSearch } from './utils';
 import useSafeState from './utils/useSafeState';
 import useLocalColumns from './utils/useLocalColumns';
-import useGetDataIndexColumns, { GETKEY } from './utils/useGetDataIndexColumns';
+import useGetDataIndexColumns, { GETKEY, ResizableUniqIdPrefix } from './utils/useGetDataIndexColumns';
 
 export type ColumnsState = {
   width: number;
