@@ -7,7 +7,7 @@ import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch, ResizableUniqIdPrefix } from './utils';
 import useSafeState from './utils/useSafeState';
 import useLocalColumns from './utils/useLocalColumns';
-import { GETKEY } from './utils/useGetDataIndexColumns';
+import useGetDataIndexColumns, { GETKEY } from './utils/useGetDataIndexColumns';
 
 export type ColumnsState = {
   width: number;
@@ -202,4 +202,4 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
 
 export default useTableResizableHeader;
 
-export { ResizableUniqIdPrefix };
+export { ResizableUniqIdPrefix, useGetDataIndexColumns };

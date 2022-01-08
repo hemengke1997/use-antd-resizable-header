@@ -7,9 +7,7 @@ const env = process.env.NODE_ENV;
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-  ],
+  plugins: [react()],
   define: {
     'process.env.NODE_ENV': JSON.stringify(env || 'development'),
   },
@@ -37,14 +35,14 @@ export default defineConfig({
           react: 'react',
           'react-dom': 'react-dom',
         },
-        exports: 'named'
+        exports: 'named',
       },
       plugins: [
         typescript({
           tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-          include: ['src/index.tsx','src/utils/index.ts']
+          include: ['src/index.tsx', 'src/utils/index.ts', 'src/utils/useGetDataIndexColumns.ts'],
         }),
-      ]
+      ],
     },
   },
 });
