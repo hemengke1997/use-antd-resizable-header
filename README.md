@@ -1,4 +1,4 @@
-# use-table-resizable-header
+# use-antd-resizable-header
 
 > antd 表格头拖拽 Hook，兼容 Table ProTable
 
@@ -13,7 +13,7 @@
 ## 安装
 
 ```bash
-yarn add @minko-fe/use-table-resizable-header
+yarn add @minko-fe/use-antd-resizable-header
 ```
 
 ## API
@@ -49,8 +49,8 @@ yarn add @minko-fe/use-table-resizable-header
 ## Example
 
 ```tsx
-import useARH from 'use-table-resizable-header';
-import 'use-table-resizable-header/dist/style.css';
+import useARH from 'use-antd-resizable-header';
+import 'use-antd-resizable-header/dist/style.css';
 
 function App() {
   const columns = [];
@@ -88,9 +88,9 @@ function App() {
 ```tsx
 import React, { useReducer } from 'react';
 import { Table, Tag, Space } from 'antd';
-import useARH from 'use-table-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import 'antd/dist/antd.css';
-import 'use-table-resizable-header/dist/style.css';
+import 'use-antd-resizable-header/dist/style.css';
 
 const data = [
   {
@@ -243,10 +243,10 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
 ```tsx
 // index.tsx
 import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
-import useARH from 'use-table-resizable-header';
+import useARH from 'use-antd-resizable-header';
 import { genEllipsis } from './utils.tsx';
 
-import 'use-table-resizable-header/dist/style.css';
+import 'use-antd-resizable-header/dist/style.css';
 import './index.css';
 
 const columns: ProColumns[] = [

@@ -15,7 +15,7 @@ export default defineConfig({
     outDir: 'dist',
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
-      name: 'use-table-resizable-header',
+      name: 'use-antd-resizable-header',
       fileName: (format) => `index.${format}.js`,
       formats: ['es', 'umd'],
     },

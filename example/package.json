@@ -10,7 +10,7 @@
     "antd": "^4.18.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "use-table-resizable-header": "link:.."
+    "use-antd-resizable-header": "link:.."
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
