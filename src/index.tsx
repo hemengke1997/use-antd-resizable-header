@@ -8,6 +8,7 @@ import { depthFirstSearch } from './utils';
 import useSafeState from './utils/useSafeState';
 import useLocalColumns from './utils/useLocalColumns';
 import useGetDataIndexColumns, { GETKEY, ResizableUniqIdPrefix } from './utils/useGetDataIndexColumns';
+import useMemoizedFn from './utils/useMemoizedFn';
 
 export type ColumnsState = {
   width: number;
@@ -73,7 +74,7 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
 
   const [resizableColumns, setResizableColumns] = useSafeState<ColumnType[]>([]);
 
-  const { localColumns: columns, resetColumns } = useLocalColumns({
+  const { localColumns: columns, resetLocalColumns } = useLocalColumns({
     columnsState,
     columns: columnsProp,
     resizableColumns,
@@ -82,6 +83,11 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
   const [tableWidth, setTableWidth] = useSafeState<number>();
 
   const [triggerRender, forceRender] = React.useReducer((s) => s + 1, 0);
+
+  const resetColumns = useMemoizedFn(() => {
+    widthCache.current = new Map();
+    resetLocalColumns();
+  });
 
   const onMount = React.useCallback(
     (id: React.Key | undefined) => (width?: number) => {

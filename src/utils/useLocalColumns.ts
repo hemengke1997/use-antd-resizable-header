@@ -96,13 +96,13 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
   /**
    * reset
    */
-  const resetColumns = useMemoizedFn(() => {
+  const resetLocalColumns = useMemoizedFn(() => {
     setLocalColumns([...(columnsProp || [])]);
   });
 
   return {
     localColumns: useMemo(() => localColumns, [localColumns]),
-    resetColumns,
+    resetLocalColumns,
   };
 }
 
