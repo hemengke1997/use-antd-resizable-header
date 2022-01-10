@@ -49,8 +49,8 @@ yarn add @minko-fe/use-antd-resizable-header
 ## Example
 
 ```tsx
-import useARH from 'use-antd-resizable-header';
-import 'use-antd-resizable-header/dist/style.css';
+import useARH from '@minko-fe/use-antd-resizable-header';
+import '@minko-fe/use-antd-resizable-header/dist/style.css';
 
 function App() {
   const columns = [];
@@ -88,9 +88,9 @@ function App() {
 ```tsx
 import React, { useReducer } from 'react';
 import { Table, Tag, Space } from 'antd';
-import useARH from 'use-antd-resizable-header';
+import useARH from '@minko-fe/use-antd-resizable-header';
 import 'antd/dist/antd.css';
-import 'use-antd-resizable-header/dist/style.css';
+import '@minko-fe/use-antd-resizable-header/dist/style.css';
 
 const data = [
   {
@@ -243,10 +243,10 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
 ```tsx
 // index.tsx
 import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
-import useARH from 'use-antd-resizable-header';
+import useARH from '@minko-fe/use-antd-resizable-header';
 import { genEllipsis } from './utils.tsx';
 
-import 'use-antd-resizable-header/dist/style.css';
+import '@minko-fe/use-antd-resizable-header/dist/style.css';
 import './index.css';
 
 const columns: ProColumns[] = [
