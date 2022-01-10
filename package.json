@@ -1,6 +1,6 @@
 {
-  "name": "use-antd-resizable-header",
-  "version": "2.1.3",
+  "name": "use-table-resizable-header",
+  "version": "1.0.0",
   "description": "antd resizable header column hook",
   "author": "hemengke1997 <23536175@qq.com>",
   "types": "dist/index.d.ts",
@@ -11,12 +11,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hemengke1997/use-antd-resizable-header.git"
+    "url": "git+https://github.com/hemengke1997/use-table-resizable-header.git"
   },
   "bugs": {
-    "url": "https://github.com/hemengke1997/use-antd-resizable-header/issues"
+    "url": "https://github.com/hemengke1997/use-table-resizable-header/issues"
   },
-  "homepage": "https://github.com/hemengke1997/use-antd-resizable-header",
+  "homepage": "https://github.com/hemengke1997/use-table-resizable-header",
   "keywords": [
     "react",
     "antd",
