@@ -5,7 +5,6 @@ type noop = (...args: any[]) => any;
 function useMemoizedFn<T extends noop>(fn: T) {
   if (process.env.NODE_ENV === 'development') {
     if (typeof fn !== 'function') {
-      // eslint-disable-next-line no-console
       console.error(`useMemoizedFn expected parameter is a function, got ${typeof fn}`);
     }
   }
@@ -18,9 +17,7 @@ function useMemoizedFn<T extends noop>(fn: T) {
 
   const memoizedFn = useRef<T>();
   if (!memoizedFn.current) {
-    // eslint-disable-next-line func-names
     memoizedFn.current = function (...args) {
-      // eslint-disable-next-line @typescript-eslint/no-invalid-this
       return fnRef.current.apply(this, args);
     } as T;
   }

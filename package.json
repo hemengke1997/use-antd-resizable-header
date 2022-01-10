@@ -29,7 +29,8 @@
     "serve": "vite preview",
     "precommit": "lint-staged",
     "prepublish": "pnpm build",
-    "prettier": "prettier -c --write \"src/**/*\""
+    "prettier": "prettier -c --write \"src/**/*\"",
+    "upgrade:deps": "pnpm up -i --latest"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -38,7 +39,8 @@
     "**/*.{ts,tsx}": "eslint --ext .ts,.tsx"
   },
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "rollup": "^2.14.0"
   },
   "dependencies": {
     "classnames": "^2.3.1",
@@ -55,23 +57,25 @@
     "@rollup/plugin-typescript": "^8.3.0",
     "@types/lodash.isequalwith": "^4.4.6",
     "@types/lodash.isfunction": "^3.0.6",
-    "@types/node": "^16.11.19",
+    "@types/node": "^17.0.8",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-resizable": "^1.7.4",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "@vitejs/plugin-react": "^1.1.4",
-    "autoprefixer": "^10.4.1",
-    "eslint": "^7.32.0",
+    "autoprefixer": "^10.4.2",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-define-config": "^1.2.1",
+    "eslint-define-config": "^1.2.2",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^11.2.6",
-    "postcss-nesting": "^8.0.1",
+    "lint-staged": "^12.1.7",
+    "postcss": "^8.4.5",
+    "postcss-nesting": "^10.1.1",
     "prettier": "^2.5.1",
     "rollup-plugin-postcss": "^4.0.2",
+    "tslib": "^2.3.1",
     "typescript": "^4.5.4",
     "vite": "^2.7.10"
   }
