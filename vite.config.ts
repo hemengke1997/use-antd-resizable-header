@@ -40,7 +40,7 @@ export default defineConfig({
       plugins: [
         typescript({
           tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-          include: ['src/index.tsx', 'src/utils/index.ts', 'src/utils/useGetDataIndexColumns.ts'],
+          include: ['src/index.tsx', 'src/utils/useGetDataIndexColumns.ts'],
         }),
       ],
     },
