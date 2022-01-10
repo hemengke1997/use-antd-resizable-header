@@ -2,8 +2,8 @@ import React from "react";
 import "antd/dist/antd.css";
 import "./index.less";
 import { Table } from "antd";
-import useARH from 'use-antd-resizable-header';
-import 'use-antd-resizable-header/dist/style.css';
+import useARH from 'use-table-resizable-header';
+import 'use-table-resizable-header/dist/style.css';
 
 const columns = [
   {

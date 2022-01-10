@@ -1508,7 +1508,7 @@ unstated-next@^1.1.0:
   resolved "https://registry.yarnpkg.com/unstated-next/-/unstated-next-1.1.0.tgz#7bb4911a12fdf3cc8ad3eb11a0b315e4a8685ea8"
   integrity sha512-AAn47ZncPvgBGOvMcn8tSRxsrqwf2VdAPxLASTuLJvZt4rhKfDvUkmYZLGfclImSfTVMv7tF4ynaVxin0JjDCA==
 
-"use-antd-resizable-header@link:..":
+"use-table-resizable-header@link:..":
   version "0.0.0"
   uid ""
 
