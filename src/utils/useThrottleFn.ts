@@ -25,6 +25,7 @@ function useThrottleFn<T extends Fn>(fn: T, options?: Options) {
 
   useEffect(() => {
     throttled.cancel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

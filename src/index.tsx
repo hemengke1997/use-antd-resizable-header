@@ -7,7 +7,7 @@ import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch } from './utils';
 import useSafeState from './utils/useSafeState';
 import useLocalColumns from './utils/useLocalColumns';
-import useGetDataIndexColumns, { GETKEY, ResizableUniqIdPrefix } from './utils/useGetDataIndexColumns';
+import useGetDataindexColumns, { GETKEY, ResizableUniqIdPrefix } from './utils/useGetDataindexColumns';
 import useMemoizedFn from './utils/useMemoizedFn';
 
 export type ColumnsState = {
@@ -115,47 +115,44 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
         });
       }
     },
-    [],
+    [setResizableColumns],
   );
 
-  const onResize = onMount;
+  const onResize = React.useMemo(() => onMount, [onMount]);
 
-  const getColumns = React.useCallback(
-    (list: ColumnType[]) => {
-      const trulyColumns = list?.filter((item) => !isEmpty(item));
-      const c = trulyColumns.map((col) => {
-        return {
-          ...col,
-          children: col?.children?.length ? getColumns(col.children) : undefined,
-          onHeaderCell: (column: ColumnType) => {
-            return {
-              title: typeof col?.title === 'string' ? col?.title : '',
-              width: cache ? widthCache.current?.get(column[GETKEY] ?? '')?.width || column?.width : column?.width,
-              resizable: column.resizable,
-              onMount: onMount(column?.[GETKEY]),
-              onResize: onResize(column?.[GETKEY]),
-              minWidth: minConstraints,
-              maxWidth: maxConstraints,
-              triggerRender,
-            };
-          },
-          width: cache ? widthCache.current?.get(col[GETKEY] ?? '')?.width || col?.width : col?.width,
-          ellipsis: typeof col.ellipsis !== 'undefined' ? col.ellipsis : true,
-          [GETKEY]: col[GETKEY] || col.key,
-        };
-      }) as ColumnType[];
+  const getColumns = useMemoizedFn((list: ColumnType[]) => {
+    const trulyColumns = list?.filter((item) => !isEmpty(item));
+    const c = trulyColumns.map((col) => {
+      return {
+        ...col,
+        children: col?.children?.length ? getColumns(col.children) : undefined,
+        onHeaderCell: (column: ColumnType) => {
+          return {
+            title: typeof col?.title === 'string' ? col?.title : '',
+            width: cache ? widthCache.current?.get(column[GETKEY] ?? '')?.width || column?.width : column?.width,
+            resizable: column.resizable,
+            onMount: onMount(column?.[GETKEY]),
+            onResize: onResize(column?.[GETKEY]),
+            minWidth: minConstraints,
+            maxWidth: maxConstraints,
+            triggerRender,
+          };
+        },
+        width: cache ? widthCache.current?.get(col[GETKEY] ?? '')?.width || col?.width : col?.width,
+        ellipsis: typeof col.ellipsis !== 'undefined' ? col.ellipsis : true,
+        [GETKEY]: col[GETKEY] || col.key,
+      };
+    }) as ColumnType[];
 
-      return c;
-    },
-    [onMount, onResize, widthCache.current, cache],
-  );
+    return c;
+  });
 
   React.useEffect(() => {
     if (columns) {
       const c = getColumns(columns);
       setResizableColumns(c);
     }
-  }, [columns]);
+  }, [columns, getColumns, setResizableColumns]);
 
   useThrottleEffect(
     () => {
@@ -179,7 +176,7 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
     })(resizableColumns);
 
     setTableWidth(width);
-  }, [resizableColumns]);
+  }, [columns, defaultWidth, resizableColumns, setTableWidth]);
 
   const { run: debounceRender } = useDebounceFn(forceRender);
 
@@ -188,7 +185,7 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
     return () => {
       window.removeEventListener('resize', debounceRender);
     };
-  }, []);
+  }, [debounceRender]);
 
   const components = React.useMemo(() => {
     return {
@@ -196,7 +193,7 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
         cell: ResizableHeader,
       },
     };
-  }, [ResizableHeader]);
+  }, []);
 
   return {
     resizableColumns,
@@ -208,4 +205,4 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
 
 export default useTableResizableHeader;
 
-export { ResizableUniqIdPrefix, useGetDataIndexColumns };
+export { ResizableUniqIdPrefix, useGetDataindexColumns };

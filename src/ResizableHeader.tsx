@@ -36,18 +36,22 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 
   const [resizeWidth, setResizeWidth] = useSafeState<number>(0);
 
-  React.useEffect(() => {
-    if (width) {
-      setResizeWidth(width);
-      onMount?.(width);
-    }
-  }, [triggerRender]);
+  React.useEffect(
+    () => {
+      if (width) {
+        setResizeWidth(width);
+        onMount?.(width);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [triggerRender],
+  );
 
   React.useEffect(() => {
     if (width) {
       setResizeWidth(width);
     }
-  }, [width]);
+  }, [setResizeWidth, width]);
 
   if (!width || Number.isNaN(Number(width))) {
     return (

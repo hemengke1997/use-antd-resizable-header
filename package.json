@@ -30,8 +30,7 @@
     "precommit": "lint-staged",
     "prepublish": "pnpm build",
     "prettier": "prettier -c --write \"src/**/*\"",
-    "upgrade:deps": "pnpm up -i --latest",
-    "run-publish": "yarn publish --access public"
+    "upgrade:deps": "pnpm up -i --latest"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
@@ -40,8 +39,7 @@
     "**/*.{ts,tsx}": "eslint --ext .ts,.tsx"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "rollup": "^2.14.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {
     "classnames": "^2.3.1",
@@ -68,6 +66,7 @@
     "autoprefixer": "^10.4.2",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^7.0.0",
     "eslint-define-config": "^1.2.2",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
@@ -81,6 +80,7 @@
     "vite": "^2.7.10"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

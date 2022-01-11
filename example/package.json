@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "@ant-design/pro-table": "^2.61.9",
-    "antd": "^4.18.2",
+    "@minko-fe/use-antd-resizable-header": "link:..",
+    "antd": "4.17.4",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "use-antd-resizable-header": "link:.."
+    "react-dom": "^17.0.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",

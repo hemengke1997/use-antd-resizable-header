@@ -7,7 +7,6 @@ import '@minko-fe/use-antd-resizable-header/dist/style.css';
 import 'antd/es/table/style/index.css';
 import { useReducer } from 'react';
 import { useMemo } from 'react';
-import { useEffect } from 'react';
 
 const data: any[] = [];
 for (let i = 0; i < 100; i++) {
@@ -24,77 +23,86 @@ for (let i = 0; i < 100; i++) {
 function App() {
   const [x, setX] = useReducer((s) => s + 1, 0);
 
-  const columns = [
-    {
-      title: 'Name',
-      width: 100,
-      dataIndex: 'name',
-      key: 'name',
-      fixed: 'left',
-    },
-    {
-      title: 'Age',
-      width: 100,
-      dataIndex: 'age',
-      key: 'age',
-    },
-    {
-      title: 'x',
-      width: 100,
-      dataIndex: 'x',
-      key: 'x',
-    },
-    {
-      title: 'y',
-      width: 100,
-      dataIndex: 'y',
-      key: 'y',
-    },
-    {
-      title: 'Column 1',
-      dataIndex: 'address',
-    },
-    {
-      title: 'test render',
-      dataIndex: 'testRender',
-      width: 200,
-      render: () => {
-        return <div onClick={() => setX()}>{x}</div>;
+  const columns = useMemo(
+    () => [
+      {
+        title: 'Name',
+        width: 100,
+        dataIndex: 'name',
+        key: 'name',
+        fixed: 'left',
       },
-    },
-    {
-      title: 'Action',
-      key: 'operation',
-      fixed: 'right',
-      width: 100,
-      render: (record: any) => {
-        return <span>{record?.address || ''}</span>;
+      {
+        title: 'Age',
+        width: 100,
+        dataIndex: 'age',
+        key: 'age',
       },
+      {
+        title: 'x',
+        width: 100,
+        dataIndex: 'x',
+        key: 'x',
+      },
+      {
+        title: 'y',
+        width: 100,
+        dataIndex: 'y',
+        key: 'y',
+      },
+      {
+        title: 'Column 1',
+        dataIndex: 'address',
+      },
+      {
+        title: 'test render',
+        dataIndex: 'testRender',
+        width: 200,
+        render: () => {
+          return <div onClick={() => setX()}>{x}</div>;
+        },
+      },
+      {
+        title: 'Action',
+        key: 'operation',
+        fixed: 'right',
+        width: 100,
+        render: (text, record) => {
+          return <span>{record?.age}</span>;
+        },
+      },
+    ],
+    [x],
+  );
+
+  const { components, resizableColumns, tableWidth } = useARH({
+    columns,
+    columnsState: {
+      persistenceType: 'localStorage',
+      persistenceKey: 'tttt',
     },
-  ];
+  });
 
-  const { components, resizableColumns, tableWidth } = useARH({ columns: useMemo(() => columns, [x]) });
+  // const {
+  //   components: proComponents,
+  //   resizableColumns: proResizableColumns,
+  //   tableWidth: proTableWidth,
+  // } = useARH({ columns: useMemo(() => columns, [x]) });
 
-  const {
-    components: proComponents,
-    resizableColumns: proResizableColumns,
-    tableWidth: proTableWidth,
-  } = useARH({ columns: useMemo(() => columns, [x]) });
-
-  useEffect(() => {
-    console.log(proTableWidth, 'proTableWidth');
-  }, [proTableWidth]);
+  // useEffect(() => {
+  //   console.log(proTableWidth, 'proTableWidth');
+  // }, [proTableWidth]);
 
   return (
     <div className="App">
       <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
-
+      {/*
       <ProTable
         columns={proResizableColumns}
         components={proComponents}
         dataSource={data}
         scroll={{ x: proTableWidth }}
-      ></ProTable>
+      ></ProTable> */}
     </div>
   );
 }

@@ -26,6 +26,7 @@ function useDebounceFn<T extends Fn>(fn: T, options?: Options) {
 
   React.useEffect(() => {
     debounced.cancel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

@@ -13,8 +13,10 @@ function useThrottleEffect(effect: EffectCallback, deps?: DependencyList, option
 
   useEffect(() => {
     return run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(cancel, []);
 
   useUpdateEffect(effect, [flag]);

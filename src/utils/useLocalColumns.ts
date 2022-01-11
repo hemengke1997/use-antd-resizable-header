@@ -61,6 +61,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     } else {
       setLocalColumns(initLocalColumns());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnsProp]);
 
   /**
@@ -91,7 +92,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     } catch (error) {
       console.error(error);
     }
-  }, [resizableColumns]);
+  }, [columnsState, resizableColumns]);
 
   /**
    * reset
