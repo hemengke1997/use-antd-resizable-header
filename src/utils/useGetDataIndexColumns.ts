@@ -26,10 +26,10 @@ function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined) {
  ** 如果columns没有dataIndex，则按规则添加一个不重复的dataIndex
  */
 
-function useGetDataindexColumns<T extends ColumnOriginType<T>>(columns: T[] | undefined) {
+function useGetDataIndexColumns<T extends ColumnOriginType<T>>(columns: T[] | undefined) {
   const dataIndexColumns = React.useMemo(() => getColumns(columns), [columns]) as T[] | undefined;
 
   return dataIndexColumns || columns;
 }
 
-export default useGetDataindexColumns;
+export default useGetDataIndexColumns;

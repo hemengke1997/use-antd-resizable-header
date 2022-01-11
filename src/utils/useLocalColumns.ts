@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import type { ColumnOriginType, ColumnsStateType } from '..';
-import useGetDataindexColumns from './useGetDataindexColumns';
+import useGetDataIndexColumns from './useGetDataIndexColumns';
 import useMemoizedFn from './useMemoizedFn';
 
 type LocalColumnsProp<T> = {
@@ -15,7 +15,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
   columns,
 }: LocalColumnsProp<T>) {
   // 列设置需要每一个column都有dataIndex或key
-  const columnsProp = useGetDataindexColumns(columns);
+  const columnsProp = useGetDataIndexColumns(columns);
 
   // 初始化本地columns
   const initLocalColumns = useMemoizedFn(() => {
