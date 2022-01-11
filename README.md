@@ -306,7 +306,7 @@ export default App;
 
 ## TODO
 
-[  ] changelog
+- [ ] changelog
 
 ## MIT
 
