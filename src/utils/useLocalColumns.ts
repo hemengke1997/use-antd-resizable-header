@@ -56,11 +56,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
   const [localColumns, setLocalColumns] = React.useState<T[] | undefined>(initLocalColumns);
 
   useEffect(() => {
-    if (!localColumns?.length) {
-      setLocalColumns(columnsProp);
-    } else {
-      setLocalColumns(initLocalColumns());
-    }
+    setLocalColumns(initLocalColumns());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnsProp]);
 
@@ -70,7 +66,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
   React.useEffect(() => {
     const { persistenceType, persistenceKey } = columnsState || {};
 
-    if (!persistenceKey || !persistenceType || !resizableColumns) {
+    if (!persistenceKey || !persistenceType || !resizableColumns?.length) {
       return;
     }
     if (typeof window === 'undefined') return;
@@ -92,7 +88,8 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     } catch (error) {
       console.error(error);
     }
-  }, [columnsState, resizableColumns]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resizableColumns]);
 
   /**
    * reset
