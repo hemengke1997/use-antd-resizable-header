@@ -1,9 +1,7 @@
 const { defineConfig } = require('eslint-define-config');
 
 module.exports = defineConfig({
-  parser: '@typescript-eslint/parser',
-  extends: ['react-app', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
-  plugins: ['@typescript-eslint'],
+  extends: ['react-app', 'plugin:prettier/recommended'],
   // "off" or 0 - turn the rule off
   // "warn" or 1 - turn the rule on as a warning (doesn't affect exit code)
   // "error" or 2 - turn the rule on as an error (exit code will be 1)

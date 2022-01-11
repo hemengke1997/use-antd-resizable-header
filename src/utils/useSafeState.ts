@@ -13,6 +13,7 @@ function useSafeState<S>(initialState?: S | (() => S)) {
     /** if component is unmounted, stop update */
     if (unmountedRef.current) return;
     setState(currentState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [state, setCurrentState] as const;
