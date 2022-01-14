@@ -7,7 +7,7 @@ import useDebounceFn from './utils/useDebounceFn';
 import { depthFirstSearch } from './utils';
 import useSafeState from './utils/useSafeState';
 import useLocalColumns from './utils/useLocalColumns';
-import useGetDataIndexColumns, { GETKEY, ResizableUniqIdPrefix } from './utils/useGetDataIndexColumns';
+import { GETKEY } from './utils/useGetDataIndexColumns';
 import useMemoizedFn from './utils/useMemoizedFn';
 
 export type ColumnsState = {
@@ -56,7 +56,7 @@ type CacheType = { width?: Width; index: number };
 
 const WIDTH = 120;
 
-function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType> = Record<string, any>>(
+function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> = Record<string, any>>(
   props: useTableResizableHeaderProps<ColumnType>,
 ) {
   const {
@@ -203,6 +203,4 @@ function useTableResizableHeader<ColumnType extends ColumnOriginType<ColumnType>
   };
 }
 
-export default useTableResizableHeader;
-
-export { ResizableUniqIdPrefix, useGetDataIndexColumns };
+export default useAntdResizableHeader;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ColumnOriginType } from '..';
+import { ColumnOriginType } from '../useAntdResizableHeader';
 
 export const GETKEY = 'dataIndex';
 
@@ -26,10 +26,8 @@ function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined) {
  ** 如果columns没有dataIndex，则按规则添加一个不重复的dataIndex
  */
 
-function useGetDataIndexColumns<T extends ColumnOriginType<T>>(columns: T[] | undefined) {
+export function useGetDataIndexColumns<T extends ColumnOriginType<T>>(columns: T[] | undefined) {
   const dataIndexColumns = React.useMemo(() => getColumns(columns), [columns]) as T[] | undefined;
 
   return dataIndexColumns || columns;
 }
-
-export default useGetDataIndexColumns;

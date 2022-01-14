@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
-import type { ColumnOriginType, ColumnsStateType } from '..';
-import useGetDataIndexColumns from './useGetDataIndexColumns';
+import type { ColumnOriginType, ColumnsStateType } from '../useAntdResizableHeader';
+import { useGetDataIndexColumns } from './useGetDataIndexColumns';
 import useMemoizedFn from './useMemoizedFn';
 
 type LocalColumnsProp<T> = {

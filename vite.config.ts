@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     lib: {
-      entry: path.resolve(__dirname, 'src/index.tsx'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'use-antd-resizable-header',
       fileName: (format) => `index.${format}.js`,
       formats: ['es', 'umd'],
@@ -40,7 +40,7 @@ export default defineConfig({
       plugins: [
         typescript({
           tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-          include: ['src/index.tsx', 'src/utils/useGetDataIndexColumns.ts'],
+          include: ['src/index.ts', 'src/utils/useGetDataIndexColumns.ts', 'src/useAntdResizableHeader.tsx'],
         }),
       ],
     },
