@@ -44,7 +44,7 @@ yarn add @minko-fe/use-antd-resizable-header
 - **至少一列不能拖动（width 不设置即可），[请保持最后至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
 - **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
 - **若 column 有副作用，请把依赖项传入 useMemo deps 中**
-- **remenber import style**
+- **remember import style**
 
 ## Example
 
