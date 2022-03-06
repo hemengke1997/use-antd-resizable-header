@@ -168,9 +168,10 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
 
     (function loop(cls: ColumnType[]) {
       for (let i = 0; i < cls.length; i++) {
-        width += Number(cls[i].width) || Number(columns?.[columns.length - 1].width) || defaultWidth;
         if (cls[i].children) {
           loop(cls[i].children as ColumnType[]);
+        } else {
+          width += Number(cls[i].width) || Number(columns?.[columns.length - 1].width) || defaultWidth;
         }
       }
     })(resizableColumns);
