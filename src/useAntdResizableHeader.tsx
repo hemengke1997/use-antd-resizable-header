@@ -50,6 +50,7 @@ export type ColumnOriginType<T> = {
   children?: T[];
   resizable?: boolean;
   ellipsis?: any;
+  hideInTable?: boolean;
 };
 
 type CacheType = { width?: Width; index: number };
@@ -171,7 +172,9 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
         if (cls[i].children) {
           loop(cls[i].children as ColumnType[]);
         } else {
-          width += Number(cls[i].width) || Number(columns?.[columns.length - 1].width) || defaultWidth;
+          if (cls[i].hideInTable === false) {
+            width += Number(cls[i].width) || Number(columns?.[columns.length - 1].width) || defaultWidth;
+          }
         }
       }
     })(resizableColumns);
