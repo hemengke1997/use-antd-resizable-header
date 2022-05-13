@@ -1,6 +1,6 @@
 {
   "name": "@minko-fe/use-antd-resizable-header",
-  "version": "2.1.9",
+  "version": "2.2.0",
   "description": "antd resizable header column hook",
   "author": "hemengke1997 <23536175@qq.com>",
   "types": "dist/index.d.ts",
@@ -30,6 +30,9 @@
     "precommit": "lint-staged",
     "prepublish": "pnpm build",
     "prettier": "prettier -c --write \"src/**/*\"",
+    "prerelease": "npm run build",
+    "release": "standard-version",
+    "postrelease": "git push && git push --follow-tags && npm run build && npm publish",
     "upgrade:deps": "pnpm up -i --latest"
   },
   "lint-staged": {
@@ -39,7 +42,11 @@
     "**/*.{ts,tsx}": "eslint --ext .ts,.tsx"
   },
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "@babel/core": ">=7.0.0-0 <8.0.0",
+    "@babel/plugin-syntax-flow": "7.14.5",
+    "@babel/plugin-transform-react-jsx": "7.14.9",
+    "react": ">=16.8.0",
+    "rollup": ">=2.14.0 <3.0.0"
   },
   "dependencies": {
     "classnames": "^2.3.1",
@@ -53,6 +60,11 @@
     "react-resizable": "^3.0.4"
   },
   "devDependencies": {
+    "@babel/core": ">=7.0.0-0 <8.0.0",
+    "@babel/plugin-syntax-flow": "7.14.5",
+    "@babel/plugin-transform-react-jsx": "7.14.9",
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
     "@rollup/plugin-typescript": "^8.3.0",
     "@types/lodash.isequalwith": "^4.4.6",
     "@types/lodash.isfunction": "^3.0.6",
@@ -72,7 +84,10 @@
     "postcss": "^8.4.5",
     "postcss-nesting": "^10.1.1",
     "prettier": "^2.5.1",
+    "rollup": ">=2.14.0 <3.0.0",
     "rollup-plugin-postcss": "^4.0.2",
+    "semver": "^7.3.7",
+    "standard-version": "^9.3.2",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4",
     "vite": "^2.7.10"
