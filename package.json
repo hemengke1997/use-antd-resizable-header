@@ -28,7 +28,6 @@
     "build": "vite build",
     "serve": "vite preview",
     "precommit": "lint-staged",
-    "prepublish": "npm build",
     "prettier": "prettier -c --write \"src/**/*\"",
     "prerelease": "npm run build",
     "release": "standard-version",
