@@ -11,6 +11,9 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': JSON.stringify(env || 'development'),
   },
+  esbuild: {
+    pure: ['console.log', 'debugger'],
+  },
   build: {
     outDir: 'dist',
     lib: {
@@ -19,14 +22,8 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
       formats: ['es', 'umd'],
     },
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        keep_infinity: true,
-        // Used to delete console in production environment
-        drop_console: true,
-      },
-    },
+    minify: 'esbuild',
+
     cssCodeSplit: false,
     // watch: {},
     rollupOptions: {
