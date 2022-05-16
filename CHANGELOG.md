@@ -2,18 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-
-
-### Features
-
-* github workflow ([47a9cf9](https://github.com/hemengke1997/use-antd-resizable-header/commit/47a9cf924f41da02985135fd1a29ac99a009d174))
-
-
-### Bug Fixes
-
-* script npm ([b302b70](https://github.com/hemengke1997/use-antd-resizable-header/commit/b302b70522af0111c36e5d9e3380fff23adce2a7))
-* typo error ([6dadb9e](https://github.com/hemengke1997/use-antd-resizable-header/commit/6dadb9e154e19a17b149343dda00130da1308534))
-* workflows ([8757c75](https://github.com/hemengke1997/use-antd-resizable-header/commit/8757c750dcf1e81a41231a4679b1a51b2a1a4764))
+### [2.3.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.3.2...v2.3.3) (2022-05-16)
 
 ## 2.2.0 (2022-05-13)
 
