@@ -19,6 +19,7 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
       formats: ['es', 'umd'],
     },
+    minify: 'terser',
     terserOptions: {
       compress: {
         keep_infinity: true,

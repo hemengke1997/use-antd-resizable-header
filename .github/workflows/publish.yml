@@ -15,6 +15,7 @@ jobs:
               uses: actions/setup-node@v2
               with:
                   node-version: '16.13.0'
+                  registry-url: "https://registry.npmjs.org"
 
             - name: 📥 Download deps
               uses: bahmutov/npm-install@v1
@@ -25,6 +26,7 @@ jobs:
               run: |
                   git config --global user.email ${{ github.actor }}@users.noreply.github.com
                   git config --global user.name ${{ github.actor }}
+
             - name: ▶️ Run release
               run: npm run release
               env:
