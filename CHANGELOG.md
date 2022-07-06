@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.3.4...v2.4.0) (2022-07-06)
+
+
+### Features
+
+* 修复 hideInTable 导致的 tableWidth 计算为 0 问题 ([f570c08](https://github.com/hemengke1997/use-antd-resizable-header/commit/f570c08cb1427f23549d2a79dc5e6e3dc2f898c3))
+
 ### [2.3.4](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.3.3...v2.3.4) (2022-05-16)
 
 ### [2.3.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.3.2...v2.3.3) (2022-05-16)
