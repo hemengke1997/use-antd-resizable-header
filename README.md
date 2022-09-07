@@ -13,7 +13,7 @@
 ## 安装
 
 ```bash
-yarn add @minko-fe/use-antd-resizable-header
+pnpm add @minko-fe/use-antd-resizable-header
 ```
 
 ## API
@@ -76,7 +76,8 @@ function App() {
       ;<Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
   )
-}
+}
+
 ```
 
 ## 基本用例
@@ -198,7 +199,8 @@ const Hello: React.FC = () => {
   return <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
 }
 
-export default Hello
+export default Hello
+
 ```
 
 ## 基本用例 - 搭配 Typography 实现 title 溢出时 tooltip
@@ -238,7 +240,8 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
       {_text}
     </Typography.Text>
   )
-}
+}
+
 ```
 
 ```tsx
@@ -290,7 +293,8 @@ function App() {
   return <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource}></ProTable>
 }
 
-export default App
+export default App
+
 ```
 
 ## 为什么需要 React.useMemo ?
