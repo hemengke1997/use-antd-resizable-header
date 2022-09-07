@@ -23,9 +23,7 @@ export default defineConfig({
       formats: ['es', 'umd'],
     },
     minify: 'esbuild',
-
     cssCodeSplit: false,
-    // watch: {},
     rollupOptions: {
       external: ['react', 'react-dom'],
       output: {

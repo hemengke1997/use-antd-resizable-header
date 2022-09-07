@@ -49,11 +49,11 @@ yarn add @minko-fe/use-antd-resizable-header
 ## Example
 
 ```tsx
-import useARH from '@minko-fe/use-antd-resizable-header';
-import '@minko-fe/use-antd-resizable-header/dist/style.css';
+import useARH from '@minko-fe/use-antd-resizable-header'
+import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
 function App() {
-  const columns = [];
+  const columns = []
 
   const { components, resizableColumns, tableWidth, resetColumns } = useARH({
     columns: useMemo(() => columns, []),
@@ -62,7 +62,7 @@ function App() {
       persistenceKey: 'localKey',
       persistenceType: 'localStorage',
     },
-  });
+  })
 
   return (
     <>
@@ -72,10 +72,11 @@ function App() {
         components={components}
         dataSource={data}
         scroll={{ x: tableWidth }}
-      ></ProTable>;<Button onClick={() => resetColumns()}>重置宽度</Button>
+      ></ProTable>
+      ;<Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
-  );
-}
+  )
+}
 ```
 
 ## 基本用例
@@ -86,11 +87,11 @@ function App() {
 ```
 
 ```tsx
-import React, { useReducer } from 'react';
-import { Table, Tag, Space } from 'antd';
-import useARH from '@minko-fe/use-antd-resizable-header';
-import 'antd/dist/antd.css';
-import '@minko-fe/use-antd-resizable-header/dist/style.css';
+import React, { useReducer } from 'react'
+import { Space, Table, Tag } from 'antd'
+import useARH from '@minko-fe/use-antd-resizable-header'
+import 'antd/dist/antd.css'
+import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
 const data = [
   {
@@ -114,11 +115,11 @@ const data = [
     address: 'Sidney No. 1 Lake Park',
     tags: ['cool', 'teacher'],
   },
-];
+]
 
 const Hello: React.FC = () => {
-  const [, forceRender] = useReducer((s) => s + 1, 0);
-  const [deps, setDeps] = useState(0);
+  const [, forceRender] = useReducer((s) => s + 1, 0)
+  const [deps, setDeps] = useState(0)
 
   const columns = [
     {
@@ -157,15 +158,15 @@ const Hello: React.FC = () => {
       render: (tags) => (
         <>
           {tags.map((tag) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
+            let color = tag.length > 5 ? 'geekblue' : 'green'
             if (tag === 'loser') {
-              color = 'volcano';
+              color = 'volcano'
             }
             return (
               <Tag color={color} key={tag}>
                 {tag.toUpperCase()}
               </Tag>
-            );
+            )
           })}
         </>
       ),
@@ -174,12 +175,12 @@ const Hello: React.FC = () => {
       title: 'render',
       key: 'action',
       render: (text, record) => (
-        <Space size="middle">
+        <Space size='middle'>
           <a>Invite {record.name}</a>
           <a
             onClick={() => {
-              forceRender();
-              alert('render');
+              forceRender()
+              alert('render')
             }}
           >
             render
@@ -187,17 +188,17 @@ const Hello: React.FC = () => {
         </Space>
       ),
     },
-  ];
+  ]
 
   const { components, resizableColumns, tableWidth } = useARH({
     columns: useMemo(() => columns, [deps]),
     minConstraints: 50,
-  });
+  })
 
-  return <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />;
-};
+  return <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
+}
 
-export default Hello;
+export default Hello
 ```
 
 ## 基本用例 - 搭配 Typography 实现 title 溢出时 tooltip
@@ -210,9 +211,9 @@ export default Hello;
 ```tsx
 // utils.tsx
 export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: boolean) => {
-  let _text = isNil(text) ? '' : String(text);
+  let _text = isNil(text) ? '' : String(text)
 
-  if ([null, undefined, ''].includes(text)) _text = '-';
+  if ([null, undefined, ''].includes(text)) _text = '-'
 
   return (
     <Typography.Text
@@ -223,7 +224,7 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
         color: 'inherit',
       }}
       onClick={(e) => (stopPropagation ? e?.stopPropagation() : null)}
-      title=" "
+      title=' '
       copyable={
         copyable && text
           ? {
@@ -236,18 +237,18 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
     >
       {_text}
     </Typography.Text>
-  );
-};
+  )
+}
 ```
 
 ```tsx
 // index.tsx
-import ProTable from '@ant-design/pro-table'; // or import { Table } from 'antd'
-import useARH from '@minko-fe/use-antd-resizable-header';
-import { genEllipsis } from './utils.tsx';
+import ProTable from '@ant-design/pro-table' // or import { Table } from 'antd'
+import useARH from '@minko-fe/use-antd-resizable-header'
+import { genEllipsis } from './utils.tsx'
 
-import '@minko-fe/use-antd-resizable-header/dist/style.css';
-import './index.css';
+import '@minko-fe/use-antd-resizable-header/dist/style.css'
+import './index.css'
 
 const columns: ProColumns[] = [
   {
@@ -261,7 +262,7 @@ const columns: ProColumns[] = [
     dataIndex: 'name',
     ellipsis: true,
   },
-];
+]
 
 const dataSource = [
   {
@@ -272,26 +273,24 @@ const dataSource = [
     id: 2,
     name: 'lisi',
   },
-];
+]
 
 function App() {
   const { resizableColumns, components, tableWidth } = useARH({
     columns: useMemo(() => columns, []),
-  });
+  })
 
-  let cols = [...resizableColumns];
+  let cols = [...resizableColumns]
 
   cols = columns.map((item) => ({
     ...item,
     title: genEllipsis(item.title as string, false, true),
-  }));
+  }))
 
-  return (
-    <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource}></ProTable>
-  );
+  return <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource}></ProTable>
 }
 
-export default App;
+export default App
 ```
 
 ## 为什么需要 React.useMemo ?

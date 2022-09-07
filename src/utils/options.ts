@@ -1,5 +1,5 @@
 export interface Options {
-  wait?: number;
-  leading?: boolean;
-  trailing?: boolean;
+  wait?: number
+  leading?: boolean
+  trailing?: boolean
 }

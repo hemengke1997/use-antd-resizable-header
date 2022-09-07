@@ -3,24 +3,23 @@ export function depthFirstSearch<T extends Record<string, any> & { children?: T[
   condition: (column: T) => boolean,
   width: number,
 ) {
-  const c = [...children];
+  const c = [...children]
 
-  (function find(cls: T[] | undefined) {
-    if (!cls) return;
+  ;(function find(cls: T[] | undefined) {
+    if (!cls) return
     for (let i = 0; i < cls?.length; i++) {
       if (condition(cls[i])) {
-        // eslint-disable-next-line no-param-reassign
         cls[i] = {
           ...cls[i],
           width,
-        };
-        return;
+        }
+        return
       }
       if (cls[i].children) {
-        find(cls[i].children);
+        find(cls[i].children)
       }
     }
-  })(c);
+  })(c)
 
-  return c;
+  return c
 }
