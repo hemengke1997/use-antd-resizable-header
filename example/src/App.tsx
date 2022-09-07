@@ -1,14 +1,12 @@
-import React from 'react';
-import { Table } from 'antd';
-import ProTable from '@ant-design/pro-table';
-import './App.css';
-import useARH from '@minko-fe/use-antd-resizable-header';
-import '@minko-fe/use-antd-resizable-header/dist/style.css';
-import 'antd/es/table/style/index.css';
-import { useReducer } from 'react';
-import { useMemo } from 'react';
+import React, { useMemo, useReducer } from 'react'
+import { Table } from 'antd'
+import ProTable from '@ant-design/pro-table'
+import './App.css'
+import useARH from '@minko-fe/use-antd-resizable-header'
+import '@minko-fe/use-antd-resizable-header/dist/style.css'
+import 'antd/es/table/style/index.css'
 
-const data: any[] = [];
+const data: any[] = []
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
@@ -17,11 +15,11 @@ for (let i = 0; i < 100; i++) {
     x: i,
     y: i,
     address: `London Park no. ${i}`,
-  });
+  })
 }
 
 function App() {
-  const [x, setX] = useReducer((s) => s + 1, 0);
+  const [x, setX] = useReducer((s) => s + 1, 0)
 
   const columns = useMemo(
     () => [
@@ -59,29 +57,24 @@ function App() {
         dataIndex: 'testRender',
         width: 200,
         render: () => {
-          return <div onClick={() => setX()}>{x}</div>;
+          return <div onClick={() => setX()}>{x}</div>
         },
       },
       {
         title: 'Action',
         key: 'operation',
         fixed: 'right',
-        width: 100,
         render: (text, record) => {
-          return <span>{record?.age}</span>;
+          return <span>{record?.age}</span>
         },
       },
     ],
     [x],
-  );
+  )
 
   const { components, resizableColumns, tableWidth } = useARH({
     columns,
-    columnsState: {
-      persistenceType: 'localStorage',
-      persistenceKey: 'tttt',
-    },
-  });
+  })
 
   // const {
   //   components: proComponents,
@@ -94,7 +87,7 @@ function App() {
   // }, [proTableWidth]);
 
   return (
-    <div className="App">
+    <div className='App'>
       <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
       {/*
       <ProTable
@@ -104,7 +97,7 @@ function App() {
         scroll={{ x: proTableWidth }}
       ></ProTable> */}
     </div>
-  );
+  )
 }
 
-export default React.memo(App);
+export default React.memo(App)

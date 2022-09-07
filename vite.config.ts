@@ -11,9 +11,6 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': JSON.stringify(env || 'development'),
   },
-  esbuild: {
-    pure: ['console.log', 'debugger'],
-  },
   build: {
     outDir: 'dist',
     lib: {
@@ -36,6 +33,7 @@ export default defineConfig({
       plugins: [
         typescript({
           tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+          sourceMap: false,
           include: ['src/index.ts', 'src/utils/useGetDataIndexColumns.ts', 'src/useAntdResizableHeader.tsx'],
         }),
       ],
