@@ -10,6 +10,8 @@ import './index.css'
 type ComponentProp = {
   onResize: (width: number) => void
   onMount: (width: number) => void
+  onResizeStart?: (width: number) => void
+  onResizeEnd?: (width: number) => void
   triggerRender: number
   width: number
   minWidth: number
@@ -22,6 +24,8 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     minWidth,
     maxWidth,
     onResize,
+    onResizeStart,
+    onResizeEnd,
     onMount,
     triggerRender,
     className,
@@ -65,20 +69,21 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     document.documentElement.style.cursor = active ? 'col-resize' : ''
   }
 
-  const onStart = (_: any, data: ResizeCallbackData) => {
+  const onStart = ({}, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width)
     setBodyStyle(true)
+    onResizeStart?.(data.size.width)
   }
 
-  const onSelfResize = (_: any, data: ResizeCallbackData) => {
+  const onSelfResize = ({}, data: ResizeCallbackData) => {
     setResizeWidth(data.size.width)
   }
 
   const onStop = () => {
     if (resizeWidth <= 0) return
-
     onResize(resizeWidth)
     setBodyStyle(false)
+    onResizeEnd?.(resizeWidth)
   }
 
   return (

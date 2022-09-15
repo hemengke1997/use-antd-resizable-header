@@ -28,6 +28,8 @@ pnpm add @minko-fe/use-antd-resizable-header
 | maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                            |
 | cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度               |
 | columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度             |
+| onResizeStart  | Function         | undefined | 开始拖拽时触发
+| onResizeEnd    | Function         | undefined | 结束拖拽时触发
 
 ### Return
 
@@ -51,7 +53,7 @@ pnpm add @minko-fe/use-antd-resizable-header
 ```tsx
 import { Button, Table } from 'antd'
 import ProTable from '@ant-design/pro-table'
-import useARH from '@minko-fe/use-antd-resizable-header'
+import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
 function App() {
@@ -91,7 +93,7 @@ function App() {
 ```tsx
 import React, { useReducer } from 'react'
 import { Space, Table, Tag } from 'antd'
-import useARH from '@minko-fe/use-antd-resizable-header'
+import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import 'antd/dist/antd.css'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
@@ -245,7 +247,7 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
 ```tsx
 // index.tsx
 import ProTable from '@ant-design/pro-table' // or import { Table } from 'antd'
-import useARH from '@minko-fe/use-antd-resizable-header'
+import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import { genEllipsis } from './utils.tsx'
 
 import '@minko-fe/use-antd-resizable-header/dist/style.css'

@@ -64,7 +64,7 @@ function App() {
         title: 'Action',
         key: 'operation',
         fixed: 'right',
-        render: (text, record) => {
+        render: (_, record) => {
           return <span>{record?.age}</span>
         },
       },
@@ -74,6 +74,12 @@ function App() {
 
   const { components, resizableColumns, tableWidth } = useARH({
     columns,
+    onResizeStart: (x) => {
+      console.log(x, 'start')
+    },
+    onResizeEnd: (y) => {
+      console.log(y, 'end')
+    },
   })
 
   // const {

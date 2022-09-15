@@ -9,6 +9,7 @@ import { useSafeState } from './utils/useSafeState'
 import { useLocalColumns } from './utils/useLocalColumns'
 import { GETKEY } from './utils/useGetDataIndexColumns'
 import { useMemoizedFn } from './utils/useMemoizedFn'
+import { useLatest } from './utils/useLatest'
 
 export interface ColumnsState {
   width: number
@@ -26,7 +27,7 @@ export interface ColumnsStateType {
   persistenceKey?: string
 }
 
-export interface useTableResizableHeaderProps<ColumnType> {
+export interface useTableResizableHeaderProps<ColumnType extends ColumnOriginType<ColumnType> = Record<string, any>> {
   columns: ColumnType[] | undefined
   /** @description 最后一列不能拖动，设置最后一列的最小展示宽度，默认120 */
   defaultWidth?: number
@@ -38,6 +39,10 @@ export interface useTableResizableHeaderProps<ColumnType> {
   cache?: boolean
   /** @description 列状态的配置，可以用来操作列拖拽宽度 */
   columnsState?: ColumnsStateType
+  /** @description 开始拖拽时触发 */
+  onResizeStart?: (col: ColumnType & { resizableColumns: ColumnType[] }) => void
+  /** @description 结束拖拽时触发 */
+  onResizeEnd?: (col: ColumnType & { resizableColumns: ColumnType[] }) => void
 }
 
 type Width = number | string
@@ -60,7 +65,7 @@ interface CacheType {
 
 const WIDTH = 120
 
-function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> = Record<string, any>>(
+function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>(
   props: useTableResizableHeaderProps<ColumnType>,
 ) {
   const {
@@ -70,6 +75,8 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
     maxConstraints = Infinity,
     cache = true,
     columnsState,
+    onResizeStart: onResizeStartProp,
+    onResizeEnd: onResizeEndProp,
   } = props
 
   // column的宽度缓存，避免render导致columns宽度重置
@@ -77,6 +84,8 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
   const widthCache = React.useRef<Map<React.Key, CacheType>>(new Map())
 
   const [resizableColumns, setResizableColumns] = useSafeState<ColumnType[]>([])
+
+  const lastestColumns = useLatest(resizableColumns)
 
   const { localColumns: columns, resetLocalColumns } = useLocalColumns({
     columnsState,
@@ -124,6 +133,22 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
 
   const onResize = React.useMemo(() => onMount, [onMount])
 
+  const onResizeStart = (col: ColumnType) => (width: number) => {
+    onResizeStartProp?.({
+      ...col,
+      width,
+      resizableColumns: lastestColumns.current,
+    })
+  }
+
+  const onResizeEnd = (col: ColumnType) => (width: number) => {
+    onResizeEndProp?.({
+      ...col,
+      width,
+      resizableColumns: lastestColumns.current,
+    })
+  }
+
   const getColumns = useMemoizedFn((list: ColumnType[]) => {
     const trulyColumns = list?.filter((item) => !isEmpty(item))
     const c = trulyColumns.map((col) => {
@@ -137,6 +162,8 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
             resizable: column.resizable,
             onMount: onMount(column?.[GETKEY]),
             onResize: onResize(column?.[GETKEY]),
+            onResizeStart: onResizeStart(column),
+            onResizeEnd: onResizeEnd(column),
             minWidth: minConstraints,
             maxWidth: maxConstraints,
             triggerRender,
@@ -210,5 +237,4 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType> 
   }
 }
 
-// eslint-disable-next-line no-restricted-syntax
-export default useAntdResizableHeader
+export { useAntdResizableHeader }
