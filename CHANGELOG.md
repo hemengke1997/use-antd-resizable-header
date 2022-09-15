@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.4.0...v2.5.0) (2022-09-15)
+
+
+### Features
+
+* ✨ support `onResizeStart` & `onResizeEnd` callback ([0e363da](https://github.com/hemengke1997/use-antd-resizable-header/commit/0e363da97ef866abceeba45a949bdf33933be1eb)), closes [#21](https://github.com/hemengke1997/use-antd-resizable-header/issues/21)
+
+
+### Bug Fixes
+
+* warning ([61378d1](https://github.com/hemengke1997/use-antd-resizable-header/commit/61378d1e66132b4ffe177a38af19334aa0333e94))
+
 ## [2.4.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.3.4...v2.4.0) (2022-07-06)
 
 
