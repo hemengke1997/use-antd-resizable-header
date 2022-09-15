@@ -13,7 +13,7 @@
 ## 安装
 
 ```bash
-yarn add @minko-fe/use-antd-resizable-header
+pnpm add @minko-fe/use-antd-resizable-header
 ```
 
 ## API
