@@ -20,14 +20,14 @@ yarn add @minko-fe/use-antd-resizable-header
 
 ### Properties
 
-| Name           | Type             | Default   | Description                                            |
-| -------------- | ---------------- | --------- | ------------------------------------------------------ |
-| columns        | ColumnType[]     | undefined | antd table 的 columns                                  |
+| Name           | Type             | Default   | Description                                      |
+| -------------- | ---------------- | --------- | ------------------------------------------------ |
+| columns        | ColumnType[]     | undefined | antd table 的 columns                            |
 | defaultWidth   | number           | 120       | 某一列不能拖动，设置该列的最小展示宽度，默认 120 |
-| minConstraints | number           | 60       | 拖动最小宽度 默认 60                                    |
-| maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                                  |
-| cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度                     |
-| columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度                   |
+| minConstraints | number           | 60        | 拖动最小宽度 默认 60                             |
+| maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                            |
+| cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度               |
+| columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度             |
 
 ### Return
 
@@ -49,6 +49,8 @@ yarn add @minko-fe/use-antd-resizable-header
 ## Example
 
 ```tsx
+import { Button, Table } from 'antd'
+import ProTable from '@ant-design/pro-table'
 import useARH from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
@@ -73,10 +75,10 @@ function App() {
         dataSource={data}
         scroll={{ x: tableWidth }}
       ></ProTable>
-      ;<Button onClick={() => resetColumns()}>重置宽度</Button>
+      <Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
   )
-}
+}
 ```
 
 ## 基本用例
@@ -197,8 +199,6 @@ const Hello: React.FC = () => {
 
   return <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
 }
-
-export default Hello
 ```
 
 ## 基本用例 - 搭配 Typography 实现 title 溢出时 tooltip
@@ -209,6 +209,7 @@ export default Hello
 ```
 
 ```tsx
+import { Typography } from 'antd'
 // utils.tsx
 export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: boolean) => {
   let _text = isNil(text) ? '' : String(text)
@@ -238,7 +239,7 @@ export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: 
       {_text}
     </Typography.Text>
   )
-}
+}
 ```
 
 ```tsx
@@ -289,8 +290,6 @@ function App() {
 
   return <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource}></ProTable>
 }
-
-export default App
 ```
 
 ## 为什么需要 React.useMemo ?
@@ -302,8 +301,6 @@ export default App
 ## 不使用 useMemo
 
 可以采用其他阻止 render 的方案，如: `columns` 是 prop 或 组件外常量
-
-
 
 ## MIT
 
