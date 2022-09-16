@@ -59,7 +59,7 @@ import '@minko-fe/use-antd-resizable-header/dist/style.css'
 function App() {
   const columns = []
 
-  const { components, resizableColumns, tableWidth, resetColumns } = useARH({
+  const { components, resizableColumns, tableWidth, resetColumns } = useAntdResizableHeader({
     columns: useMemo(() => columns, []),
     // 保存拖拽宽度至本地localStorage
     columnsState: {
@@ -194,7 +194,7 @@ const Hello: React.FC = () => {
     },
   ]
 
-  const { components, resizableColumns, tableWidth } = useARH({
+  const { components, resizableColumns, tableWidth } = useAntdResizableHeader({
     columns: useMemo(() => columns, [deps]),
     minConstraints: 50,
   })
@@ -279,7 +279,7 @@ const dataSource = [
 ]
 
 function App() {
-  const { resizableColumns, components, tableWidth } = useARH({
+  const { resizableColumns, components, tableWidth } = useAntdResizableHeader({
     columns: useMemo(() => columns, []),
   })
 
@@ -306,4 +306,4 @@ function App() {
 
 ## MIT
 
-[LICENSE](https://github.com/hemengke1997/useARH/blob/master/LICENSE)
+[LICENSE](https://github.com/hemengke1997/use-antd-resizable-header/blob/master/LICENSE)
