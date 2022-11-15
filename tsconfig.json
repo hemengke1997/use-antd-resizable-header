@@ -1,5 +1,5 @@
 {
-  "extends": "@minko-fe/tsconfig/tsconfig.base",
+  "extends": "@minko-fe/tsconfig/tsconfig.lib",
   "compilerOptions": {
     "outDir": "dist",
     "sourceMap": false,

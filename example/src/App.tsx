@@ -80,6 +80,7 @@ function App() {
     onResizeEnd: (y) => {
       console.log(y, 'end')
     },
+    minConstraints: 100
   })
 
   // const {
