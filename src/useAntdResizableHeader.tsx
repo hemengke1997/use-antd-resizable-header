@@ -1,7 +1,6 @@
 import React from 'react'
-import isEmpty from 'lodash.isempty'
+import { isEmpty } from 'lodash-es'
 import ResizableHeader from './ResizableHeader'
-import { option } from './config'
 import { useThrottleEffect } from './utils/useThrottleEffect'
 import { useDebounceFn } from './utils/useDebounceFn'
 import { depthFirstSearch } from './utils'
@@ -191,7 +190,9 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
       setResizableColumns(t)
     },
     [triggerRender],
-    option,
+    {
+      wait: 500,
+    },
   )
 
   React.useEffect(() => {

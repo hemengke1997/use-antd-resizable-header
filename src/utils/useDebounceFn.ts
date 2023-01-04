@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
-import debounce from 'lodash.debounce'
-
+import { debounce } from 'lodash-es'
 import { useCreation } from './useCreation'
 import type { Options } from './options'
 

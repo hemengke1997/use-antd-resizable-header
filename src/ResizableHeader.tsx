@@ -2,7 +2,6 @@ import type { ThHTMLAttributes } from 'react'
 import React from 'react'
 import type { ResizeCallbackData } from 'react-resizable'
 import { Resizable } from 'react-resizable'
-import classnames from 'classnames'
 import { useSafeState } from './utils/useSafeState'
 
 import './index.css'
@@ -97,7 +96,7 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
   return (
     <th
       scope='col'
-      className={classnames(className, 'resizable-container')}
+      className={`resizable-container ${className}`}
       style={{
         ...style,
         overflow: 'unset',

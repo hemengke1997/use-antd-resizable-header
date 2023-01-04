@@ -20,6 +20,7 @@ export default defineConfig({
       formats: ['es', 'umd'],
     },
     minify: 'esbuild',
+    target: 'es2015',
     cssCodeSplit: false,
     rollupOptions: {
       external: ['react', 'react-dom'],

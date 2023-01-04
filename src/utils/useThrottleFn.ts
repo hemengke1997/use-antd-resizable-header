@@ -1,4 +1,4 @@
-import throttle from 'lodash.throttle'
+import { throttle } from 'lodash-es'
 import { useEffect, useRef } from 'react'
 import { useCreation } from './useCreation'
 import type { Options } from './options'

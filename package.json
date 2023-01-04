@@ -7,7 +7,8 @@
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "repository": {
     "type": "git",
@@ -26,13 +27,13 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build",
-    "serve": "vite preview",
     "lint": "eslint . --fix",
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
-    "prerelease": "npm run build",
-    "release": "standard-version",
-    "postrelease": "git push && git push --follow-tags && npm run build && npm publish",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "prerelease": "npm run changelog",
+    "release": "bumpp package.json --commit --push --tag -all",
+    "postrelease": "git commit -m \"chore: changelog\" && git push",
     "upgrade:deps": "pnpm up -i --latest"
   },
   "lint-staged": {
@@ -42,14 +43,7 @@
     "**/*.{ts,tsx}": "eslint --ext .ts,.tsx"
   },
   "dependencies": {
-    "classnames": "^2.3.2",
-    "lodash.debounce": "^4.0.8",
-    "lodash.isempty": "4.4.0",
-    "lodash.isequalwith": "^4.4.0",
-    "lodash.isfunction": "^3.0.9",
-    "lodash.throttle": "^4.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "lodash-es": "^4.17.21",
     "react-resizable": "^3.0.4"
   },
   "devDependencies": {
@@ -60,11 +54,7 @@
     "@minko-fe/prettier-config": "^1.2.4",
     "@minko-fe/tsconfig": "^1.2.4",
     "@rollup/plugin-typescript": "^10.0.1",
-    "@types/lodash.debounce": "^4.0.7",
-    "@types/lodash.isempty": "^4.4.7",
-    "@types/lodash.isequalwith": "^4.4.7",
-    "@types/lodash.isfunction": "^3.0.7",
-    "@types/lodash.throttle": "^4.1.7",
+    "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
@@ -78,6 +68,8 @@
     "postcss": "^8.4.20",
     "postcss-nested": "^6.0.0",
     "prettier": "^2.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup": "^3.9.1",
     "rollup-plugin-postcss": "^4.0.2",
     "semver": "^7.3.8",

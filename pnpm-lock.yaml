@@ -8,27 +8,18 @@ specifiers:
   '@minko-fe/prettier-config': ^1.2.4
   '@minko-fe/tsconfig': ^1.2.4
   '@rollup/plugin-typescript': ^10.0.1
-  '@types/lodash.debounce': ^4.0.7
-  '@types/lodash.isempty': ^4.4.7
-  '@types/lodash.isequalwith': ^4.4.7
-  '@types/lodash.isfunction': ^3.0.7
-  '@types/lodash.throttle': ^4.1.7
+  '@types/lodash-es': ^4.17.6
   '@types/node': ^18.11.18
   '@types/react': ^18.0.26
   '@types/react-dom': ^18.0.10
   '@types/react-resizable': ^3.0.3
   '@vitejs/plugin-react': ^3.0.0
   autoprefixer: ^10.4.13
-  classnames: ^2.3.2
   eslint: ^8.31.0
   eslint-define-config: ^1.13.0
   husky: ^7.0.4
   lint-staged: ^12.1.7
-  lodash.debounce: ^4.0.8
-  lodash.isempty: 4.4.0
-  lodash.isequalwith: ^4.4.0
-  lodash.isfunction: ^3.0.9
-  lodash.throttle: ^4.1.1
+  lodash-es: ^4.17.21
   postcss: ^8.4.20
   postcss-nested: ^6.0.0
   prettier: ^2.8.1
@@ -44,14 +35,7 @@ specifiers:
   vite: ^4.0.4
 
 dependencies:
-  classnames: registry.npmmirror.com/classnames/2.3.2
-  lodash.debounce: 4.0.8
-  lodash.isempty: 4.4.0
-  lodash.isequalwith: 4.4.0
-  lodash.isfunction: 3.0.9
-  lodash.throttle: 4.1.1
-  react: registry.npmmirror.com/react/18.2.0
-  react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
+  lodash-es: registry.npmmirror.com/lodash-es/4.17.21
   react-resizable: 3.0.4_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
@@ -62,11 +46,7 @@ devDependencies:
   '@minko-fe/prettier-config': registry.npmmirror.com/@minko-fe/prettier-config/1.2.4
   '@minko-fe/tsconfig': registry.npmmirror.com/@minko-fe/tsconfig/1.2.4
   '@rollup/plugin-typescript': registry.npmmirror.com/@rollup/plugin-typescript/10.0.1_72ziezxssayeptwoan2cjjewem
-  '@types/lodash.debounce': 4.0.7
-  '@types/lodash.isempty': 4.4.7
-  '@types/lodash.isequalwith': registry.npmmirror.com/@types/lodash.isequalwith/4.4.7
-  '@types/lodash.isfunction': registry.npmmirror.com/@types/lodash.isfunction/3.0.7
-  '@types/lodash.throttle': 4.1.7
+  '@types/lodash-es': registry.npmmirror.com/@types/lodash-es/4.17.6
   '@types/node': registry.npmmirror.com/@types/node/18.11.18
   '@types/react': registry.npmmirror.com/@types/react/18.0.26
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.10
@@ -80,6 +60,8 @@ devDependencies:
   postcss: registry.npmmirror.com/postcss/8.4.20
   postcss-nested: registry.npmmirror.com/postcss-nested/6.0.0_postcss@8.4.20
   prettier: registry.npmmirror.com/prettier/2.8.1
+  react: registry.npmmirror.com/react/18.2.0
+  react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
   rollup: registry.npmmirror.com/rollup/3.9.1
   rollup-plugin-postcss: 4.0.2_postcss@8.4.20
   semver: registry.npmmirror.com/semver/7.3.8
@@ -98,28 +80,6 @@ packages:
   /@trysound/sax/0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
-    dev: true
-
-  /@types/lodash.debounce/4.0.7:
-    resolution: {integrity: sha512-X1T4wMZ+gT000M2/91SYj0d/7JfeNZ9PeeOldSNoE/lunLeQXKvkmIumI29IaKMotU/ln/McOIvgzZcQ/3TrSA==}
-    dependencies:
-      '@types/lodash': 4.14.178
-    dev: true
-
-  /@types/lodash.isempty/4.4.7:
-    resolution: {integrity: sha512-YOzlpoIn9jrfHzjIukKnu9Le3tmi+0PhUdOt2rMpJW/4J6jX7s0HeBatXdh9QckLga8qt4EKBxVIEqtEq6pzLg==}
-    dependencies:
-      '@types/lodash': 4.14.178
-    dev: true
-
-  /@types/lodash.throttle/4.1.7:
-    resolution: {integrity: sha512-znwGDpjCHQ4FpLLx19w4OXDqq8+OvREa05H89obtSyXyOFKL3dDjCslsmfBz0T2FU8dmf5Wx1QvogbINiGIu9g==}
-    dependencies:
-      '@types/lodash': 4.14.178
-    dev: true
-
-  /@types/lodash/4.14.178:
-    resolution: {integrity: sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==}
     dev: true
 
   /@types/minimist/1.2.2:
@@ -1158,22 +1118,6 @@ packages:
     resolution: {integrity: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=}
     dev: true
 
-  /lodash.debounce/4.0.8:
-    resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
-    dev: false
-
-  /lodash.isempty/4.4.0:
-    resolution: {integrity: sha1-b4bL7di+TsmHvpqvM8loTbGzHn4=}
-    dev: false
-
-  /lodash.isequalwith/4.4.0:
-    resolution: {integrity: sha1-Jmcm3dUo+FTyH06pigZWBuD7xrA=}
-    dev: false
-
-  /lodash.isfunction/3.0.9:
-    resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
-    dev: false
-
   /lodash.ismatch/4.4.0:
     resolution: {integrity: sha1-dWy1FQyjum8RCFp4hJZF8Yj4Xzc=}
     dev: true
@@ -1181,10 +1125,6 @@ packages:
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=}
     dev: true
-
-  /lodash.throttle/4.1.1:
-    resolution: {integrity: sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=}
-    dev: false
 
   /lodash.uniq/4.5.0:
     resolution: {integrity: sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=}
@@ -3475,18 +3415,10 @@ packages:
     version: 0.0.29
     dev: true
 
-  registry.npmmirror.com/@types/lodash.isequalwith/4.4.7:
-    resolution: {integrity: sha512-GdI984QbZw+LGAd3jcFIIhaMwhlVasTMIT3nmE1rOcACjyzp9J9VjTENVkl9aJLOiPZt6RYSJFVEEsRHKbdh3w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/lodash.isequalwith/-/lodash.isequalwith-4.4.7.tgz}
-    name: '@types/lodash.isequalwith'
-    version: 4.4.7
-    dependencies:
-      '@types/lodash': registry.npmmirror.com/@types/lodash/4.14.191
-    dev: true
-
-  registry.npmmirror.com/@types/lodash.isfunction/3.0.7:
-    resolution: {integrity: sha512-kpYexfS7OvD8Gb74F2ogdHVbeWpYsiP8cadpIBBbJivG0i7kQ0xEn3V78jhFiJN6HfZhggWhbP659+HYMnFFHw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/lodash.isfunction/-/lodash.isfunction-3.0.7.tgz}
-    name: '@types/lodash.isfunction'
-    version: 3.0.7
+  registry.npmmirror.com/@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/lodash-es/-/lodash-es-4.17.6.tgz}
+    name: '@types/lodash-es'
+    version: 4.17.6
     dependencies:
       '@types/lodash': registry.npmmirror.com/@types/lodash/4.14.191
     dev: true
@@ -4080,12 +4012,6 @@ packages:
     version: 3.7.1
     engines: {node: '>=8'}
     dev: true
-
-  registry.npmmirror.com/classnames/2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/classnames/-/classnames-2.3.2.tgz}
-    name: classnames
-    version: 2.3.2
-    dev: false
 
   registry.npmmirror.com/clean-regexp/1.0.0:
     resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/clean-regexp/-/clean-regexp-1.0.0.tgz}
@@ -5915,6 +5841,12 @@ packages:
       p-locate: registry.npmmirror.com/p-locate/5.0.0
     dev: true
 
+  registry.npmmirror.com/lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash-es/-/lodash-es-4.17.21.tgz}
+    name: lodash-es
+    version: 4.17.21
+    dev: false
+
   registry.npmmirror.com/lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz}
     name: lodash.camelcase
@@ -6630,7 +6562,6 @@ packages:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
       react: registry.npmmirror.com/react/18.2.0
       scheduler: registry.npmmirror.com/scheduler/0.23.0
-    dev: false
 
   registry.npmmirror.com/react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-is/-/react-is-16.13.1.tgz}
@@ -6652,7 +6583,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
-    dev: false
 
   registry.npmmirror.com/read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/read-pkg-up/-/read-pkg-up-7.0.1.tgz}
@@ -6846,7 +6776,6 @@ packages:
     version: 0.23.0
     dependencies:
       loose-envify: registry.npmmirror.com/loose-envify/1.4.0
-    dev: false
 
   registry.npmmirror.com/semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/semver/-/semver-5.7.1.tgz}

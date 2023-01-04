@@ -1,33 +1,44 @@
-name: "publish to npm"
-on: workflow_dispatch
+name: Npm Publish
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
-    main:
-        runs-on: ubuntu-latest
-        steps:
-            - name: ⬇️ Checkout repo
-              uses: actions/checkout@v2
-              with:
-                  token: ${{ secrets.ACCESS_TOKEN }}
-                  fetch-depth: 0
+  publish-npm:
+    if: "contains(github.event.head_commit.message, 'release')"
+    runs-on: ${{matrix.os}}
 
-            - name: ⎔ Setup node
-              # sets up the .npmrc file to publish to npm
-              uses: actions/setup-node@v2
-              with:
-                  node-version: '16.13.0'
-                  registry-url: "https://registry.npmjs.org"
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [16.x]
+      fail-fast: false
 
-            - name: 📥 Download deps
-              uses: bahmutov/npm-install@v1
-              with:
-                  useLockFile: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-            - name: Configure git user
-              run: |
-                  git config --global user.email ${{ github.actor }}@users.noreply.github.com
-                  git config --global user.name ${{ github.actor }}
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.31.0
 
-            - name: ▶️ Run release
-              run: npm run release
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - name: Install Dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Publish to NPM
+        run: pnpm -r publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
