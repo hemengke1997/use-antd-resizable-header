@@ -1,6 +1,6 @@
 {
   "name": "@minko-fe/use-antd-resizable-header",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "antd resizable header column hook",
   "author": "hemengke1997",
   "types": "dist/index.d.ts",
@@ -31,9 +31,8 @@
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "prerelease": "npm run changelog",
-    "release": "bumpp package.json --commit --push --tag -all",
-    "postrelease": "git commit -m \"chore: changelog\" && git push",
+    "release": "npm run changelog && bumpp package.json --commit --push --tag -all && npm run pushchangelog",
+    "pushchangelog": "git commit -m \"chore: changelog\" && git push",
     "upgrade:deps": "pnpm up -i --latest"
   },
   "lint-staged": {
@@ -59,8 +58,9 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/react-resizable": "^3.0.3",
-    "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.13",
+    "bumpp": "^8.2.1",
+    "conventional-changelog-cli": "^2.2.2",
     "eslint": "^8.31.0",
     "eslint-define-config": "^1.13.0",
     "husky": "^7.0.4",
@@ -72,9 +72,6 @@
     "react-dom": "^18.2.0",
     "rollup": "^3.9.1",
     "rollup-plugin-postcss": "^4.0.2",
-    "semver": "^7.3.8",
-    "standard-version": "^9.3.2",
-    "tslib": "^2.3.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.4"
   }
