@@ -1,3 +1,12 @@
+# [2.6.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.5.0...v2.6.0) (2023-01-04)
+
+
+### Bug Fixes
+
+* resizable box overflow(unset) lead to table overflow ([523a7fc](https://github.com/hemengke1997/use-antd-resizable-header/commit/523a7fceead98ec266ec67b4c32434bed9a49480))
+
+
+
 # [2.5.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.4.0...v2.5.0) (2022-09-15)
 
 
