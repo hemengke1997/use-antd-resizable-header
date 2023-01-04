@@ -1,3 +1,16 @@
+## [2.6.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.2...v2.6.3) (2023-01-04)
+
+
+
+## [2.6.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.1...v2.6.2) (2023-01-04)
+
+
+### Bug Fixes
+
+* deps ([be75cf8](https://github.com/hemengke1997/use-antd-resizable-header/commit/be75cf8f686b1daa4e9f6516d9ce4135d0403dba))
+
+
+
 ## [2.6.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.0...v2.6.1) (2023-01-04)
 
 

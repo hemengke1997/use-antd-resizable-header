@@ -31,7 +31,7 @@
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "bump": "npm run changelog && bumpp package.json --commit --push --tag -all",
+    "bump": "npm run changelog && bumpp package.json -all --commit --push --tag && pushchangelog",
     "pushchangelog": "git add . && git commit -m \"chore: changelog\" && git push",
     "upgrade:deps": "pnpm up -i --latest"
   },
