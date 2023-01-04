@@ -230,7 +230,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
   }, [])
 
   return {
-    resizableColumns,
+    resizableColumns: resizableColumns as any[],
     components,
     tableWidth,
     resetColumns,

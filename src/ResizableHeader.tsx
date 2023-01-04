@@ -57,7 +57,15 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 
   if (!width || Number.isNaN(Number(width))) {
     return (
-      <th {...rest} style={style} className={className} onClick={onClick} rowSpan={rowSpan} colSpan={colSpan}>
+      <th
+        {...rest}
+        data-arh-disable='true'
+        style={style}
+        className={className}
+        onClick={onClick}
+        rowSpan={rowSpan}
+        colSpan={colSpan}
+      >
         <span title={title}>{children}</span>
       </th>
     )
@@ -88,11 +96,13 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 
   return (
     <th
+      scope='col'
       className={classnames(className, 'resizable-container')}
       style={{
         ...style,
         overflow: 'unset',
       }}
+      data-arh-enable='true'
       ref={thRef}
       onClick={onClick}
       rowSpan={rowSpan}

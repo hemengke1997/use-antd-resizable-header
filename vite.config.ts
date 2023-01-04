@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import typescript from '@rollup/plugin-typescript';
-import path from 'path';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import typescript from '@rollup/plugin-typescript'
+import path from 'path'
 
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,18 +25,18 @@ export default defineConfig({
       external: ['react', 'react-dom'],
       output: {
         globals: {
-          react: 'react',
+          'react': 'react',
           'react-dom': 'react-dom',
         },
         exports: 'named',
       },
       plugins: [
         typescript({
-          tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+          tsconfig: path.resolve(__dirname, './tsconfig.json'),
           sourceMap: false,
           include: ['src/index.ts', 'src/utils/useGetDataIndexColumns.ts', 'src/useAntdResizableHeader.tsx'],
         }),
       ],
     },
   },
-});
+})

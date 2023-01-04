@@ -2,9 +2,8 @@ import React, { useMemo, useReducer } from 'react'
 import { Table } from 'antd'
 import ProTable from '@ant-design/pro-table'
 import './App.css'
-import useARH from '@minko-fe/use-antd-resizable-header'
+import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
-import 'antd/es/table/style/index.css'
 
 const data: any[] = []
 for (let i = 0; i < 100; i++) {
@@ -55,7 +54,7 @@ function App() {
       {
         title: 'test render',
         dataIndex: 'testRender',
-        width: 200,
+        width: 333,
         render: () => {
           return <div onClick={() => setX()}>{x}</div>
         },
@@ -64,6 +63,7 @@ function App() {
         title: 'Action',
         key: 'operation',
         fixed: 'right',
+        width: 100,
         render: (_, record) => {
           return <span>{record?.age}</span>
         },
@@ -72,39 +72,72 @@ function App() {
     [x],
   )
 
-  const { components, resizableColumns, tableWidth } = useARH({
+  const { components, resizableColumns, tableWidth } = useAntdResizableHeader({
     columns,
-    onResizeStart: (x) => {
-      console.log(x, 'start')
-    },
-    onResizeEnd: (y) => {
-      console.log(y, 'end')
-    },
-    minConstraints: 100
   })
 
-  // const {
-  //   components: proComponents,
-  //   resizableColumns: proResizableColumns,
-  //   tableWidth: proTableWidth,
-  // } = useARH({ columns: useMemo(() => columns, [x]) });
+  const proColumns = useMemo(
+    () => [
+      {
+        title: 'Pro-Name',
+        width: 100,
+        dataIndex: 'name',
+        key: 'name',
+        fixed: 'left',
+      },
+      {
+        title: 'Age',
+        width: 100,
+        dataIndex: 'age',
+        key: 'age',
+      },
+      {
+        title: 'x',
+        width: 100,
+        dataIndex: 'x',
+        key: 'x',
+      },
+      {
+        title: 'y',
+        width: 100,
+        dataIndex: 'y',
+        key: 'y',
+      },
+      {
+        title: 'Column 1',
+        dataIndex: 'address',
+      },
+      {
+        title: 'test render',
+        dataIndex: 'testRender',
+        width: 333,
+        render: () => {
+          return <div onClick={() => setX()}>{x}</div>
+        },
+      },
+      {
+        title: 'Action',
+        key: 'operation',
+        fixed: 'right',
+        width: 100,
+        render: (_, record) => {
+          return <span>{record?.age}</span>
+        },
+      },
+    ],
+    [x],
+  )
 
-  // useEffect(() => {
-  //   console.log(proTableWidth, 'proTableWidth');
-  // }, [proTableWidth]);
+  const { components: cp, resizableColumns: rp, tableWidth: tp } = useAntdResizableHeader({ columns: proColumns })
 
   return (
     <div className='App'>
-      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
-      {/*
-      <ProTable
-        columns={proResizableColumns}
-        components={proComponents}
-        dataSource={data}
-        scroll={{ x: proTableWidth }}
-      ></ProTable> */}
+      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
+
+      <ProTable columns={rp} components={cp} dataSource={data} scroll={{ x: tp }} />
     </div>
   )
 }
 
-export default React.memo(App)
+// eslint-disable-next-line no-restricted-syntax
+export default App

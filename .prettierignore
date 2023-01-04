@@ -12,4 +12,3 @@ LICENSE
 .eslintcache
 *.lock
 yarn-error.log
-/example

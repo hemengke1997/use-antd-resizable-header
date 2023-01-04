@@ -1,5 +1,4 @@
 node_modules/
 /dist
 *.min.js
-/example
 /vite.config.ts

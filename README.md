@@ -4,7 +4,7 @@
 
 ## 预览
 
-![preview](./image/new_preview.gif)
+![preview](./screenshots/new_preview.gif)
 
 ## 在线地址
 
@@ -70,13 +70,13 @@ function App() {
 
   return (
     <>
-      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }}></Table>
+      <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
       <ProTable
         columns={resizableColumns}
         components={components}
         dataSource={data}
         scroll={{ x: tableWidth }}
-      ></ProTable>
+       />
       <Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
   )
@@ -290,7 +290,7 @@ function App() {
     title: genEllipsis(item.title as string, false, true),
   }))
 
-  return <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource}></ProTable>
+  return <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource} />
 }
 ```
 
