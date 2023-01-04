@@ -1,3 +1,7 @@
+## [2.6.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.0...v2.6.1) (2023-01-04)
+
+
+
 # [2.6.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.5.0...v2.6.0) (2023-01-04)
 
 
