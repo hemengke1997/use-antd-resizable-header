@@ -1,3 +1,12 @@
+# [2.7.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.3...v2.7.0) (2023-01-04)
+
+
+### Bug Fixes
+
+* publish config ([ff4bb1c](https://github.com/hemengke1997/use-antd-resizable-header/commit/ff4bb1c50ea7fd4ea1dc88658898274ecf03c35e))
+
+
+
 ## [2.6.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.2...v2.6.3) (2023-01-04)
 
 
