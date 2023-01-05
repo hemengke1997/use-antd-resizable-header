@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { debounce } from 'lodash-es'
 import { useCreation } from './useCreation'
 import type { Options } from './options'
@@ -23,7 +23,7 @@ function useDebounceFn<T extends Fn>(fn: T, options?: Options) {
     [],
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     debounced.cancel()
   }, [])
 

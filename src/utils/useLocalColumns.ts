@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { ColumnOriginType, ColumnsStateType } from '../useAntdResizableHeader'
 import { useGetDataIndexColumns } from './useGetDataIndexColumns'
 import { useMemoizedFn } from './useMemoizedFn'
@@ -53,7 +53,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     }
   })
 
-  const [localColumns, setLocalColumns] = React.useState<T[] | undefined>(initLocalColumns)
+  const [localColumns, setLocalColumns] = useState<T[] | undefined>(initLocalColumns)
 
   useEffect(() => {
     setLocalColumns(initLocalColumns())
@@ -62,7 +62,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
   /**
    * 把resizableColumns存储在本地
    */
-  React.useEffect(() => {
+  useEffect(() => {
     const { persistenceType, persistenceKey } = columnsState || {}
 
     if (!persistenceKey || !persistenceType || !resizableColumns?.length) {

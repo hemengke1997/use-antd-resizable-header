@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo } from 'react'
 import type { ColumnOriginType } from '../useAntdResizableHeader'
 
 export const GETKEY = 'dataIndex'
@@ -27,7 +27,7 @@ function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined): any {
  */
 
 export function useGetDataIndexColumns<T extends ColumnOriginType<T>>(columns: T[] | undefined) {
-  const dataIndexColumns = React.useMemo(() => getColumns(columns), [columns]) as T[] | undefined
+  const dataIndexColumns = useMemo(() => getColumns(columns), [columns]) as T[] | undefined
 
   return dataIndexColumns || columns
 }

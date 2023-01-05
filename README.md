@@ -28,8 +28,8 @@ pnpm add @minko-fe/use-antd-resizable-header
 | maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                            |
 | cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度               |
 | columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度             |
-| onResizeStart  | Function         | undefined | 开始拖拽时触发
-| onResizeEnd    | Function         | undefined | 结束拖拽时触发
+| onResizeStart  | Function         | undefined | 开始拖拽时触发                                   |
+| onResizeEnd    | Function         | undefined | 结束拖拽时触发                                   |
 
 ### Return
 
@@ -71,12 +71,7 @@ function App() {
   return (
     <>
       <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
-      <ProTable
-        columns={resizableColumns}
-        components={components}
-        dataSource={data}
-        scroll={{ x: tableWidth }}
-       />
+      <ProTable columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
       <Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
   )
@@ -303,6 +298,17 @@ function App() {
 ## 不使用 useMemo
 
 可以采用其他阻止 render 的方案，如: `columns` 是 prop 或 组件外常量
+
+## ProTable 需要特殊处理的点
+
+### fixed
+
+[ProTable 默认会给 fixed 列添加宽度](https://github.com/ant-design/pro-components/blob/master/packages/table/src/utils/genProColumnToColumn.tsx#L115-L116)，所以可能会造成 `至少一列宽度为0` 的条件无法满足。
+
+#### 解决方案
+
+1. 手动给 fixed 列添加宽度，然后不设置其余某一个非 fixed 列宽度
+2. 不设置 fixed 列宽度（默认 200），然后其余某一列也不设置宽度
 
 ## MIT
 

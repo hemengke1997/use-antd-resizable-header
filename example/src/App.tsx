@@ -24,10 +24,14 @@ function App() {
     () => [
       {
         title: 'Name',
-        width: 100,
         dataIndex: 'name',
         key: 'name',
-        fixed: 'left',
+        width: 300,
+        filters: [
+          { text: 'test', value: '1' },
+          { text: 'test2', value: '2' },
+        ],
+        defaultFilteredValue: ['1'],
       },
       {
         title: 'Age',
@@ -49,8 +53,10 @@ function App() {
       },
       {
         title: 'Column 1',
+        width: 100,
         dataIndex: 'address',
       },
+
       {
         title: 'test render',
         dataIndex: 'testRender',
@@ -63,7 +69,6 @@ function App() {
         title: 'Action',
         key: 'operation',
         fixed: 'right',
-        width: 100,
         render: (_, record) => {
           return <span>{record?.age}</span>
         },
@@ -119,10 +124,10 @@ function App() {
         title: 'Action',
         key: 'operation',
         fixed: 'right',
-        width: 100,
         render: (_, record) => {
           return <span>{record?.age}</span>
         },
+        width: 100,
       },
     ],
     [x],

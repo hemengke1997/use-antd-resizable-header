@@ -1,7 +1,8 @@
-import type { ThHTMLAttributes } from 'react'
-import React from 'react'
+import type { FC, ThHTMLAttributes } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import type { ResizeCallbackData } from 'react-resizable'
 import { Resizable } from 'react-resizable'
+import { isString } from 'lodash-es'
 import { useSafeState } from './utils/useSafeState'
 
 import './index.css'
@@ -17,7 +18,7 @@ type ComponentProp = {
   maxWidth: number
 } & ThHTMLAttributes<HTMLTableCellElement>
 
-const ResizableHeader: React.FC<ComponentProp> = (props) => {
+const ResizableHeader: FC<ComponentProp> = (props) => {
   const {
     width,
     minWidth,
@@ -34,21 +35,22 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     rowSpan,
     colSpan,
     title,
+    scope,
     ...rest
   } = props
 
-  const thRef = React.useRef<HTMLTableCellElement>(null)
+  const thRef = useRef<HTMLTableCellElement>(null)
 
   const [resizeWidth, setResizeWidth] = useSafeState<number>(0)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (width) {
       setResizeWidth(width)
       onMount?.(width)
     }
   }, [triggerRender])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (width) {
       setResizeWidth(width)
     }
@@ -93,9 +95,16 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
     onResizeEnd?.(resizeWidth)
   }
 
+  const isSimpleChildren = () => {
+    if (Array.isArray(children)) {
+      return isString(children[children.length - 1])
+    }
+    return false
+  }
+
   return (
     <th
-      scope='col'
+      scope={scope}
       className={`resizable-container ${className}`}
       style={{
         ...style,
@@ -130,7 +139,7 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }} />
       </Resizable>
-      <div {...rest} className='resizable-title'>
+      <div {...rest} className={`resizable-title ${isSimpleChildren() ? 'ellipsis' : ''}`}>
         <span title={title}>{children}</span>
       </div>
     </th>
@@ -138,4 +147,4 @@ const ResizableHeader: React.FC<ComponentProp> = (props) => {
 }
 
 // eslint-disable-next-line no-restricted-syntax
-export default React.memo(ResizableHeader)
+export default memo(ResizableHeader)
