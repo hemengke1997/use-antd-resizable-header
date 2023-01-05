@@ -21,6 +21,7 @@ export default defineConfig({
     minify: 'esbuild',
     target: 'es2015',
     cssCodeSplit: false,
+    reportCompressedSize: false,
     rollupOptions: {
       external: ['react', 'react-dom'],
       output: {
