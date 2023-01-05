@@ -1,6 +1,6 @@
 {
   "name": "@minko-fe/use-antd-resizable-header",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "antd resizable header column hook",
   "author": "hemengke1997",
   "types": "dist/index.d.ts",
@@ -32,8 +32,7 @@
     "lint-staged": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "bump": "npm run changelog && bumpp package.json -all --commit --push --tag && npm run pushchangelog",
-    "pushchangelog": "git add . && git commit -m \"chore: changelog\" && git push",
+    "bump": "npm run changelog && bumpp package.json CHANGELOG.md -all --commit --no-verify --push --tag",
     "upgrade:deps": "pnpm up -i --latest"
   },
   "lint-staged": {

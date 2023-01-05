@@ -1,3 +1,16 @@
+## [2.7.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.7.2) (2023-01-05)
+
+
+
+## [2.7.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.0...v2.7.1) (2023-01-05)
+
+
+### Bug Fixes
+
+* defaultValue not work ([91d8b3f](https://github.com/hemengke1997/use-antd-resizable-header/commit/91d8b3f2caac6689cad2c0a9aab9c3d6afc1197e))
+
+
+
 # [2.7.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.6.3...v2.7.0) (2023-01-04)
 
 
