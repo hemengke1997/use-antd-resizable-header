@@ -8,7 +8,7 @@
 
 ## 在线地址
 
-[codesandbox](https://codesandbox.io/s/silly-dream-rq89l?file=/src/App.tsx)
+[Demo](https://stackblitz.com/edit/use-antd-resizable-header-demo?file=src/App.tsx)
 
 ## 安装
 
