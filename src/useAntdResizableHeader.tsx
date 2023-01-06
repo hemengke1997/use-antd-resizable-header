@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import { isEmpty } from 'lodash-es'
 import ResizableHeader from './ResizableHeader'
-import { useThrottleEffect } from './utils/useThrottleEffect'
 import { useDebounceFn } from './utils/useDebounceFn'
 import { depthFirstSearch } from './utils'
 import { useSafeState } from './utils/useSafeState'
@@ -10,6 +9,7 @@ import { useLocalColumns } from './utils/useLocalColumns'
 import { GETKEY } from './utils/useGetDataIndexColumns'
 import { useMemoizedFn } from './utils/useMemoizedFn'
 import { useLatest } from './utils/useLatest'
+import { useUpdateThrottleEffect } from './utils/useUpdateThrottleEffect'
 
 export interface ColumnsState {
   width: number
@@ -152,17 +152,9 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
         ...col,
         children: col?.children?.length ? getColumns(col.children) : undefined,
         onHeaderCell: (column: ColumnType) => {
-          const columnWidth = () => {
-            const colWitdh = col.width && column.width
-            if (cache) {
-              return widthCache.current?.get(column[GETKEY] ?? '')?.width || colWitdh
-            }
-            return colWitdh
-          }
-
           return {
             title: typeof col?.title === 'string' ? col?.title : '',
-            width: columnWidth(),
+            width: cache ? widthCache.current?.get(column[GETKEY] ?? '')?.width || column?.width : column?.width,
             resizable: column.resizable,
             onMount: onMount(column?.[GETKEY]),
             onResize: onResize(column?.[GETKEY]),
@@ -189,7 +181,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     }
   }, [columns, getColumns])
 
-  useThrottleEffect(
+  useUpdateThrottleEffect(
     () => {
       const t = getColumns(resizableColumns)
       setResizableColumns(t)
@@ -216,7 +208,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     })(resizableColumns)
 
     setTableWidth(width)
-  }, [columns, defaultWidth, resizableColumns, setTableWidth])
+  }, [columns, defaultWidth, resizableColumns])
 
   const { run: debounceRender } = useDebounceFn(forceRender)
 

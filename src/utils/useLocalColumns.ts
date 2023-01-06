@@ -9,6 +9,21 @@ interface LocalColumnsProp<T> {
   columns?: T[]
 }
 
+function mergeColumns<T extends any[]>(src: T, target: T, mergeKey: string): T {
+  const res = src
+  if (Array.isArray(res)) {
+    res.forEach((t, i) => {
+      if (t.children) {
+        mergeColumns(t.children, target[i].children, mergeKey)
+      } else {
+        res[i][mergeKey] = target[i][mergeKey]
+      }
+    })
+  }
+
+  return res
+}
+
 function useLocalColumns<T extends ColumnOriginType<T>>({
   columnsState,
   resizableColumns,
@@ -26,28 +41,14 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     }
     if (typeof window === 'undefined') return columnsProp
 
-    /** 从持久化中读取数据 */
+    // 从持久化中读取数据
     const storage = window[persistenceType]
 
     try {
       const localResizableColumns = JSON.parse(storage?.getItem(persistenceKey) || '{}')?.resizableColumns
-      const c = columnsProp?.map((col, i) => ({
-        ...col,
-        width:
-          (localResizableColumns as T[])?.find((item, j) => {
-            if (item.dataIndex && col.dataIndex && item.dataIndex === col.dataIndex) {
-              return true
-            }
-            if (item.key && col.key && item.key === col.key) {
-              return true
-            }
-            if (i === j && !col.dataIndex && !col.key) {
-              return true
-            }
-            return false
-          })?.width || col.width,
-      }))
-      return c
+
+      const x = mergeColumns<T[]>(columnsProp || [], localResizableColumns, 'width')
+      return x
     } catch (error) {
       console.error(error)
     }
@@ -59,9 +60,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     setLocalColumns(initLocalColumns())
   }, [columnsProp])
 
-  /**
-   * 把resizableColumns存储在本地
-   */
+  // 把resizableColumns存储在本地
   useEffect(() => {
     const { persistenceType, persistenceKey } = columnsState || {}
 
@@ -69,8 +68,9 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
       return
     }
     if (typeof window === 'undefined') return
-    /** 给持久化中设置数据 */
+    // 给持久化中设置数据
     const storage = window[persistenceType]
+
     try {
       storage.setItem(
         persistenceKey,
@@ -81,6 +81,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
             key: col.key,
             title: col.title,
             width: col.width,
+            children: col.children,
           })),
         }),
       )
@@ -89,9 +90,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
     }
   }, [resizableColumns])
 
-  /**
-   * reset
-   */
+  // reset
   const resetLocalColumns = useMemoizedFn(() => {
     setLocalColumns([...(columnsProp || [])])
   })

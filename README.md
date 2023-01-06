@@ -299,7 +299,19 @@ function App() {
 
 可以采用其他阻止 render 的方案，如: `columns` 是 prop 或 组件外常量
 
-## ProTable 需要特殊处理的点
+## Table 特殊处理
+
+### filter 按钮溢出隐藏了
+
+#### 解决方案
+
+```css
+.ant-table-filter-trigger {
+  margin-inline: 0;
+}
+```
+
+## ProTable 特殊处理
 
 ### fixed
 

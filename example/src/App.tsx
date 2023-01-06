@@ -5,80 +5,114 @@ import './App.css'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
+const tcls = [
+  {
+    title: '333',
+    dataIndex: 'name',
+    key: 'name',
+    width: 100,
+    fixed: 'left',
+    filters: [
+      {
+        text: 'Joe',
+        value: 'Joe',
+      },
+      {
+        text: 'John',
+        value: 'John',
+      },
+    ],
+    onFilter: (value, record) => record.name.indexOf(value) === 0,
+  },
+  {
+    title: 'Other',
+    children: [
+      {
+        title: 'Age',
+        dataIndex: 'age',
+        key: 'age',
+        width: 150,
+        sorter: (a, b) => a.age - b.age,
+      },
+      {
+        title: 'Address',
+        children: [
+          {
+            title: 'Street',
+            dataIndex: 'street',
+            key: 'street',
+            width: 150,
+          },
+          {
+            title: 'Block',
+            children: [
+              {
+                title: 'Building',
+                dataIndex: 'building',
+                key: 'building',
+                width: 100,
+              },
+              {
+                title: 'Door No.',
+                dataIndex: 'number',
+                key: 'number',
+                width: 100,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Company',
+    children: [
+      {
+        title: 'Company Address',
+        dataIndex: 'companyAddress',
+        key: 'companyAddress',
+        width: 200,
+      },
+      {
+        title: 'Company Name',
+        dataIndex: 'companyName',
+        key: 'companyName',
+      },
+    ],
+  },
+  {
+    title: 'Gender',
+    dataIndex: 'gender',
+    key: 'gender',
+    width: 80,
+    fixed: 'right',
+  },
+]
+
 const data: any[] = []
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i,
-    name: `Edrward ${i}`,
-    age: 32,
-    x: i,
-    y: i,
-    address: `London Park no. ${i}`,
+    name: 'John Brown',
+    age: i + 1,
+    street: 'Lake Park',
+    building: 'C',
+    number: 2035,
+    companyAddress: 'Lake Street 42',
+    companyName: 'SoftLake Co',
+    gender: 'M',
   })
 }
 
 function App() {
   const [x, setX] = useReducer((s) => s + 1, 0)
 
-  const columns = useMemo(
-    () => [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        width: 300,
-        filters: [
-          { text: 'test', value: '1' },
-          { text: 'test2', value: '2' },
-        ],
-        defaultFilteredValue: ['1'],
-      },
-      {
-        title: 'Age',
-        width: 100,
-        dataIndex: 'age',
-        key: 'age',
-      },
-      {
-        title: 'x',
-        width: 100,
-        dataIndex: 'x',
-        key: 'x',
-      },
-      {
-        title: 'y',
-        width: 100,
-        dataIndex: 'y',
-        key: 'y',
-      },
-      {
-        title: 'Column 1',
-        width: 100,
-        dataIndex: 'address',
-      },
-
-      {
-        title: 'test render',
-        dataIndex: 'testRender',
-        width: 333,
-        render: () => {
-          return <div onClick={() => setX()}>{x}</div>
-        },
-      },
-      {
-        title: 'Action',
-        key: 'operation',
-        fixed: 'right',
-        render: (_, record) => {
-          return <span>{record?.age}</span>
-        },
-      },
-    ],
-    [x],
-  )
-
   const { components, resizableColumns, tableWidth } = useAntdResizableHeader({
-    columns,
+    columns: tcls,
+    columnsState: {
+      persistenceType: 'localStorage',
+      persistenceKey: 'test',
+    },
   })
 
   const proColumns = useMemo(
@@ -133,7 +167,17 @@ function App() {
     [x],
   )
 
-  const { components: cp, resizableColumns: rp, tableWidth: tp } = useAntdResizableHeader({ columns: proColumns })
+  const {
+    components: cp,
+    resizableColumns: rp,
+    tableWidth: tp,
+  } = useAntdResizableHeader({
+    columns: proColumns,
+    columnsState: {
+      persistenceType: 'localStorage',
+      persistenceKey: 'fds',
+    },
+  })
 
   return (
     <div className='App'>
