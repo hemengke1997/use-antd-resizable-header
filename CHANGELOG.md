@@ -1,4 +1,4 @@
-## [2.7.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.7.3) (2023-01-05)
+## [2.8.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.8.0) (2023-01-05)
 
 
 ### Bug Fixes
