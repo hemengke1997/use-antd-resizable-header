@@ -1,4 +1,9 @@
-## [2.7.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.7.2) (2023-01-05)
+## [2.7.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.7.3) (2023-01-05)
+
+
+### Bug Fixes
+
+* husky script ([e4df7d3](https://github.com/hemengke1997/use-antd-resizable-header/commit/e4df7d3682f1791c089a4ff4a2e084f7bf7a4790))
 
 
 

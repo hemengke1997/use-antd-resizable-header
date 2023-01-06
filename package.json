@@ -1,6 +1,6 @@
 {
   "name": "@minko-fe/use-antd-resizable-header",
-  "version": "2.7.2",
+  "version": "2.7.3",
   "description": "antd resizable header column hook",
   "author": "hemengke1997",
   "types": "dist/index.d.ts",
@@ -28,7 +28,6 @@
     "dev": "vite build --watch",
     "build": "vite build",
     "lint": "eslint . --fix",
-    "postinstall": "husky install",
     "lint-staged": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
