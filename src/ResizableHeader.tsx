@@ -97,7 +97,10 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
 
   const isSimpleChildren = () => {
     if (Array.isArray(children)) {
-      return isString(children[children.length - 1])
+      const lastChild = children[children.length - 1]
+      if (lastChild) {
+        return isString(lastChild) || lastChild.props?.ellipsis || isString(lastChild.props?.label)
+      }
     }
     return false
   }

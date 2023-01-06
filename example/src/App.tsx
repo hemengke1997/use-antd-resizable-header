@@ -5,7 +5,7 @@ import './App.css'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
-const tcls = [
+const tcls: any[] = [
   {
     title: '333',
     dataIndex: 'name',
@@ -149,7 +149,7 @@ function App() {
       {
         title: 'test render',
         dataIndex: 'testRender',
-        width: 333,
+        width: 111,
         render: () => {
           return <div onClick={() => setX()}>{x}</div>
         },
@@ -173,6 +173,7 @@ function App() {
     tableWidth: tp,
   } = useAntdResizableHeader({
     columns: proColumns,
+    defaultWidth: 444,
     columnsState: {
       persistenceType: 'localStorage',
       persistenceKey: 'fds',
