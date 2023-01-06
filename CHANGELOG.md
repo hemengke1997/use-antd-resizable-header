@@ -1,4 +1,13 @@
-## [2.8.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.8.0) (2023-01-05)
+# [2.8.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.3...v2.8.1) (2023-01-06)
+
+
+### Features
+
+* support cache children column width ([c562c5c](https://github.com/hemengke1997/use-antd-resizable-header/commit/c562c5ceb88e68a6325836f28d7881d291921908))
+
+
+
+## [2.7.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.1...v2.7.3) (2023-01-05)
 
 
 ### Bug Fixes
