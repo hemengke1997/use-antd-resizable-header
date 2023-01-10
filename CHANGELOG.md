@@ -1,4 +1,13 @@
-## [2.8.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.0...v2.8.2) (2023-01-06)
+## [2.8.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.1...v2.8.3) (2023-01-10)
+
+
+### Bug Fixes
+
+* local columns is undefined at first render ([aeca034](https://github.com/hemengke1997/use-antd-resizable-header/commit/aeca03440f63b0230b07aae689531eb9a3ecaca8))
+
+
+
+## [2.8.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.0...v2.8.1) (2023-01-06)
 
 
 ### Bug Fixes
