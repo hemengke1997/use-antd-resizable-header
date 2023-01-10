@@ -25,8 +25,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "dev": "vite build --watch",
-    "build": "vite build",
+    "dev": "vite build --watch --mode development",
+    "build": "vite build --mode production",
     "lint": "eslint . --fix",
     "lint-staged": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
