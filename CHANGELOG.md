@@ -1,4 +1,13 @@
-# [2.8.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.3...v2.8.1) (2023-01-06)
+## [2.8.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.0...v2.8.2) (2023-01-06)
+
+
+### Bug Fixes
+
+* `defaultWidth` not work ([886899f](https://github.com/hemengke1997/use-antd-resizable-header/commit/886899f9249580b79db7fb397241d28f879c817f))
+
+
+
+# [2.8.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.7.3...v2.8.0) (2023-01-06)
 
 
 ### Features
