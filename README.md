@@ -89,7 +89,6 @@ function App() {
 import React, { useReducer } from 'react'
 import { Space, Table, Tag } from 'antd'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import 'antd/dist/antd.css'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
 const data = [
@@ -116,7 +115,7 @@ const data = [
   },
 ]
 
-const Hello: React.FC = () => {
+const Example: React.FC = () => {
   const [, forceRender] = useReducer((s) => s + 1, 0)
   const [deps, setDeps] = useState(0)
 
@@ -195,97 +194,6 @@ const Hello: React.FC = () => {
   })
 
   return <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
-}
-```
-
-## 基本用例 - 搭配 Typography 实现 title 溢出时 tooltip
-
-```css
-/* index.css */
---arh-color: red;
-```
-
-```tsx
-import { Typography } from 'antd'
-// utils.tsx
-export const genEllipsis = (text: string, copyable?: boolean, stopPropagation?: boolean) => {
-  let _text = isNil(text) ? '' : String(text)
-
-  if ([null, undefined, ''].includes(text)) _text = '-'
-
-  return (
-    <Typography.Text
-      style={{
-        width: '100%',
-        margin: 0,
-        padding: 0,
-        color: 'inherit',
-      }}
-      onClick={(e) => (stopPropagation ? e?.stopPropagation() : null)}
-      title=' '
-      copyable={
-        copyable && text
-          ? {
-              text,
-              tooltips: ['', ''],
-            }
-          : undefined
-      }
-      ellipsis={text ? { tooltip: text } : false}
-    >
-      {_text}
-    </Typography.Text>
-  )
-}
-```
-
-```tsx
-// index.tsx
-import ProTable from '@ant-design/pro-table' // or import { Table } from 'antd'
-import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import { genEllipsis } from './utils.tsx'
-
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
-import './index.css'
-
-const columns: ProColumns[] = [
-  {
-    title: 'id',
-    dataIndex: 'id',
-    width: 300,
-    ellipsis: true,
-  },
-  {
-    title: 'name',
-    dataIndex: 'name',
-    ellipsis: true,
-  },
-]
-
-const dataSource = [
-  {
-    id: 1,
-    name: 'zhangsan',
-  },
-  {
-    id: 2,
-    name: 'lisi',
-  },
-]
-
-function App() {
-  const { resizableColumns, components, tableWidth } = useAntdResizableHeader({
-    columns: useMemo(() => columns, []),
-  })
-
-  let cols = [...resizableColumns]
-
-  cols = columns.map((item) => ({
-    ...item,
-    title: genEllipsis(item.title as string, false, true),
-  }))
-
-  return <ProTable columns={cols} components={components} scroll={{ x: tableWidth }} dataSource={dataSource} />
 }
 ```
 
