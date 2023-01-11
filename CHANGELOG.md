@@ -1,4 +1,13 @@
-## [2.8.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.1...v2.8.3) (2023-01-10)
+## [2.8.4](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.2...v2.8.4) (2023-01-10)
+
+
+### Bug Fixes
+
+* `mergeColumns` edge case ([aaec764](https://github.com/hemengke1997/use-antd-resizable-header/commit/aaec7643603699560deaca1e69ea321da6ad6cad)), closes [#37](https://github.com/hemengke1997/use-antd-resizable-header/issues/37)
+
+
+
+## [2.8.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.1...v2.8.2) (2023-01-10)
 
 
 ### Bug Fixes
