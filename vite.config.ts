@@ -1,7 +1,8 @@
-import { ConfigEnv, UserConfig } from 'vite'
+import { ConfigEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import typescript from '@rollup/plugin-typescript'
 import path from 'path'
+import { UserConfig } from 'vitest/config'
 
 const env = process.env.NODE_ENV
 
@@ -44,6 +45,12 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           }),
         ],
       },
+    },
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './tests/setup.ts',
+      // css: true,
     },
   }
 }

@@ -27,6 +27,8 @@
   "scripts": {
     "dev": "vite build --watch --mode development",
     "build": "vite build --mode production",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
     "lint": "eslint . --fix",
     "lint-staged": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
@@ -52,18 +54,25 @@
     "@minko-fe/prettier-config": "^1.2.4",
     "@minko-fe/tsconfig": "^1.2.4",
     "@rollup/plugin-typescript": "^10.0.1",
+    "@testing-library/dom": "^8.19.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/react-resizable": "^3.0.3",
     "@vitejs/plugin-react": "^3.0.0",
+    "@vitest/ui": "^0.27.0",
+    "antd": "^5.1.4",
     "autoprefixer": "^10.4.13",
     "bumpp": "^8.2.1",
     "conventional-changelog-cli": "^2.2.2",
     "eslint": "^8.31.0",
     "eslint-define-config": "^1.13.0",
     "husky": "^8.0.3",
+    "jsdom": "^21.0.0",
     "lint-staged": "^13.1.0",
     "postcss": "^8.4.20",
     "postcss-nested": "^6.0.0",
@@ -72,6 +81,7 @@
     "react-dom": "^18.2.0",
     "rollup": "^3.9.1",
     "typescript": "^4.9.4",
-    "vite": "^4.0.4"
+    "vite": "^4.0.4",
+    "vitest": "^0.27.0"
   }
 }
