@@ -2,12 +2,10 @@ name: Test
 
 on:
   push:
-    branches:
-      - master
+    branches: [master, test]
 
   pull_request:
-    branches:
-      - master
+    branches: [master, test]
 
 jobs:
   test:
@@ -25,6 +23,6 @@ jobs:
 
       - name: Lint
         run: npm run lint
-      
+
       - name: Test
         run: npm run test
