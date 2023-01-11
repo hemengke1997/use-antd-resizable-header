@@ -22,6 +22,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         formats: ['es', 'umd'],
       },
       minify: 'esbuild',
+      emptyOutDir: false,
       target: 'es2015',
       cssCodeSplit: false,
       reportCompressedSize: false,

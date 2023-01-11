@@ -80,11 +80,7 @@ const Hello: React.FC = () => {
     }, 300)
   }, [])
 
-  return (
-    <div style={{ width: 500 }}>
-      <TableComponent dataSource={data} columns={columns} />
-    </div>
-  )
+  return <TableComponent dataSource={data} columns={columns} />
 }
 
 export default Hello

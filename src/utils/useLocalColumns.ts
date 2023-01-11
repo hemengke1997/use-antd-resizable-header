@@ -11,12 +11,13 @@ interface LocalColumnsProp<T> {
 
 function mergeColumns<T extends any[]>(src: T, target: T, mergeKey: string): T {
   const res = src
+
   if (Array.isArray(res) && Array.isArray(target)) {
     res.forEach((t?, i?) => {
       if (t?.children) {
         mergeColumns(t.children, target[i]?.children, mergeKey)
       } else {
-        res[i][mergeKey] = target[i]?.[mergeKey]
+        res[i][mergeKey] ||= target[i]?.[mergeKey]
       }
     })
   }
@@ -46,8 +47,8 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
 
     try {
       const localResizableColumns = JSON.parse(storage?.getItem(persistenceKey) || '{}')?.resizableColumns
-
-      return mergeColumns<T[]>(columnsProp || [], localResizableColumns, 'width')
+      const x = mergeColumns<T[]>(columnsProp || [], localResizableColumns, 'width')
+      return x
     } catch (error) {
       console.error(error)
     }

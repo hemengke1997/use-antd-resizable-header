@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
+
 import { isEmpty } from 'lodash-es'
 import ResizableHeader from './ResizableHeader'
 import { useDebounceFn } from './utils/useDebounceFn'
@@ -10,6 +11,7 @@ import { GETKEY } from './utils/useGetDataIndexColumns'
 import { useMemoizedFn } from './utils/useMemoizedFn'
 import { useLatest } from './utils/useLatest'
 import { useUpdateThrottleEffect } from './utils/useUpdateThrottleEffect'
+import { useIsomorphicLayoutEffect } from './utils/useIsomorphicLayoutEffect'
 
 export interface ColumnsState {
   width: number
@@ -192,9 +194,8 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     },
   )
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let width = 0
-
     ;(function loop(cls: ColumnType[]) {
       for (let i = 0; i < cls.length; i++) {
         if (cls[i].children) {
@@ -206,9 +207,8 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
         }
       }
     })(resizableColumns)
-
     setTableWidth(width)
-  }, [columns, defaultWidth, resizableColumns])
+  }, [defaultWidth, resizableColumns])
 
   const { run: debounceRender } = useDebounceFn(forceRender)
 

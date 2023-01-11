@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Table } from 'antd'
 import useATRH from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
@@ -9,7 +9,7 @@ interface IProps {
 }
 const TableComponent: React.FC<IProps> = (props) => {
   const { components, resizableColumns, tableWidth } = useATRH({
-    columns: useMemo(() => props.columns, [props.columns]),
+    columns: props.columns,
     minConstraints: 70,
     defaultWidth: 222,
     columnsState: {
