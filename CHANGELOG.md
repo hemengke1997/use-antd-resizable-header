@@ -1,4 +1,13 @@
-## [2.8.4](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.2...v2.8.4) (2023-01-10)
+## [2.8.5](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.3...v2.8.5) (2023-01-11)
+
+
+### Bug Fixes
+
+* dynamic columns & table blink ([ce4ab41](https://github.com/hemengke1997/use-antd-resizable-header/commit/ce4ab410111c4aa276933eb2dfc800b53181739d)), closes [#38](https://github.com/hemengke1997/use-antd-resizable-header/issues/38)
+
+
+
+## [2.8.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.2...v2.8.3) (2023-01-10)
 
 
 ### Bug Fixes
