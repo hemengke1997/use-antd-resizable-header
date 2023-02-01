@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table } from 'antd'
-import useATRH from '@minko-fe/use-antd-resizable-header'
+import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
   dataSource: any[]
 }
 const TableComponent: React.FC<IProps> = (props) => {
-  const { components, resizableColumns, tableWidth } = useATRH({
+  const { components, resizableColumns, tableWidth } = useAntdResizableHeader({
     columns: props.columns,
     minConstraints: 70,
     defaultWidth: 222,

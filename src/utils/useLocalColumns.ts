@@ -17,7 +17,7 @@ function mergeColumns<T extends any[]>(src: T, target: T, mergeKey: string): T {
       if (t?.children) {
         mergeColumns(t.children, target[i]?.children, mergeKey)
       } else {
-        res[i][mergeKey] ||= target[i]?.[mergeKey]
+        res[i][mergeKey] = target.find((x) => x.dataIndex === res[i].dataIndex)?.[mergeKey] || res[i][mergeKey]
       }
     })
   }
@@ -47,8 +47,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
 
     try {
       const localResizableColumns = JSON.parse(storage?.getItem(persistenceKey) || '{}')?.resizableColumns
-      const x = mergeColumns<T[]>(columnsProp || [], localResizableColumns, 'width')
-      return x
+      return mergeColumns<T[]>(columnsProp || [], localResizableColumns, 'width')
     } catch (error) {
       console.error(error)
     }
