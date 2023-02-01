@@ -1,4 +1,13 @@
-## [2.8.5](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.3...v2.8.5) (2023-01-11)
+## [2.8.6](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.4...v2.8.6) (2023-01-11)
+
+
+### Bug Fixes
+
+* `resizable-handler` z-index compatible with antd ([e2f8997](https://github.com/hemengke1997/use-antd-resizable-header/commit/e2f8997c33850870ff036560eb92ef80c855ac99))
+
+
+
+## [2.8.4](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.3...v2.8.4) (2023-01-11)
 
 
 ### Bug Fixes
