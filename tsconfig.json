@@ -3,6 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "sourceMap": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["vitest/globals"]
   }
 }

@@ -176,12 +176,12 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     return c
   })
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (columns) {
       const c = getColumns(columns)
       setResizableColumns(c)
     }
-  }, [columns, getColumns])
+  }, [columns])
 
   useUpdateThrottleEffect(
     () => {
