@@ -1,4 +1,13 @@
-## [2.8.6](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.4...v2.8.6) (2023-01-11)
+## [2.8.7](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.5...v2.8.7) (2023-02-01)
+
+
+### Bug Fixes
+
+* storage cache not working ([a8057f3](https://github.com/hemengke1997/use-antd-resizable-header/commit/a8057f3c40198b984e2b00f78759fe2d19afcb9d))
+
+
+
+## [2.8.5](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.4...v2.8.5) (2023-01-11)
 
 
 ### Bug Fixes
