@@ -1,10 +1,7 @@
 {
   "extends": "@minko-fe/tsconfig/tsconfig.lib",
   "compilerOptions": {
-    "outDir": "dist",
-    "sourceMap": false,
-    "noImplicitAny": false,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vitest/globals"]
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   }
 }
