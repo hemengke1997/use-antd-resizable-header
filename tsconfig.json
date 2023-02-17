@@ -2,6 +2,12 @@
   "extends": "@minko-fe/tsconfig/tsconfig.lib",
   "compilerOptions": {
     "noUnusedLocals": false,
-    "noUnusedParameters": false
-  }
+    "noUnusedParameters": false,
+    "noEmit": false,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "noImplicitAny": false
+  },
+  "include": ["./src/**/*"]
 }

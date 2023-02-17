@@ -1,8 +1,8 @@
-import { ConfigEnv } from 'vite'
-import react from '@vitejs/plugin-react'
-import typescript from '@rollup/plugin-typescript'
 import path from 'path'
-import { UserConfig } from 'vitest/config'
+import type { ConfigEnv } from 'vite'
+import react from '@vitejs/plugin-react'
+import type { UserConfig } from 'vitest/config'
+import dts from 'vite-plugin-dts'
 
 const env = process.env.NODE_ENV
 
@@ -10,7 +10,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const isDev = mode === 'development'
 
   return {
-    plugins: [react()],
+    plugins: [react(), dts({ skipDiagnostics: true, insertTypesEntry: true })],
     define: {
       'process.env.NODE_ENV': JSON.stringify(env || 'development'),
     },
@@ -37,20 +37,12 @@ export default ({ mode }: ConfigEnv): UserConfig => {
           },
           exports: 'named',
         },
-        plugins: [
-          typescript({
-            tsconfig: path.resolve(__dirname, './tsconfig.json'),
-            sourceMap: isDev,
-            include: ['src/index.ts', 'src/utils/useGetDataIndexColumns.ts', 'src/useAntdResizableHeader.tsx'],
-          }),
-        ],
       },
     },
     test: {
       globals: true,
       environment: 'jsdom',
       setupFiles: './tests/setup.ts',
-      // css: true,
     },
   }
 }
