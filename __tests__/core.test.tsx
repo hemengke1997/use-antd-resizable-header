@@ -37,7 +37,7 @@ describe('Basic Render', () => {
           value: 'John',
         },
       ],
-      onFilter: (value, record) => record.name.indexOf(value) === 0,
+      onFilter: (value: any, record: { name: string | any[] }) => record.name.indexOf(value) === 0,
     },
     {
       title: 'Other',
@@ -47,7 +47,7 @@ describe('Basic Render', () => {
           dataIndex: 'age',
           key: 'age',
           width: 150,
-          sorter: (a, b) => a.age - b.age,
+          sorter: (a: { age: number }, b: { age: number }) => a.age - b.age,
         },
         {
           title: 'Address',

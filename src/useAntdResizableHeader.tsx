@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-
 import { isEmpty } from 'lodash-es'
 import ResizableHeader from './ResizableHeader'
 import { useDebounceFn } from './utils/useDebounceFn'
@@ -81,7 +80,6 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     onResizeEnd: onResizeEndProp,
   } = props
 
-  // column的宽度缓存，避免render导致columns宽度重置
   // add column width cache to avoid column's width reset after render
   const widthCache = useRef<Map<string | number, CacheType>>(new Map())
 

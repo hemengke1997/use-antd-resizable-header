@@ -1,10 +1,13 @@
 {
   "extends": "@minko-fe/tsconfig/tsconfig.lib",
   "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noEmit": false,
     "outDir": "dist",
-    "sourceMap": false,
-    "noImplicitAny": false,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vitest/globals"]
-  }
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "noImplicitAny": false
+  },
+  "include": ["./src/**/*"]
 }
