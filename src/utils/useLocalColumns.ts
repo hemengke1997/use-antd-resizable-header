@@ -1,3 +1,4 @@
+import { isString } from 'lodash-es'
 import { useEffect, useMemo, useState } from 'react'
 import type { ColumnOriginType, ColumnsStateType } from '../useAntdResizableHeader'
 import { useGetDataIndexColumns } from './useGetDataIndexColumns'
@@ -75,13 +76,19 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
         persistenceKey,
         JSON.stringify({
           ...JSON.parse(storage?.getItem(persistenceKey) || '{}'),
-          resizableColumns: resizableColumns.map((col) => ({
-            dataIndex: col.dataIndex,
-            key: col.key,
-            title: col.title,
-            width: col.width,
-            children: col.children,
-          })),
+          resizableColumns: resizableColumns.map((col) => {
+            const localCol: ColumnOriginType<T> = {
+              dataIndex: col.dataIndex,
+              key: col.key,
+              width: col.width,
+              children: col.children,
+            }
+
+            if (isString(col.title)) {
+              localCol.title = col.title
+            }
+            return localCol
+          }),
         }),
       )
     } catch (error) {

@@ -7,7 +7,7 @@
     "upgrade:deps": "pnpm up -i --latest"
   },
   "dependencies": {
-    "@ant-design/pro-table": "^3.2.9",
+    "@ant-design/pro-table": "^3.3.1",
     "@minko-fe/use-antd-resizable-header": "link:..",
     "antd": "5.1.2",
     "react": "^18.2.0",

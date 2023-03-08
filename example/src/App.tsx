@@ -29,6 +29,14 @@ export default function App() {
       path: '/37',
       component: () => import('./37'),
     },
+    {
+      path: '/42',
+      component: () => import('./42'),
+    },
+    {
+      path: '/43',
+      component: () => import('./43'),
+    },
   ]
 
   const element = useRoutes(

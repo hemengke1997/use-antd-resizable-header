@@ -2,7 +2,6 @@ import path from 'path'
 import type { ConfigEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import type { UserConfig } from 'vitest/config'
-import dts from 'vite-plugin-dts'
 
 const env = process.env.NODE_ENV
 
@@ -10,7 +9,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const isDev = mode === 'development'
 
   return {
-    plugins: [react(), dts({ skipDiagnostics: true, insertTypesEntry: true })],
+    plugins: [react()],
     define: {
       'process.env.NODE_ENV': JSON.stringify(env || 'development'),
     },
