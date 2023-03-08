@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'antd'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
+
 
 interface IProps {
   columns: any[]

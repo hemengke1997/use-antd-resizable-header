@@ -1,6 +1,6 @@
 import { Tooltip } from 'antd'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
+
 import React from 'react'
 import ProTable from '@ant-design/pro-table'
 

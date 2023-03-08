@@ -1,5 +1,4 @@
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
 import React, { useMemo } from 'react'
 import { Table } from 'antd'
 

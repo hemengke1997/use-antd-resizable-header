@@ -1,6 +1,6 @@
 import { Table } from 'antd'
 import useARH from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
+
 import React, { useEffect, useMemo, useState } from 'react'
 
 const columns = [

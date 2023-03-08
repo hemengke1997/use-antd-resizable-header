@@ -54,7 +54,7 @@ pnpm add @minko-fe/use-antd-resizable-header
 import { Button, Table } from 'antd'
 import ProTable from '@ant-design/pro-table'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
+import '@minko-fe/use-antd-resizable-header/index.css'
 
 function App() {
   const columns = []
@@ -89,7 +89,7 @@ function App() {
 import React, { useReducer } from 'react'
 import { Space, Table, Tag } from 'antd'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/dist/style.css'
+import '@minko-fe/use-antd-resizable-header/index.css'
 
 const data = [
   {
