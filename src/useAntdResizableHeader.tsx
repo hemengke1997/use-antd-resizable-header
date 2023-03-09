@@ -28,7 +28,7 @@ export interface ColumnsStateType {
   persistenceKey?: string
 }
 
-export interface useTableResizableHeaderProps<ColumnType extends ColumnOriginType<ColumnType> = Record<string, any>> {
+export interface OptionsType<ColumnType extends ColumnOriginType<ColumnType> = Record<string, any>> {
   columns: ColumnType[] | undefined
   /** @description 最后一列不能拖动，设置最后一列的最小展示宽度，默认120 */
   defaultWidth?: number
@@ -66,9 +66,7 @@ interface CacheType {
 
 const WIDTH = 120
 
-function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>(
-  props: useTableResizableHeaderProps<ColumnType>,
-) {
+function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>(props: OptionsType<ColumnType>) {
   const {
     columns: columnsProp,
     defaultWidth = WIDTH,
