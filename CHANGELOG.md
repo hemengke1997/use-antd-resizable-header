@@ -1,4 +1,15 @@
-## [2.8.8](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.6...v2.8.8) (2023-02-01)
+## [2.8.9](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.7...v2.8.9) (2023-03-08)
+
+
+### Bug Fixes
+
+* exports ([629b9e0](https://github.com/hemengke1997/use-antd-resizable-header/commit/629b9e0deabbb26114692934f6ce7be8e43143e9))
+* only storage string `title` ([1dc047d](https://github.com/hemengke1997/use-antd-resizable-header/commit/1dc047d92dd29aed83a54cce9cf5f1a6c5a8a48f)), closes [#43](https://github.com/hemengke1997/use-antd-resizable-header/issues/43)
+* test ([faca77f](https://github.com/hemengke1997/use-antd-resizable-header/commit/faca77f57b373aa31dcf271bd8efe6cc4fdf9a67))
+
+
+
+## [2.8.7](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.6...v2.8.7) (2023-02-01)
 
 
 
