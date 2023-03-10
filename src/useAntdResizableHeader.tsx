@@ -45,10 +45,10 @@ export interface OptionsType<ColumnType extends ColumnOriginType<ColumnType> = R
   onResizeEnd?: (col: ColumnType & { resizableColumns: ColumnType[] }) => void
 }
 
-type Width = number
+type WidthType = number | string
 
 export interface ColumnOriginType<T> {
-  width?: Width
+  width?: WidthType
   dataIndex?: string | number
   key?: string | number
   title?: ReactNode | string
@@ -59,7 +59,7 @@ export interface ColumnOriginType<T> {
 }
 
 interface CacheType {
-  width?: Width
+  width?: WidthType
   index: number
 }
 
