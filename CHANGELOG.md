@@ -1,4 +1,13 @@
-## [2.8.10](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.8...v2.8.10) (2023-03-09)
+## [2.8.11](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.9...v2.8.11) (2023-03-10)
+
+
+### Bug Fixes
+
+* uniq colunm id ([f1eca36](https://github.com/hemengke1997/use-antd-resizable-header/commit/f1eca36879a41bee372b1bc8bca45d8cba8e5af3))
+
+
+
+## [2.8.9](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.8...v2.8.9) (2023-03-09)
 
 
 ### Bug Fixes
