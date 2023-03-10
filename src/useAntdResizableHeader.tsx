@@ -197,7 +197,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
           loop(cls[i].children as ColumnType[])
         } else {
           if (!cls[i].hideInTable) {
-            width += cls[i].width ?? defaultWidth
+            width += Number(cls[i].width) || defaultWidth
           }
         }
       }
