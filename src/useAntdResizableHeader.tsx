@@ -1,9 +1,8 @@
 import type { ReactNode } from 'react'
 import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-import { isEmpty } from 'lodash-es'
 import ResizableHeader from './ResizableHeader'
 import { useDebounceFn } from './utils/useDebounceFn'
-import { depthFirstSearch } from './utils'
+import { depthFirstSearch, isEmpty } from './utils'
 import { useSafeState } from './utils/useSafeState'
 import { useLocalColumns } from './utils/useLocalColumns'
 import { GETKEY } from './utils/useGetDataIndexColumns'
@@ -46,7 +45,7 @@ export interface OptionsType<ColumnType extends ColumnOriginType<ColumnType> = R
   onResizeEnd?: (col: ColumnType & { resizableColumns: ColumnType[] }) => void
 }
 
-type Width = number | string
+type Width = number
 
 export interface ColumnOriginType<T> {
   width?: Width
@@ -198,7 +197,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
           loop(cls[i].children as ColumnType[])
         } else {
           if (!cls[i].hideInTable) {
-            width += Number(cls[i].width) || defaultWidth
+            width += cls[i].width ?? defaultWidth
           }
         }
       }

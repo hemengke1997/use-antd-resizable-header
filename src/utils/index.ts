@@ -23,3 +23,20 @@ export function depthFirstSearch<T extends Record<string, any> & { children?: T[
 
   return c
 }
+
+export function isString(data: unknown): data is string {
+  return typeof data === 'string'
+}
+
+export function isEmpty(data: unknown) {
+  if (typeof data !== 'object' || data === null) {
+    return true
+  }
+  if (Array.isArray(data) && data.length) {
+    return false
+  }
+  if (Object.keys(data).length) {
+    return false
+  }
+  return true
+}

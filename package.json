@@ -59,7 +59,8 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "react-resizable": "^3.0.4"
   },
   "devDependencies": {

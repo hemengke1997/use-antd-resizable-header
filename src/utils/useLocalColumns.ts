@@ -1,8 +1,8 @@
-import { isString } from 'lodash-es'
 import { useEffect, useMemo, useState } from 'react'
 import type { ColumnOriginType, ColumnsStateType } from '../useAntdResizableHeader'
 import { useGetDataIndexColumns } from './useGetDataIndexColumns'
 import { useMemoizedFn } from './useMemoizedFn'
+import { isString } from '.'
 
 interface LocalColumnsProp<T> {
   columnsState?: ColumnsStateType

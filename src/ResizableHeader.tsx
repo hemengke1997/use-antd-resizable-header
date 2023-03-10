@@ -2,8 +2,8 @@ import type { FC, ThHTMLAttributes } from 'react'
 import { memo, useEffect, useRef } from 'react'
 import type { ResizeCallbackData } from 'react-resizable'
 import { Resizable } from 'react-resizable'
-import { isString } from 'lodash-es'
 import { useSafeState } from './utils/useSafeState'
+import { isString } from './utils'
 
 import './index.css'
 

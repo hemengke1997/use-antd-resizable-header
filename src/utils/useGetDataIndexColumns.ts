@@ -5,8 +5,8 @@ export const GETKEY = 'dataIndex'
 
 export const ResizableUniqIdPrefix = 'resizable-table-id'
 
-export function getUniqueId(index: number) {
-  return `${ResizableUniqIdPrefix}-${index}`
+export function getUniqueId(s: string) {
+  return `${ResizableUniqIdPrefix}-${s}`
 }
 
 function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined): any {
@@ -15,7 +15,7 @@ function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined): any {
     return {
       ...col,
       children: col?.children?.length ? getColumns(col.children) : undefined,
-      [GETKEY]: col[GETKEY] || col.key || getUniqueId(index),
+      [GETKEY]: col[GETKEY] || col.key || getUniqueId(`${col.title}-${index}`),
     }
   })
 

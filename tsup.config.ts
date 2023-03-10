@@ -3,7 +3,7 @@ import fs from 'fs-extra'
 
 const env = process.env.NODE_ENV
 
-export default defineConfig({
+export default defineConfig((options) => ({
   entry: ['./src/index.ts'],
   define: {
     'process.env.NODE_ENV': JSON.stringify(env || 'development'),
@@ -13,7 +13,7 @@ export default defineConfig({
   format: ['esm', 'cjs'],
   dts: true,
   esbuildOptions(opt) {
-    opt.drop = ['console', 'debugger']
+    !options.watch && (opt.drop = ['console', 'debugger'])
   },
   platform: 'browser',
   bundle: true,
@@ -27,4 +27,4 @@ export default defineConfig({
       '// `style.css` has been deprecated. Please import `@minko-fe/use-antd-resizable-header/index.css` instead of `style.css`',
     )
   },
-})
+}))
