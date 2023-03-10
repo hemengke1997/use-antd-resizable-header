@@ -1,4 +1,13 @@
-## [2.8.9](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.7...v2.8.9) (2023-03-08)
+## [2.8.10](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.8...v2.8.10) (2023-03-09)
+
+
+### Bug Fixes
+
+* css build ([2882a6b](https://github.com/hemengke1997/use-antd-resizable-header/commit/2882a6b7ff7c37f8bfd86c6215f4bcaec04efb76))
+
+
+
+## [2.8.8](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.7...v2.8.8) (2023-03-08)
 
 
 ### Bug Fixes
