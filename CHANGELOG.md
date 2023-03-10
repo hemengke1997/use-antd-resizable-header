@@ -1,4 +1,13 @@
-## [2.8.11](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.9...v2.8.11) (2023-03-10)
+## [2.8.12](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.10...v2.8.12) (2023-03-10)
+
+
+### Bug Fixes
+
+* typo ([afedd60](https://github.com/hemengke1997/use-antd-resizable-header/commit/afedd602c4778eb14efc15684be0ee177682b812))
+
+
+
+## [2.8.10](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.9...v2.8.10) (2023-03-10)
 
 
 ### Bug Fixes
