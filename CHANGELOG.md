@@ -1,4 +1,13 @@
-## [2.8.12](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.10...v2.8.12) (2023-03-10)
+## [2.8.13](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.11...v2.8.13) (2023-03-10)
+
+
+### Reverts
+
+* compute table width ([04f77ad](https://github.com/hemengke1997/use-antd-resizable-header/commit/04f77ad9bc9129dbb30d08060d03822eb1f67c76))
+
+
+
+## [2.8.11](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.10...v2.8.11) (2023-03-10)
 
 
 ### Bug Fixes
