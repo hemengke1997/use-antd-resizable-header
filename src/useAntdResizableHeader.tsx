@@ -94,8 +94,11 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
 
   const [triggerRender, forceRender] = useReducer((s) => s + 1, 0)
 
+  let kvMap: Map<string | number, CacheType>
+
   const resetColumns = useMemoizedFn(() => {
-    widthCache.current = new Map()
+    kvMap = new Map()
+    widthCache.current = kvMap
     resetLocalColumns()
   })
 
@@ -104,7 +107,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
       if (width) {
         setResizableColumns((t) => {
           const nextColumns = depthFirstSearch(t, (col) => col[GETKEY] === id && !!col.width, width)
-          const kvMap = new Map<string | number, CacheType>()
+          kvMap = kvMap || new Map<string | number, CacheType>()
           function dig(cols: ColumnType[]) {
             cols.forEach((col, i) => {
               const key = col[GETKEY]
