@@ -153,7 +153,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
         children: col?.children?.length ? getColumns(col.children) : undefined,
         onHeaderCell: (column: ColumnType) => {
           return {
-            "column-key": column.dataIndex,
+            dataindex: column.dataIndex,
             title: typeof col?.title === 'string' ? col?.title : '',
             width: cache ? widthCache.current?.get(column[GETKEY] ?? '')?.width || column?.width : column?.width,
             resizable: column.resizable,
