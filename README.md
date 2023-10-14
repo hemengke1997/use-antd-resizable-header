@@ -230,6 +230,22 @@ const Example: React.FC = () => {
 1. 手动给 fixed 列添加宽度，然后不设置其余某一个非 fixed 列宽度
 2. 不设置 fixed 列宽度（默认 200），然后其余某一列也不设置宽度
 
+## 本地开发
+
+```bash
+# 开发调试工具库
+pnpm i
+
+pnpm run dev
+
+# 预览调试 example
+cd example
+
+pnpm i
+
+pnpm run dev
+```
+
 ## MIT
 
 [LICENSE](https://github.com/hemengke1997/use-antd-resizable-header/blob/master/LICENSE)
