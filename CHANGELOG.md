@@ -1,4 +1,23 @@
-## [2.8.13](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.11...v2.8.13) (2023-03-10)
+## [2.8.14](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.13...v2.8.14) (2023-10-16)
+
+
+### Bug Fixes
+
+* `resizbale` option not working ([8efae9d](https://github.com/hemengke1997/use-antd-resizable-header/commit/8efae9dd5d26208a82dc501219c9ce888dfbdedb))
+* fix typo ([02b04cb](https://github.com/hemengke1997/use-antd-resizable-header/commit/02b04cb71c7c1f5a31d8cea727999512e3b33199))
+
+
+
+## [2.8.13](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.12...v2.8.13) (2023-05-19)
+
+
+### Bug Fixes
+
+* 可以自定义勾选表头时，cacheWidth失效 ([439a4d6](https://github.com/hemengke1997/use-antd-resizable-header/commit/439a4d6a64f9cb5b833ad3a4b76f106142408923))
+
+
+
+## [2.8.12](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.11...v2.8.12) (2023-03-10)
 
 
 ### Reverts
