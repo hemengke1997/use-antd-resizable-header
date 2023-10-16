@@ -1,23 +1,30 @@
 {
   "name": "@minko-fe/use-antd-resizable-header",
-  "type": "module",
   "version": "2.8.13",
   "description": "antd resizable header column hook",
-  "author": "hemengke1997",
-  "license": "MIT",
-  "homepage": "https://github.com/hemengke1997/use-antd-resizable-header",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hemengke1997/use-antd-resizable-header.git"
-  },
-  "bugs": {
-    "url": "https://github.com/hemengke1997/use-antd-resizable-header/issues"
-  },
+  "type": "module",
   "keywords": [
     "react",
     "antd",
     "resiable header"
   ],
+  "license": "MIT",
+  "homepage": "https://github.com/hemengke1997/use-antd-resizable-header",
+  "bugs": {
+    "url": "https://github.com/hemengke1997/use-antd-resizable-header/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hemengke1997/use-antd-resizable-header.git"
+  },
+  "author": "hemengke1997",
+  "files": [
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
@@ -27,9 +34,6 @@
     "./index.css": "./dist/index.css",
     "./style.css": "./dist/index.css"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
       "style.css": [
@@ -40,18 +44,14 @@
       ]
     }
   },
-  "files": [
-    "dist",
-    "CHANGELOG.md"
-  ],
   "scripts": {
     "dev": "rimraf dist &&tsup --watch",
     "build": "rimraf dist && tsup",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint . --fix",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add .",
-    "bump": "npm run changelog && bumpp package.json CHANGELOG.md -all --commit --push --tag",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "bump": "bumpp package.json -c -p -t --all -x \"pnpm run changelog\"",
     "upgrade:deps": "pnpm up -i --latest"
   },
   "peerDependencies": {
@@ -61,36 +61,35 @@
   "dependencies": {
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
-    "react-resizable": "^3.0.4"
+    "react-resizable": "^3.0.5"
   },
   "devDependencies": {
-    "@minko-fe/eslint-config": "^1.2.22",
-    "@minko-fe/tsconfig": "^1.2.22",
+    "@minko-fe/eslint-config": "^2.0.0",
+    "@minko-fe/tsconfig": "^2.0.0",
     "@testing-library/dom": "^8.20.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/fs-extra": "^11.0.1",
-    "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.14.6",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@types/react-resizable": "^3.0.3",
+    "@types/react": "^18.2.28",
+    "@types/react-dom": "^18.2.13",
+    "@types/react-resizable": "^3.0.5",
     "@vitest/ui": "^0.29.2",
     "antd": "^5.3.0",
     "bumpp": "^9.0.0",
     "conventional-changelog-cli": "^2.2.2",
-    "eslint": "^8.35.0",
+    "eslint": "^8.44.0",
     "fs-extra": "^11.1.0",
     "jsdom": "^21.1.0",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "postcss-nested": "^6.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^4.4.0",
-    "tsup": "^6.6.3",
-    "typescript": "^4.9.5",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
     "vite": "^4.1.4",
     "vitest": "^0.29.2"
   }

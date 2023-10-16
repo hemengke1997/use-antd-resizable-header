@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import type { ColumnOriginType } from '../useAntdResizableHeader'
+import { type ColumnOriginType } from '../useAntdResizableHeader'
+import { isEmpty } from '.'
 
 export const GETKEY = 'dataIndex'
 
@@ -10,7 +11,7 @@ export function getUniqueId(s: string) {
 }
 
 function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined): any {
-  const trulyColumns = list
+  const trulyColumns = list?.filter((item) => !isEmpty(item))
   const c = trulyColumns?.map((col, index) => {
     return {
       ...col,

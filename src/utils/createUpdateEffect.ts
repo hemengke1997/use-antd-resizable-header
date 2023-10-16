@@ -1,6 +1,5 @@
-import { useRef } from 'react'
-import type { useEffect, useLayoutEffect } from 'react'
-import type { useThrottleEffect } from './useThrottleEffect'
+import { type useEffect, type useLayoutEffect, useRef } from 'react'
+import { type useThrottleEffect } from './useThrottleEffect'
 
 type EffectHookType = typeof useEffect | typeof useLayoutEffect | typeof useThrottleEffect
 

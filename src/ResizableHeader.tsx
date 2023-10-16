@@ -1,9 +1,8 @@
-import type { FC, ThHTMLAttributes } from 'react'
-import { memo, useEffect, useRef } from 'react'
-import type { ResizeCallbackData } from 'react-resizable'
-import { Resizable } from 'react-resizable'
+import { type FC, type ThHTMLAttributes, memo, useEffect, useRef } from 'react'
+import { Resizable, type ResizeCallbackData } from 'react-resizable'
 import { useSafeState } from './utils/useSafeState'
 import { isString } from './utils'
+import { type ColumnOriginType } from './useAntdResizableHeader'
 
 import './index.css'
 
@@ -16,13 +15,16 @@ type ComponentProp = {
   width: number
   minWidth: number
   maxWidth: number
-} & ThHTMLAttributes<HTMLTableCellElement>
+} & ColumnOriginType<any> &
+  ThHTMLAttributes<HTMLTableCellElement>
 
 const ResizableHeader: FC<ComponentProp> = (props) => {
   const {
     width,
     minWidth,
     maxWidth,
+    resizable,
+    hideInTable,
     onResize,
     onResizeStart,
     onResizeEnd,
@@ -56,7 +58,11 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     }
   }, [setResizeWidth, width])
 
-  if (!width || Number.isNaN(Number(width))) {
+  if (hideInTable) {
+    return null
+  }
+
+  if (!width || Number.isNaN(Number(width)) || resizable === false) {
     return (
       <th
         {...rest}
@@ -97,7 +103,7 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
 
   const isSimpleChildren = () => {
     if (Array.isArray(children)) {
-      const lastChild = children[children.length - 1]
+      const lastChild = children.at(-1)
       if (lastChild) {
         return isString(lastChild) || lastChild.props?.ellipsis || isString(lastChild.props?.label)
       }
@@ -149,5 +155,4 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
   )
 }
 
-// eslint-disable-next-line no-restricted-syntax
 export default memo(ResizableHeader)

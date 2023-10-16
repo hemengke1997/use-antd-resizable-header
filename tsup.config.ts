@@ -8,7 +8,7 @@ export default defineConfig((options) => ({
   define: {
     'process.env.NODE_ENV': JSON.stringify(env || 'development'),
   },
-  target: 'es6',
+  target: 'es2015',
   external: ['react', 'react-dom'],
   format: ['esm', 'cjs'],
   dts: true,
@@ -18,7 +18,7 @@ export default defineConfig((options) => ({
   platform: 'browser',
   bundle: true,
   splitting: false,
-  treeshake: true,
+  treeshake: false,
   async onSuccess() {
     // css 向下兼容
     fs.copyFileSync('./dist/index.css', './dist/style.css')

@@ -1,6 +1,0 @@
-{
-  "extends": "@minko-fe",
-  "rules": {
-    "no-empty-pattern": "off"
-  }
-}

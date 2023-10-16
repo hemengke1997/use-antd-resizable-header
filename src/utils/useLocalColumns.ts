@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import type { ColumnOriginType, ColumnsStateType } from '../useAntdResizableHeader'
+import { type ColumnOriginType, type ColumnsStateType } from '../useAntdResizableHeader'
 import { useGetDataIndexColumns } from './useGetDataIndexColumns'
 import { useMemoizedFn } from './useMemoizedFn'
 import { isString } from '.'

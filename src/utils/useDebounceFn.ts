@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import debounce from 'lodash.debounce'
 import { useCreation } from './useCreation'
-import type { Options } from './options'
+import { type Options } from './options'
 
 type Fn = (...args: any) => any
 

@@ -1,10 +1,10 @@
 {
-  "extends": "@minko-fe/tsconfig/tsconfig.lib",
+  "extends": "@minko-fe/tsconfig/tsconfig.lib.json",
   "compilerOptions": {
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
     "baseUrl": ".",
-    "types": ["vite/client", "node"],
-    "noImplicitAny": false
+    "verbatimModuleSyntax": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   }
 }

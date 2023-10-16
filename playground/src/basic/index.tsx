@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer } from 'react'
+import { useMemo, useReducer } from 'react'
 import { Table } from 'antd'
 import ProTable from '@ant-design/pro-table'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
@@ -128,6 +128,7 @@ function App() {
         width: 100,
         dataIndex: 'age',
         key: 'age',
+        resizable: false,
       },
       {
         title: 'x',

@@ -30,5 +30,4 @@ const TableComponent: React.FC<IProps> = (props) => {
   )
 }
 
-// eslint-disable-next-line no-restricted-syntax
 export default TableComponent

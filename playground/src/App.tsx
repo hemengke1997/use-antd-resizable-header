@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import { Suspense, lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
 import './App.css'
 
@@ -6,7 +6,6 @@ interface FunctionalImportType {
   (): any
 }
 
-// eslint-disable-next-line no-restricted-syntax
 export default function App() {
   const comp = (C) => {
     return (

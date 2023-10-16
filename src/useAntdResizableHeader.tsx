@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react'
-import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
+import { type ReactNode, useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import ResizableHeader from './ResizableHeader'
 import { useDebounceFn } from './utils/useDebounceFn'
 import { depthFirstSearch, isEmpty } from './utils'
@@ -10,6 +9,7 @@ import { useMemoizedFn } from './utils/useMemoizedFn'
 import { useLatest } from './utils/useLatest'
 import { useUpdateThrottleEffect } from './utils/useUpdateThrottleEffect'
 import { useIsomorphicLayoutEffect } from './utils/useIsomorphicLayoutEffect'
+import { validateColumnsFlex } from './utils/validateOptions'
 
 export interface ColumnsState {
   width: number
@@ -47,13 +47,13 @@ export interface OptionsType<ColumnType extends ColumnOriginType<ColumnType> = R
 
 type WidthType = number | string
 
-export interface ColumnOriginType<T> {
+export interface ColumnOriginType<T = any> {
   width?: WidthType
   dataIndex?: string | number
   key?: string | number
   title?: ReactNode | string
   children?: T[]
-  resizable?: boolean
+  resizable?: boolean // internal
   ellipsis?: any
   hideInTable?: boolean
 }
@@ -70,12 +70,14 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     columns: columnsProp,
     defaultWidth = WIDTH,
     minConstraints = WIDTH / 2,
-    maxConstraints = Infinity,
+    maxConstraints = Number.POSITIVE_INFINITY,
     cache = true,
     columnsState,
     onResizeStart: onResizeStartProp,
     onResizeEnd: onResizeEndProp,
   } = props
+
+  validateColumnsFlex(columnsProp)
 
   // add column width cache to avoid column's width reset after render
   const widthCache = useRef<Map<string | number, CacheType>>(new Map())
@@ -199,10 +201,8 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
       for (let i = 0; i < cls.length; i++) {
         if (cls[i].children) {
           loop(cls[i].children as ColumnType[])
-        } else {
-          if (!cls[i].hideInTable) {
-            width += Number(cls[i].width) || defaultWidth
-          }
+        } else if (!cls[i].hideInTable) {
+          width += Number(cls[i].width) || defaultWidth
         }
       }
     })(resizableColumns)
