@@ -84,7 +84,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
 
   const [resizableColumns, setResizableColumns] = useSafeState<ColumnType[]>(columnsProp || []) // keep all default vlaue (e.g. defaultFilterValue)
 
-  const lastestColumns = useLatest(resizableColumns)
+  const latestColumns = useLatest(resizableColumns)
 
   const { localColumns: columns, resetLocalColumns } = useLocalColumns({
     columnsState,
@@ -134,7 +134,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     onResizeStartProp?.({
       ...col,
       width,
-      resizableColumns: lastestColumns.current,
+      resizableColumns: latestColumns.current,
     })
   }
 
@@ -142,7 +142,7 @@ function useAntdResizableHeader<ColumnType extends ColumnOriginType<ColumnType>>
     onResizeEndProp?.({
       ...col,
       width,
-      resizableColumns: lastestColumns.current,
+      resizableColumns: latestColumns.current,
     })
   }
 
