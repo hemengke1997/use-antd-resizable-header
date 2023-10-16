@@ -238,8 +238,8 @@ pnpm i
 
 pnpm run dev
 
-# 预览调试 example
-cd example
+# 预览调试 playground
+cd playground
 
 pnpm i
 
