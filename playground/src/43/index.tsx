@@ -1,6 +1,6 @@
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import React, { useMemo } from 'react'
 import { Table } from 'antd'
+import React, { useMemo } from 'react'
 import '@minko-fe/use-antd-resizable-header/index.css'
 
 const columns: any[] = [

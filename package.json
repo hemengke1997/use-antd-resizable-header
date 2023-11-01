@@ -50,9 +50,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint . --fix",
+    "upgrade:deps": "pnpm up -i --latest",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "bump": "bumpp package.json -c -p -t --all -x \"pnpm run changelog\"",
-    "upgrade:deps": "pnpm up -i --latest"
+    "bump": "bumpp package.json -c -p -t --all -x \"pnpm run changelog\""
   },
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -64,8 +64,8 @@
     "react-resizable": "^3.0.5"
   },
   "devDependencies": {
-    "@minko-fe/eslint-config": "^2.0.0",
-    "@minko-fe/tsconfig": "^2.0.0",
+    "@minko-fe/eslint-config": "^2.0.4",
+    "@minko-fe/tsconfig": "^2.0.4",
     "@testing-library/dom": "^8.20.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -78,8 +78,8 @@
     "@vitest/ui": "^0.29.2",
     "antd": "^5.3.0",
     "bumpp": "^9.0.0",
-    "conventional-changelog-cli": "^2.2.2",
-    "eslint": "^8.44.0",
+    "conventional-changelog-cli": "^4.1.0",
+    "eslint": "^8.52.0",
     "fs-extra": "^11.1.0",
     "jsdom": "^21.1.0",
     "postcss": "^8.4.31",

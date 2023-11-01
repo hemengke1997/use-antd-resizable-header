@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
 import { Tag } from 'antd'
+import React, { useEffect, useState } from 'react'
 import TableComponent from './TableComponent'
 
 const data = [

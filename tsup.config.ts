@@ -1,5 +1,5 @@
-import { defineConfig } from 'tsup'
 import fs from 'fs-extra'
+import { defineConfig } from 'tsup'
 
 const env = process.env.NODE_ENV
 
@@ -17,8 +17,8 @@ export default defineConfig((options) => ({
   },
   platform: 'browser',
   bundle: true,
-  splitting: false,
-  treeshake: false,
+  splitting: true,
+  treeshake: true,
   async onSuccess() {
     // css 向下兼容
     fs.copyFileSync('./dist/index.css', './dist/style.css')

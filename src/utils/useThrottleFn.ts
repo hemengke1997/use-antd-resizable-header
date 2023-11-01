@@ -1,7 +1,7 @@
 import throttle from 'lodash.throttle'
 import { useEffect, useRef } from 'react'
-import { useCreation } from './useCreation'
 import { type Options } from './options'
+import { useCreation } from './useCreation'
 
 type Fn = (...args: any) => any
 

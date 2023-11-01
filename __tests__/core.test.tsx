@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest'
 import { Table } from 'antd'
 import { type FC } from 'react'
+import { describe, expect, it } from 'vitest'
 import useAntdResizableHeader from '../src'
 import { renderHook } from './test-utils'
 

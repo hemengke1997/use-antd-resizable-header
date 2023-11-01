@@ -51,9 +51,9 @@ pnpm add @minko-fe/use-antd-resizable-header
 ## Example
 
 ```tsx
-import { Button, Table } from 'antd'
 import ProTable from '@ant-design/pro-table'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
+import { Button, Table } from 'antd'
 import '@minko-fe/use-antd-resizable-header/index.css'
 
 function App() {
@@ -86,9 +86,9 @@ function App() {
 ```
 
 ```tsx
-import React, { useReducer } from 'react'
-import { Space, Table, Tag } from 'antd'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
+import { Space, Table, Tag } from 'antd'
+import React, { useReducer } from 'react'
 import '@minko-fe/use-antd-resizable-header/index.css'
 
 const data = [

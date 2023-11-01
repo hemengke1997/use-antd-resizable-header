@@ -1,6 +1,6 @@
-import React from 'react'
 import ProTable from '@ant-design/pro-table'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
+import React from 'react'
 import '@minko-fe/use-antd-resizable-header/dist/style.css'
 
 const columns: any[] = [

@@ -6,6 +6,7 @@ export default defineConfig([
   {
     rules: {
       'no-empty-pattern': 'off',
+      'unicorn/prefer-at': 'off',
     },
   },
 ])

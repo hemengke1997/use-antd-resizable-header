@@ -1,7 +1,7 @@
-import { Tooltip } from 'antd'
-import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
-import '@minko-fe/use-antd-resizable-header/index.css'
 import ProTable from '@ant-design/pro-table'
+import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
+import { Tooltip } from 'antd'
+import '@minko-fe/use-antd-resizable-header/index.css'
 
 const columns: any[] = [
   {

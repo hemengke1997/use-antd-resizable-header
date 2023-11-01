@@ -1,6 +1,6 @@
-import React from 'react'
-import { Table } from 'antd'
 import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
+import { Table } from 'antd'
+import React from 'react'
 import '@minko-fe/use-antd-resizable-header/index.css'
 
 interface IProps {

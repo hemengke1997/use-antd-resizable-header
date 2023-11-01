@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { type ColumnOriginType } from '../useAntdResizableHeader'
 import { isEmpty } from '.'
+import { type ColumnOriginType } from '../useAntdResizableHeader'
 
 export const GETKEY = 'dataIndex'
 

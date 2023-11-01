@@ -1,9 +1,8 @@
 import { type FC, type ThHTMLAttributes, memo, useEffect, useRef } from 'react'
 import { Resizable, type ResizeCallbackData } from 'react-resizable'
-import { useSafeState } from './utils/useSafeState'
-import { isString } from './utils'
 import { type ColumnOriginType } from './useAntdResizableHeader'
-
+import { isString } from './utils'
+import { useSafeState } from './utils/useSafeState'
 import './index.css'
 
 type ComponentProp = {
@@ -103,7 +102,7 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
 
   const isSimpleChildren = () => {
     if (Array.isArray(children)) {
-      const lastChild = children.at(-1)
+      const lastChild = children[children.length - 1]
       if (lastChild) {
         return isString(lastChild) || lastChild.props?.ellipsis || isString(lastChild.props?.label)
       }
