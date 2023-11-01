@@ -1,3 +1,14 @@
+## [2.8.15](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.14...v2.8.15) (2023-11-01)
+
+
+### Bug Fixes
+
+* `children.at is not a function` in legacy browser ([2b536d0](https://github.com/hemengke1997/use-antd-resizable-header/commit/2b536d0f8462bde7b0b4ce5f526a753531ad4f5e)), closes [#64](https://github.com/hemengke1997/use-antd-resizable-header/issues/64)
+* fix typo ([21cf966](https://github.com/hemengke1997/use-antd-resizable-header/commit/21cf9663a91f8589f33f898af0d221b5051c1b37))
+* typo ([37b00f5](https://github.com/hemengke1997/use-antd-resizable-header/commit/37b00f501965a77fe0d51665ff19301ccdccaab8))
+
+
+
 ## [2.8.14](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.13...v2.8.14) (2023-10-16)
 
 
