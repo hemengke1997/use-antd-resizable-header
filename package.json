@@ -64,8 +64,8 @@
     "react-resizable": "^3.0.5"
   },
   "devDependencies": {
-    "@minko-fe/eslint-config": "^2.0.4",
-    "@minko-fe/tsconfig": "^2.0.4",
+    "@minko-fe/eslint-config": "^2.0.5",
+    "@minko-fe/tsconfig": "^2.0.5",
     "@testing-library/dom": "^8.20.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
