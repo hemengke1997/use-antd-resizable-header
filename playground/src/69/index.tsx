@@ -108,7 +108,7 @@ const columns: ProColumns<GithubIssueItem>[] = [
     title: '操作',
     valueType: 'option',
     key: 'option',
-    render: (text, record, _, action) => [
+    render: (text, record, _) => [
       <a href={record.url} target='_blank' rel='noopener noreferrer' key='view'>
         查看
       </a>,
@@ -130,7 +130,7 @@ export default () => {
       components={components}
       scroll={{ x: tableWidth }}
       cardBordered
-      request={async (params = {}, sort, filter) => {
+      request={async (params = {}) => {
         return request<{
           data: GithubIssueItem[]
         }>('https://proapi.azurewebsites.net/github/issues', {
