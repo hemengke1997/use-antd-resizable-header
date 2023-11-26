@@ -31,18 +31,7 @@
       "import": "./dist/index.js"
     },
     "./dist/*": "./dist/*",
-    "./index.css": "./dist/index.css",
-    "./style.css": "./dist/index.css"
-  },
-  "typesVersions": {
-    "*": {
-      "style.css": [
-        "./dist/style.d.ts"
-      ],
-      "index.css": [
-        "./dist/style.d.ts"
-      ]
-    }
+    "./index.css": "./dist/index.css"
   },
   "scripts": {
     "dev": "rimraf dist &&tsup --watch",
