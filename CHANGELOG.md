@@ -1,3 +1,12 @@
+# [2.9.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.15...v2.9.0) (2023-11-26)
+
+
+### Features
+
+* support `tooltipRender` for header cell ellipsis ([3345589](https://github.com/hemengke1997/use-antd-resizable-header/commit/33455893448204c79b713a427578b94b13ceb901))
+
+
+
 ## [2.8.15](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.14...v2.8.15) (2023-11-01)
 
 
