@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { isEmpty } from '.'
-import { type ColumnOriginType } from '../useAntdResizableHeader'
+import { type UARHColumnType } from '../useAntdResizableHeader'
 
 export const GETKEY = 'dataIndex'
 
@@ -10,7 +10,7 @@ export function getUniqueId(s: string) {
   return `${ResizableUniqIdPrefix}-${s}`
 }
 
-function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined): any {
+function getColumns<T extends UARHColumnType>(list: T[] | undefined): any {
   const trulyColumns = list?.filter((item) => !isEmpty(item))
   const c = trulyColumns?.map((col, index) => {
     return {
@@ -27,7 +27,7 @@ function getColumns<T extends ColumnOriginType<T>>(list: T[] | undefined): any {
  ** 如果columns没有dataIndex，则按规则添加一个不重复的dataIndex
  */
 
-export function useGetDataIndexColumns<T extends ColumnOriginType<T>>(columns: T[] | undefined) {
+export function useGetDataIndexColumns<T extends UARHColumnType>(columns: T[] | undefined) {
   const dataIndexColumns = useMemo(() => getColumns(columns), [columns]) as T[] | undefined
 
   return dataIndexColumns || columns

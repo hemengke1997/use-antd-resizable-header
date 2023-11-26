@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { isString } from '.'
-import { type ColumnOriginType, type ColumnsStateType } from '../useAntdResizableHeader'
+import { type ColumnsStateType, type UARHColumnType } from '../useAntdResizableHeader'
 import { useGetDataIndexColumns } from './useGetDataIndexColumns'
 import { useMemoizedFn } from './useMemoizedFn'
 
@@ -26,11 +26,7 @@ function mergeColumns<T extends any[]>(src: T, target: T, mergeKey: string): T {
   return res
 }
 
-function useLocalColumns<T extends ColumnOriginType<T>>({
-  columnsState,
-  resizableColumns,
-  columns,
-}: LocalColumnsProp<T>) {
+function useLocalColumns<T extends UARHColumnType>({ columnsState, resizableColumns, columns }: LocalColumnsProp<T>) {
   // 列设置需要每一个column都有dataIndex或key
   const columnsProp = useGetDataIndexColumns(columns)
 
@@ -77,7 +73,7 @@ function useLocalColumns<T extends ColumnOriginType<T>>({
         JSON.stringify({
           ...JSON.parse(storage?.getItem(persistenceKey) || '{}'),
           resizableColumns: resizableColumns.map((col) => {
-            const localCol: ColumnOriginType<T> = {
+            const localCol: UARHColumnType = {
               dataIndex: col.dataIndex,
               key: col.key,
               width: col.width,

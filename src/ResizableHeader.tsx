@@ -1,20 +1,29 @@
-import { type FC, type ThHTMLAttributes, memo, useEffect, useRef } from 'react'
+import { type FC, type ThHTMLAttributes, memo, useEffect } from 'react'
+import { useOverflowDetector } from 'react-detectable-overflow'
 import { Resizable, type ResizeCallbackData } from 'react-resizable'
-import { type ColumnOriginType } from './useAntdResizableHeader'
+import { type OptionsType, type UARHColumnType } from './useAntdResizableHeader'
 import { isString } from './utils'
 import { useSafeState } from './utils/useSafeState'
 import './index.css'
 
+type OnMountType = (
+  width: number,
+  extraProps?: {
+    overflow?: boolean
+  },
+) => void
+
 type ComponentProp = {
-  onResize: (width: number) => void
-  onMount: (width: number) => void
+  onMount: OnMountType
+  onResize: OnMountType
   onResizeStart?: (width: number) => void
   onResizeEnd?: (width: number) => void
   triggerRender: number
   width: number
   minWidth: number
   maxWidth: number
-} & ColumnOriginType<any> &
+  tooltipRender?: OptionsType['tooltipRender']
+} & UARHColumnType &
   ThHTMLAttributes<HTMLTableCellElement>
 
 const ResizableHeader: FC<ComponentProp> = (props) => {
@@ -37,17 +46,18 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     colSpan,
     title,
     scope,
+    tooltipRender,
     ...rest
   } = props
 
-  const thRef = useRef<HTMLTableCellElement>(null)
-
   const [resizeWidth, setResizeWidth] = useSafeState<number>(0)
+
+  const { overflow, ref } = useOverflowDetector({})
 
   useEffect(() => {
     if (width) {
       setResizeWidth(width)
-      onMount?.(width)
+      onMount?.(width, { overflow })
     }
   }, [triggerRender])
 
@@ -95,7 +105,9 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
 
   const onStop = () => {
     if (resizeWidth <= 0) return
-    onResize(resizeWidth)
+    onResize(resizeWidth, {
+      overflow,
+    })
     setBodyStyle(false)
     onResizeEnd?.(resizeWidth)
   }
@@ -110,6 +122,15 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     return false
   }
 
+  const content = (
+    <div
+      {...rest}
+      ref={ref as any}
+      className={`resizable-title${isSimpleChildren() ? ' ellipsis' : ''}`}
+      children={children}
+    ></div>
+  )
+
   return (
     <th
       scope={scope}
@@ -118,8 +139,7 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
         ...style,
         overflow: 'unset',
       }}
-      data-arh-enable='true'
-      ref={thRef}
+      data-uarh-enable='true'
       onClick={onClick}
       rowSpan={rowSpan}
       colSpan={colSpan}
@@ -147,9 +167,13 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }} />
       </Resizable>
-      <div {...rest} className={`resizable-title ${isSimpleChildren() ? 'ellipsis' : ''}`}>
-        <span title={title}>{children}</span>
-      </div>
+      {tooltipRender
+        ? tooltipRender({
+            children: content,
+            open: overflow ? undefined : false,
+            title: children,
+          })
+        : content}
     </th>
   )
 }

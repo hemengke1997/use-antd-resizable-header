@@ -15,32 +15,14 @@ export default function App() {
     )
   }
 
-  const routes = [
-    {
-      path: '/',
-      component: () => import('./basic'),
-    },
-    {
-      path: '/36',
-      component: () => import('./36'),
-    },
-    {
-      path: '/37',
-      component: () => import('./37'),
-    },
-    {
-      path: '/42',
-      component: () => import('./42'),
-    },
-    {
-      path: '/43',
-      component: () => import('./43'),
-    },
-    {
-      path: '/44',
-      component: () => import('./44'),
-    },
-  ]
+  const modules = import.meta.glob('./**/index.tsx')
+  const routes = Object.keys(modules).map((key) => {
+    return {
+      path: key.replace('./', '').replace('/index.tsx', ''),
+      /* @vite-ignore */
+      component: () => import(key),
+    }
+  })
 
   const element = useRoutes(
     routes.map((t) => ({

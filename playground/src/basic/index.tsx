@@ -1,8 +1,7 @@
 import ProTable from '@ant-design/pro-table'
-import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import { Table } from 'antd'
 import { useMemo, useReducer } from 'react'
-import '@minko-fe/use-antd-resizable-header/index.css'
+import { useAntdResizableHeader } from 'use-antd-resizable-header'
 
 const tcls: any[] = [
   {

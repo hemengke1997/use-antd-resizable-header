@@ -13,7 +13,7 @@
 ## 安装
 
 ```bash
-pnpm add @minko-fe/use-antd-resizable-header
+pnpm add use-antd-resizable-header
 ```
 
 ## API
@@ -46,15 +46,13 @@ pnpm add @minko-fe/use-antd-resizable-header
 - **至少一列不能拖动（width 不设置即可），[请保持至少一列的自适应](https://ant-design.gitee.io/components/table-cn/#components-table-demo-fixed-columns)**
 - **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
 - **若 column 有副作用，请把依赖项传入 useMemo deps 中**
-- **remember import style**
 
 ## Example
 
 ```tsx
 import ProTable from '@ant-design/pro-table'
-import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import { Button, Table } from 'antd'
-import '@minko-fe/use-antd-resizable-header/index.css'
+import { useAntdResizableHeader } from 'use-antd-resizable-header'
 
 function App() {
   const columns = []
@@ -86,10 +84,9 @@ function App() {
 ```
 
 ```tsx
-import { useAntdResizableHeader } from '@minko-fe/use-antd-resizable-header'
 import { Space, Table, Tag } from 'antd'
 import React, { useReducer } from 'react'
-import '@minko-fe/use-antd-resizable-header/index.css'
+import { useAntdResizableHeader } from 'use-antd-resizable-header'
 
 const data = [
   {

@@ -9,13 +9,14 @@
   },
   "dependencies": {
     "@ant-design/pro-table": "^3.4.0",
-    "@minko-fe/use-antd-resizable-header": "workspace:*",
     "ahooks": "^3.7.5",
     "antd": "5.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.8.2",
-    "react-router-dom": "^6.8.2"
+    "react-router-dom": "^6.8.2",
+    "umi-request": "^1.4.0",
+    "use-antd-resizable-header": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.28",

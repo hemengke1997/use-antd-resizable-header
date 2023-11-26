@@ -1,14 +1,17 @@
-import { Table } from 'antd'
+import ProTable, { type ProColumns } from '@ant-design/pro-table'
+import { Tooltip } from 'antd'
 import { useMemo } from 'react'
 import { useAntdResizableHeader } from 'use-antd-resizable-header'
 
-const columns: any[] = [
+const columns: ProColumns[] = [
   {
-    title: <div>title1</div>,
+    title: 'title mmmmmmmmmmmmmmmmmm',
     dataIndex: 'name',
     width: 150,
     key: 'name',
-    ellipsis: true,
+    ellipsis: {
+      showTitle: true,
+    },
     search: false,
   },
   {
@@ -16,7 +19,6 @@ const columns: any[] = [
     dataIndex: 'street',
     key: 'street',
     valueType: 'dateRange',
-    hideInTable: true,
   },
 ]
 
@@ -42,15 +44,13 @@ const ResizableTable = () => {
       persistenceKey: 'localKey',
       persistenceType: 'localStorage',
     },
-    onResizeEnd: (col) => {
-      console.log(col)
-    },
+    tooltipRender: (props) => <Tooltip {...props} />,
   })
   return (
     <>
       <div>
-        <h1>Hello!</h1>
-        <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
+        <ProTable columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
+        <Tooltip title={'123'} open={undefined} children='test'></Tooltip>
       </div>
     </>
   )

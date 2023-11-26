@@ -1,7 +1,6 @@
-import useARH from '@minko-fe/use-antd-resizable-header'
 import { Table } from 'antd'
 import React, { useEffect, useMemo, useState } from 'react'
-import '@minko-fe/use-antd-resizable-header/index.css'
+import useARH from 'use-antd-resizable-header'
 
 const columns = [
   {

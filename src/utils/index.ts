@@ -1,4 +1,4 @@
-export function depthFirstSearch<T extends Record<string, any> & { children?: T[] }>(
+export function depthFirstSearch<T extends { children?: T[] } & Record<string, any>>(
   children: T[],
   condition: (column: T) => boolean,
   width: number,
