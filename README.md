@@ -12,7 +12,17 @@
 
 ## 安装
 
-```bash
+```sh
+npm i use-antd-resizable-header
+```
+
+or 
+```sh
+yarn add use-antd-resizable-header
+```
+or
+
+```sh
 pnpm add use-antd-resizable-header
 ```
 
@@ -20,16 +30,17 @@ pnpm add use-antd-resizable-header
 
 ### Properties
 
-| Name           | Type             | Default   | Description                                      |
-| -------------- | ---------------- | --------- | ------------------------------------------------ |
-| columns        | ColumnType[]     | undefined | antd table 的 columns                            |
-| defaultWidth   | number           | 120       | 某一列不能拖动，设置该列的最小展示宽度，默认 120 |
-| minConstraints | number           | 60        | 拖动最小宽度 默认 60                             |
-| maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                            |
-| cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度               |
-| columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度             |
-| onResizeStart  | Function         | undefined | 开始拖拽时触发                                   |
-| onResizeEnd    | Function         | undefined | 结束拖拽时触发                                   |
+| Name           | Type             | Default   | Description                                          |
+| -------------- | ---------------- | --------- | ---------------------------------------------------- |
+| columns        | ColumnType[]     | undefined | antd table 的 columns                                |
+| defaultWidth   | number           | 120       | 某一列不能拖动，设置该列的最小展示宽度，默认 120     |
+| minConstraints | number           | 60        | 拖动最小宽度 默认 defaultWidth/2                     |
+| maxConstraints | number           | Infinity  | 拖动最大宽度 默认无穷                                |
+| cache          | boolean          | true      | 是否缓存宽度，避免渲染重置拖拽宽度                   |
+| columnsState   | ColumnsStateType | undefined | 列状态的配置，可以用来操作列拖拽宽度                 |
+| onResizeStart  | Function         | undefined | 开始拖拽时触发                                       |
+| onResizeEnd    | Function         | undefined | 结束拖拽时触发                                       |
+| tooltipRender  | Function         | undefined | 使用tooltip渲染表格头，当表格头文字溢出时展示tooltip |
 
 ### Return
 
@@ -47,16 +58,20 @@ pnpm add use-antd-resizable-header
 - **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
 - **若 column 有副作用，请把依赖项传入 useMemo deps 中**
 
+## 更新
+
+- v2.9.0起，不需要再手动引入css样式文件
+- 请安装 `use-antd-resizable-header`，而非 `@minko-fe/use-antd-resizable-header`
+
 ## Example
 
 ```tsx
 import ProTable from '@ant-design/pro-table'
-import { Button, Table } from 'antd'
+import { Button, Table, Tooltip } from 'antd'
 import { useAntdResizableHeader } from 'use-antd-resizable-header'
 
 function App() {
-  const columns = []
-
+  const columns: ColumnsType<object> = []
   const { components, resizableColumns, tableWidth, resetColumns } = useAntdResizableHeader({
     columns: useMemo(() => columns, []),
     // 保存拖拽宽度至本地localStorage
@@ -64,12 +79,20 @@ function App() {
       persistenceKey: 'localKey',
       persistenceType: 'localStorage',
     },
+    tooltipRender: (props) => <Tooltip {...props} />,
   })
+
+  const proColumns: ProColumns[] = []
+  const { components: proComponents, resizableColumns: proResizableColumns, tableWidth: proTableWidth, resetColumns: proResetColumns } = useAntdResizableHeader({
+      columns: useMemo(() => proColumns, []),
+      tooltipRender: (props) => <Tooltip {...props} />,
+    })
+  
 
   return (
     <>
       <Table columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
-      <ProTable columns={resizableColumns} components={components} dataSource={data} scroll={{ x: tableWidth }} />
+      <ProTable columns={proResizableColumns} components={proComponents} dataSource={data} scroll={{ x: proTableWidth }} />
       <Button onClick={() => resetColumns()}>重置宽度</Button>
     </>
   )

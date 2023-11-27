@@ -1,6 +1,5 @@
 import ProTable from '@ant-design/pro-table'
 import { useAntdResizableHeader } from 'use-antd-resizable-header'
-import 'use-antd-resizable-header/dist/style.css'
 
 const columns: any[] = [
   {

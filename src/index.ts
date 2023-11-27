@@ -1,5 +1,4 @@
 import { useAntdResizableHeader } from './useAntdResizableHeader'
-import './index.css'
 
 export type { OptionsType } from './useAntdResizableHeader'
 

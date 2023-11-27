@@ -125,7 +125,7 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
   const content = (
     <div
       {...rest}
-      ref={ref as any}
+      ref={tooltipRender ? (ref as any) : null}
       className={`resizable-title${isSimpleChildren() ? ' ellipsis' : ''}`}
       children={children}
     ></div>

@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { useAntdResizableHeader } from 'use-antd-resizable-header'
 
 export default function () {
-  const [proCols, _setProCols] = useState<ProColumns<any>[]>([])
+  const [proCols, _setProCols] = useState<ProColumns[]>([])
   const { resizableColumns: proResizableColumns } = useAntdResizableHeader({
     columns: proCols,
   })
 
-  const [cols, _setCols] = useState<ColumnsType<any>>([{ title: 'Name', dataIndex: 'name' }])
+  const [cols, _setCols] = useState<ColumnsType<object>>([])
   const { resizableColumns } = useAntdResizableHeader({
     columns: cols,
   })

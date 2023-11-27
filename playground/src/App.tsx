@@ -19,8 +19,8 @@ export default function App() {
   const routes = Object.keys(modules).map((key) => {
     return {
       path: key.replace('./', '').replace('/index.tsx', ''),
-      /* @vite-ignore */
-      component: () => import(key),
+
+      component: () => import(/* @vite-ignore */ key),
     }
   })
 
