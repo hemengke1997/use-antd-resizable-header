@@ -18,6 +18,7 @@ export default defineConfig((options) => ({
   bundle: true,
   splitting: true,
   treeshake: true,
+  minify: !options.watch && 'terser',
   banner(ctx) {
     return {
       js: ctx.format === 'cjs' ? `require('./index.css');` : `import './index.css';`,
