@@ -163,6 +163,7 @@ function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnT
         children: col?.children?.length ? getColumns(col.children) : undefined,
         onHeaderCell: (column: ColumnsType) => {
           return {
+            ...col.onHeaderCell?.(column),
             'data-index': column.dataIndex,
             'title': typeof col?.title === 'string' ? col?.title : '',
             'width': cache ? widthCache.current?.get(column[GETKEY] ?? '')?.width || column?.width : column?.width,
