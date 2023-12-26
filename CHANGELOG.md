@@ -1,3 +1,19 @@
+## [2.9.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.0...v2.9.1) (2023-12-26)
+
+
+### Bug Fixes
+
+* `onHeaderCell` not working ([911a19a](https://github.com/hemengke1997/use-antd-resizable-header/commit/911a19a0444557c2f4a7804a947483cd093e9c22))
+* playground [#67](https://github.com/hemengke1997/use-antd-resizable-header/issues/67) type ([c40a022](https://github.com/hemengke1997/use-antd-resizable-header/commit/c40a02298384d2d26c25afa64088222a0520bbc7))
+
+
+### Performance Improvements
+
+* minify code on build ([9187819](https://github.com/hemengke1997/use-antd-resizable-header/commit/918781968d9e6d73f2c938ea269ac2b550727ee4))
+* optimize tootipRender ([5680146](https://github.com/hemengke1997/use-antd-resizable-header/commit/5680146e2b312b9bf9a7c78a26db266f9cb7dd4b))
+
+
+
 # [2.9.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.8.15...v2.9.0) (2023-11-26)
 
 
