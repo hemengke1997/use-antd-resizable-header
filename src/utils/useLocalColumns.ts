@@ -14,7 +14,7 @@ function mergeColumns<T extends any[]>(src: T, target: T, mergeKey: string): T {
   const res = src
 
   if (Array.isArray(res) && Array.isArray(target)) {
-    res.forEach((t?, i?) => {
+    res.forEach((t, i) => {
       if (t?.children) {
         mergeColumns(t.children, target[i]?.children, mergeKey)
       } else {

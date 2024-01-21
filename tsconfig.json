@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "noImplicitAny": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "jsx": "react"
   }
 }

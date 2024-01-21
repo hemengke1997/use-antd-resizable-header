@@ -58,7 +58,7 @@ pnpm add use-antd-resizable-header
 - **若 column 未传入`dataIndex`，请传入一个唯一的`key`，否则按照将按照 column 的序号 index 计算唯一 key**
 - **若 column 有副作用，请把依赖项传入 useMemo deps 中**
 
-## 更新
+## Break-Change
 
 - v2.9.0起，不需要再手动引入css样式文件
 - 请安装 `use-antd-resizable-header`，而非 `@minko-fe/use-antd-resizable-header`
