@@ -1,3 +1,12 @@
+## [2.9.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.1...v2.9.2) (2024-01-21)
+
+
+### Bug Fixes
+
+* compatible with react legacy, not require react/jsx-runtime ([6bb0115](https://github.com/hemengke1997/use-antd-resizable-header/commit/6bb01159b7e7b530074ba774706110b57dea99a0))
+
+
+
 ## [2.9.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.0...v2.9.1) (2023-12-26)
 
 

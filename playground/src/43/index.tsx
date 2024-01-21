@@ -16,7 +16,6 @@ const columns: any[] = [
     dataIndex: 'street',
     key: 'street',
     valueType: 'dateRange',
-    hideInTable: true,
   },
 ]
 
@@ -46,6 +45,7 @@ const ResizableTable = () => {
       console.log(col)
     },
   })
+
   return (
     <>
       <div>
