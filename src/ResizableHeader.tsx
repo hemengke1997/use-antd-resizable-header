@@ -1,5 +1,4 @@
-import React from 'react'
-import { type FC, type ThHTMLAttributes, memo, useEffect } from 'react'
+import React, { type FC, type ThHTMLAttributes, memo, useEffect } from 'react'
 import { useOverflowDetector } from 'react-detectable-overflow'
 import { Resizable, type ResizeCallbackData } from 'react-resizable'
 import { type OptionsType, type UARHColumnType } from './useAntdResizableHeader'
