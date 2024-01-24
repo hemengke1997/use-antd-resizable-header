@@ -1,3 +1,12 @@
+## [2.9.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.2...v2.9.3) (2024-01-24)
+
+
+### Bug Fixes
+
+* react-detectable-overflow node engine ([d6b2d4f](https://github.com/hemengke1997/use-antd-resizable-header/commit/d6b2d4fd1d05a2035f1c40953a179c65c111cf36)), closes [#75](https://github.com/hemengke1997/use-antd-resizable-header/issues/75)
+
+
+
 ## [2.9.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.1...v2.9.2) (2024-01-21)
 
 
