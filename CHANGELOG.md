@@ -1,3 +1,12 @@
+## [2.9.4](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.3...v2.9.4) (2024-01-25)
+
+
+### Bug Fixes
+
+* replace overflow detector ([e5bc5ef](https://github.com/hemengke1997/use-antd-resizable-header/commit/e5bc5ef36f69dc9a9faed9efc6feb214bc378ea1))
+
+
+
 ## [2.9.3](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.2...v2.9.3) (2024-01-24)
 
 
