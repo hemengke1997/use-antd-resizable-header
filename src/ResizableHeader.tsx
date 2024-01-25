@@ -1,8 +1,8 @@
 import React, { type FC, type ThHTMLAttributes, memo, useEffect } from 'react'
-import { useOverflowDetector } from 'react-detectable-overflow'
 import { Resizable, type ResizeCallbackData } from 'react-resizable'
 import { type OptionsType, type UARHColumnType } from './useAntdResizableHeader'
 import { isString } from './utils'
+import { useOverflowDetector } from './utils/useOverflowDetector'
 import { useSafeState } from './utils/useSafeState'
 import './index.css'
 
