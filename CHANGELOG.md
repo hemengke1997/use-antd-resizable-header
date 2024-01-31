@@ -1,3 +1,12 @@
+## [2.9.5](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.4...v2.9.5) (2024-01-31)
+
+
+### Bug Fixes
+
+* render error caused by react-resize-detector ([52f5321](https://github.com/hemengke1997/use-antd-resizable-header/commit/52f53219a6554c381102eb0ac8a3abe9d3b1b029))
+
+
+
 ## [2.9.4](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.3...v2.9.4) (2024-01-25)
 
 
