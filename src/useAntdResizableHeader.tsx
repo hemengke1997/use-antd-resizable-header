@@ -10,6 +10,7 @@ import { useMemoizedFn } from './utils/useMemoizedFn'
 import { useSafeState } from './utils/useSafeState'
 import { useUpdateThrottleEffect } from './utils/useUpdateThrottleEffect'
 import { validateColumnsFlex } from './utils/validateOptions'
+import React from 'react'
 
 export interface ColumnsStateType {
   /**
@@ -47,6 +48,7 @@ export interface OptionsType<ColumnsType extends Record<string, any> = Record<st
    * ```
    */
   tooltipRender?: <T extends PropsWithChildren>(props: T) => ReactNode
+  dragRender?: ReactNode
 }
 
 type WidthType = number | string
@@ -76,6 +78,7 @@ function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnT
     onResizeStart: onResizeStartProp,
     onResizeEnd: onResizeEndProp,
     tooltipRender,
+    dragRender,
   } = props
 
   validateColumnsFlex(columnsProp)
@@ -227,11 +230,11 @@ function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnT
       window.removeEventListener('resize', debounceRender)
     }
   }, [debounceRender])
-
+  console.log('ResizableHeader :>> ', ResizableHeader);
   const components = useMemo(() => {
     return {
       header: {
-        cell: ResizableHeader,
+        cell: (props)=> <ResizableHeader {...props} dragRender={dragRender}/>,
       },
     }
   }, [])

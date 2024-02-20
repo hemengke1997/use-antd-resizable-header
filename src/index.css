@@ -2,10 +2,13 @@
 
 .resizable-container {
   position: relative;
+  &:before {
+    display: none;
+  }
   &:last-child {
-    .resizable-handler {
+    /* .resizable-handler {
       right: 0px;
-    }
+    } */
   }
 }
 
@@ -14,20 +17,24 @@
   left: 0;
   top: 0;
   background-clip: padding-box;
+  display: flex;
+  align-items: center;
 }
 
 .resizable-handler {
   position: absolute;
-  right: -5px;
-  bottom: 0;
+  padding: 0 4px;
+  right: -6px;
+  /* bottom: 0; */
   z-index: 1;
   display: flex;
   justify-content: center;
-  width: 10px;
+  width: 12px;
+  /* height: 16px; */
   height: 100%;
   cursor: col-resize;
 
-  &:active,
+  /* &:active,
   &:hover {
     z-index: 5;
     cursor: col-resize;
@@ -36,7 +43,7 @@
       background: var(--arh-color, #000);
       pointer-events: none;
     }
-  }
+  } */
 }
 
 .resizable-line {

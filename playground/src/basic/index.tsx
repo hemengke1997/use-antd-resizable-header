@@ -1,3 +1,4 @@
+import { ColumnWidthOutlined } from '@ant-design/icons'
 import ProTable from '@ant-design/pro-table'
 import { Table } from 'antd'
 import { useMemo, useReducer } from 'react'
@@ -88,7 +89,7 @@ const tcls: any[] = [
 ]
 
 const data: any[] = []
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 100; i++) { 
   data.push({
     key: i,
     name: 'John Brown',
@@ -111,6 +112,10 @@ function App() {
       persistenceType: 'localStorage',
       persistenceKey: 'test',
     },
+    // dragRender: <ColumnWidthOutlined 
+    //     style={{
+    //       color: 'red',
+    //     }} />,
   })
 
   const proColumns = useMemo(

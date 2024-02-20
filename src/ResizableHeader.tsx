@@ -1,4 +1,4 @@
-import React, { type FC, type ThHTMLAttributes, memo, useEffect } from 'react'
+import React, { type FC, type ThHTMLAttributes, memo, useEffect, ReactNode, ReactComponentElement } from 'react'
 import { Resizable, type ResizeCallbackData } from 'react-resizable'
 import { type OptionsType, type UARHColumnType } from './useAntdResizableHeader'
 import { isString } from './utils'
@@ -22,9 +22,12 @@ type ComponentProp = {
   width: number
   minWidth: number
   maxWidth: number
+  dragRender?: ReactNode
   tooltipRender?: OptionsType['tooltipRender']
 } & UARHColumnType &
   ThHTMLAttributes<HTMLTableCellElement>
+
+const defaultDragRender = <svg t="1708413777062" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1215" ><path fill='rgba(0, 0, 0, 0.40)' d="M234.88 631.232a25.6 25.6 0 0 1-43.776 18.112L71.936 530.112a25.6 25.6 0 0 1 0-36.224l119.168-119.232a25.6 25.6 0 0 1 43.712 18.112z m219.392 219.072a45.696 45.696 0 0 1-91.456 0V173.696a45.696 45.696 0 1 1 91.456 0v676.608z m210.24 0a45.696 45.696 0 0 1-91.392 0V173.696a45.696 45.696 0 0 1 91.392 0v676.608z m290.944-320.192L836.224 649.344a25.6 25.6 0 0 1-43.712-18.112V392.768a25.6 25.6 0 0 1 43.712-18.112l119.232 119.232a25.6 25.6 0 0 1 0 36.224z" p-id="1216"></path></svg>
 
 const ResizableHeader: FC<ComponentProp> = (props) => {
   const {
@@ -47,6 +50,7 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     title,
     scope,
     tooltipRender,
+    dragRender,
     ...rest
   } = props
 
@@ -157,7 +161,8 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
               e.stopPropagation()
             }}
           >
-            <div className='resizable-line' />
+            {/* <div className='resizable-line' /> */}
+            {dragRender || defaultDragRender}
           </div>
         }
         draggableOpts={{ enableUserSelectHack: false }}

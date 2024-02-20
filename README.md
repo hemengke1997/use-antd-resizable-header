@@ -41,6 +41,7 @@ pnpm add use-antd-resizable-header
 | onResizeStart  | Function         | undefined | 开始拖拽时触发                                       |
 | onResizeEnd    | Function         | undefined | 结束拖拽时触发                                       |
 | tooltipRender  | Function         | undefined | 使用tooltip渲染表格头，当表格头文字溢出时展示tooltip |
+| dragRender  | ReactNode         | svg左右拖动dom | 控制表头拖拽节点 |
 
 ### Return
 
