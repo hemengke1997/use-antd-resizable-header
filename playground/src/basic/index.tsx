@@ -121,6 +121,14 @@ function App() {
   const proColumns = useMemo(
     () => [
       {
+        title: '序号',
+        width: 60,
+        dataIndex: 'index',
+        valueType: 'index',
+        fixed: 'left',
+        resizable: false,
+      },
+      {
         title: 'Pro-Name',
         width: 100,
         dataIndex: 'name',
