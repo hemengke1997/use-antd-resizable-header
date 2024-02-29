@@ -1,16 +1,23 @@
-import { type PropsWithChildren, type ReactNode, useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
-import ResizableHeader from './ResizableHeader'
-import { depthFirstSearch, isEmpty } from './utils'
-import { useDebounceFn } from './utils/useDebounceFn'
-import { GETKEY } from './utils/useGetDataIndexColumns'
-import { useIsomorphicLayoutEffect } from './utils/useIsomorphicLayoutEffect'
-import { useLatest } from './utils/useLatest'
-import { useLocalColumns } from './utils/useLocalColumns'
-import { useMemoizedFn } from './utils/useMemoizedFn'
-import { useSafeState } from './utils/useSafeState'
-import { useUpdateThrottleEffect } from './utils/useUpdateThrottleEffect'
-import { validateColumnsFlex } from './utils/validateOptions'
-import React from 'react'
+import React, {
+  type PropsWithChildren,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from "react";
+import ResizableHeader from "./ResizableHeader";
+import { depthFirstSearch, isEmpty } from "./utils";
+import { useDebounceFn } from "./utils/useDebounceFn";
+import { GETKEY } from "./utils/useGetDataIndexColumns";
+import { useIsomorphicLayoutEffect } from "./utils/useIsomorphicLayoutEffect";
+import { useLatest } from "./utils/useLatest";
+import { useLocalColumns } from "./utils/useLocalColumns";
+import { useMemoizedFn } from "./utils/useMemoizedFn";
+import { useSafeState } from "./utils/useSafeState";
+import { useUpdateThrottleEffect } from "./utils/useUpdateThrottleEffect";
+import { validateColumnsFlex } from "./utils/validateOptions";
 
 export interface ColumnsStateType {
   /**
@@ -19,27 +26,33 @@ export interface ColumnsStateType {
    * @param localStorage 设置在关闭浏览器后也是存在的
    * @param sessionStorage 关闭浏览器后会丢失
    */
-  persistenceType?: 'localStorage' | 'sessionStorage'
+  persistenceType?: "localStorage" | "sessionStorage";
   /** 持久化的key，用于存储到 storage 中 */
-  persistenceKey?: string
+  persistenceKey?: string;
 }
 
-export interface OptionsType<ColumnsType extends Record<string, any> = Record<string, any>> {
-  columns: ColumnsType[] | undefined
+export interface OptionsType<
+  ColumnsType extends Record<string, any> = Record<string, any>,
+> {
+  columns: ColumnsType[] | undefined;
   /** @description 最后一列不能拖动，设置最后一列的最小展示宽度，默认120 */
-  defaultWidth?: number
+  defaultWidth?: number;
   /** @description 拖动最小宽度 默认0 */
-  minConstraints?: number
+  minConstraints?: number;
   /** @description 拖动最大宽度 默认无穷 */
-  maxConstraints?: number
+  maxConstraints?: number;
   /** @description 是否缓存宽度 */
-  cache?: boolean
+  cache?: boolean;
   /** @description 列状态的配置，可以用来操作列拖拽宽度 */
-  columnsState?: ColumnsStateType
+  columnsState?: ColumnsStateType;
   /** @description 开始拖拽时触发 */
-  onResizeStart?: (col: ColumnsType & { resizableColumns: ColumnsType[] }) => void
+  onResizeStart?: (
+    col: ColumnsType & { resizableColumns: ColumnsType[] }
+  ) => void;
   /** @description 结束拖拽时触发 */
-  onResizeEnd?: (col: ColumnsType & { resizableColumns: ColumnsType[] }) => void
+  onResizeEnd?: (
+    col: ColumnsType & { resizableColumns: ColumnsType[] }
+  ) => void;
   /**
    * headerCell的tooltip
    * @example
@@ -47,27 +60,31 @@ export interface OptionsType<ColumnsType extends Record<string, any> = Record<st
    * tooltipRender={(props) => <Tooltip {...props} />)
    * ```
    */
-  tooltipRender?: <T extends PropsWithChildren>(props: T) => ReactNode
-  dragRender?: ReactNode
+  tooltipRender?: <T extends PropsWithChildren>(props: T) => ReactNode;
+  dragRender?: ReactNode;
 }
 
-type WidthType = number | string
+type WidthType = number | string;
 
 type ExtendsInternalColumnType<T> = {
-  width?: WidthType
-  resizable?: boolean
-} & T
+  width?: WidthType;
+  resizable?: boolean;
+} & T;
 
-export type UARHColumnType<T extends Record<string, any> = Record<string, any>> = ExtendsInternalColumnType<T>
+export type UARHColumnType<
+  T extends Record<string, any> = Record<string, any>,
+> = ExtendsInternalColumnType<T>;
 
 interface CacheType {
-  width?: WidthType
-  index: number
+  width?: WidthType;
+  index: number;
 }
 
-const WIDTH = 120
+const WIDTH = 120;
 
-function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnType>(props: OptionsType<ColumnsType>) {
+function useAntdResizableHeader<
+  ColumnsType extends UARHColumnType = UARHColumnType,
+>(props: OptionsType<ColumnsType>) {
   const {
     columns: columnsProp,
     defaultWidth = WIDTH,
@@ -79,34 +96,36 @@ function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnT
     onResizeEnd: onResizeEndProp,
     tooltipRender,
     dragRender,
-  } = props
+  } = props;
 
-  validateColumnsFlex(columnsProp)
+  validateColumnsFlex(columnsProp);
 
   // add column width cache to avoid column's width reset after render
-  const widthCache = useRef<Map<string | number, CacheType>>(new Map())
+  const widthCache = useRef<Map<string | number, CacheType>>(new Map());
 
-  const [resizableColumns, setResizableColumns] = useSafeState<ColumnsType[]>(columnsProp || []) // keep all default vlaue (e.g. defaultFilterValue)
+  const [resizableColumns, setResizableColumns] = useSafeState<ColumnsType[]>(
+    columnsProp || []
+  ); // keep all default vlaue (e.g. defaultFilterValue)
 
-  const latestColumns = useLatest(resizableColumns)
+  const latestColumns = useLatest(resizableColumns);
 
   const { localColumns, resetLocalColumns } = useLocalColumns({
     columnsState,
     columns: columnsProp,
     resizableColumns,
-  })
+  });
 
-  const [tableWidth, setTableWidth] = useSafeState<number>()
+  const [tableWidth, setTableWidth] = useSafeState<number>();
 
-  const [triggerRender, forceRender] = useReducer((s) => s + 1, 0)
+  const [triggerRender, forceRender] = useReducer((s) => s + 1, 0);
 
-  let kvMap: Map<string | number, CacheType>
+  let kvMap: Map<string | number, CacheType>;
 
   const resetColumns = useMemoizedFn(() => {
-    kvMap = new Map()
-    widthCache.current = kvMap
-    resetLocalColumns()
-  })
+    kvMap = new Map();
+    widthCache.current = kvMap;
+    resetLocalColumns();
+  });
 
   const onMount = useCallback(
     (id?: string | number) => (width: number) => {
@@ -115,50 +134,50 @@ function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnT
           const nextColumns = depthFirstSearch(
             t as ColumnsType[],
             (col) => col[GETKEY] === id && !!col.width && !col.hideInTable,
-            width,
-          )
-          kvMap = kvMap || new Map<string | number, CacheType>()
+            width
+          );
+          kvMap = kvMap || new Map<string | number, CacheType>();
           function dig(cols: ColumnsType[]) {
             for (let i = 0; i < cols.length; i++) {
-              const col = cols[i]
-              if (col.hideInTable) continue
-              const key = col[GETKEY]
-              kvMap.set(String(key) ?? '', { width: col?.width, index: i })
+              const col = cols[i];
+              if (col.hideInTable) continue;
+              const key = col[GETKEY];
+              kvMap.set(String(key) ?? "", { width: col?.width, index: i });
               if (col?.children) {
-                dig(col.children)
+                dig(col.children);
               }
             }
           }
-          dig(nextColumns)
-          widthCache.current = kvMap
+          dig(nextColumns);
+          widthCache.current = kvMap;
 
-          return nextColumns
-        })
+          return nextColumns;
+        });
       }
     },
-    [],
-  )
+    []
+  );
 
-  const onResize = useMemo(() => onMount, [onMount])
+  const onResize = useMemo(() => onMount, [onMount]);
 
   const onResizeStart = (col: ColumnsType) => (width: number) => {
     onResizeStartProp?.({
       ...col,
       width,
       resizableColumns: latestColumns.current,
-    })
-  }
+    });
+  };
 
   const onResizeEnd = (col: ColumnsType) => (width: number) => {
     onResizeEndProp?.({
       ...col,
       width,
       resizableColumns: latestColumns.current,
-    })
-  }
+    });
+  };
 
   const getColumns = useMemoizedFn((list: ColumnsType[]) => {
-    const trulyColumns = list?.filter((item) => !isEmpty(item))
+    const trulyColumns = list?.filter((item) => !isEmpty(item));
 
     const c = trulyColumns.map((col) => {
       return {
@@ -167,84 +186,89 @@ function useAntdResizableHeader<ColumnsType extends UARHColumnType = UARHColumnT
         onHeaderCell: (column: ColumnsType) => {
           return {
             ...col.onHeaderCell?.(column),
-            'data-index': column.dataIndex,
-            'title': typeof col?.title === 'string' ? col?.title : '',
-            'width': cache ? widthCache.current?.get(column[GETKEY] ?? '')?.width || column?.width : column?.width,
-            'resizable': column.resizable,
-            'onMount': onMount(column?.[GETKEY]),
-            'onResize': onResize(column?.[GETKEY]),
-            'onResizeStart': onResizeStart(column),
-            'onResizeEnd': onResizeEnd(column),
-            'minWidth': minConstraints,
-            'maxWidth': maxConstraints,
-            'hideInTable': column.hideInTable,
+            "data-index": column.dataIndex,
+            title: typeof col?.title === "string" ? col?.title : "",
+            width: cache
+              ? widthCache.current?.get(column[GETKEY] ?? "")?.width ||
+                column?.width
+              : column?.width,
+            resizable: column.resizable,
+            onMount: onMount(column?.[GETKEY]),
+            onResize: onResize(column?.[GETKEY]),
+            onResizeStart: onResizeStart(column),
+            onResizeEnd: onResizeEnd(column),
+            minWidth: minConstraints,
+            maxWidth: maxConstraints,
+            hideInTable: column.hideInTable,
             tooltipRender,
             triggerRender,
-          }
+          };
         },
-        width: cache ? widthCache.current?.get(col[GETKEY] ?? '')?.width || col?.width : col?.width,
+        width: cache
+          ? widthCache.current?.get(col[GETKEY] ?? "")?.width || col?.width
+          : col?.width,
         [GETKEY]: col[GETKEY] || col.key,
-      }
-    }) as ColumnsType[]
+      };
+    }) as ColumnsType[];
 
-    return c
-  })
+    return c;
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (localColumns) {
-      const c = getColumns(localColumns)
-      setResizableColumns(c)
+      const c = getColumns(localColumns);
+      setResizableColumns(c);
     }
-  }, [localColumns])
+  }, [localColumns]);
 
   useUpdateThrottleEffect(
     () => {
-      const t = getColumns(resizableColumns)
-      setResizableColumns(t)
+      const t = getColumns(resizableColumns);
+      setResizableColumns(t);
     },
     [triggerRender],
     {
       wait: 500,
-    },
-  )
+    }
+  );
 
   useIsomorphicLayoutEffect(() => {
-    let width = 0
-    ;(function loop(cls: ColumnsType[]) {
+    let width = 0;
+    (function loop(cls: ColumnsType[]) {
       for (let i = 0; i < cls.length; i++) {
         if (cls[i].children) {
-          loop(cls[i].children as ColumnsType[])
+          loop(cls[i].children as ColumnsType[]);
         } else if (!cls[i].hideInTable) {
-          width += Number(cls[i].width) || defaultWidth
+          width += Number(cls[i].width) || defaultWidth;
         }
       }
-    })(resizableColumns)
-    setTableWidth(width)
-  }, [defaultWidth, resizableColumns])
+    })(resizableColumns);
+    setTableWidth(width);
+  }, [defaultWidth, resizableColumns]);
 
-  const { run: debounceRender } = useDebounceFn(forceRender)
+  const { run: debounceRender } = useDebounceFn(forceRender);
 
   useEffect(() => {
-    window.addEventListener('resize', debounceRender)
+    window.addEventListener("resize", debounceRender);
     return () => {
-      window.removeEventListener('resize', debounceRender)
-    }
-  }, [debounceRender])
-  console.log('ResizableHeader :>> ', ResizableHeader);
+      window.removeEventListener("resize", debounceRender);
+    };
+  }, [debounceRender]);
+  console.log("ResizableHeader :>> ", ResizableHeader);
   const components = useMemo(() => {
     return {
       header: {
-        cell: (props)=> <ResizableHeader {...props} dragRender={dragRender}/>,
+        cell: (props) => <ResizableHeader {...props} dragRender={dragRender} />,
       },
-    }
-  }, [])
+    };
+  }, []);
 
   return {
     resizableColumns,
     components,
     tableWidth,
     resetColumns,
-  }
+  };
 }
 
-export { useAntdResizableHeader }
+export { useAntdResizableHeader };

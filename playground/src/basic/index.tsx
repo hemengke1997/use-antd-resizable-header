@@ -1,4 +1,3 @@
-import { ColumnWidthOutlined } from '@ant-design/icons'
 import ProTable from '@ant-design/pro-table'
 import { Table } from 'antd'
 import { useMemo, useReducer } from 'react'
