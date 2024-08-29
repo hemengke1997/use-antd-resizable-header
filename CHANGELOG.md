@@ -1,3 +1,12 @@
+# [3.0.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.5...v3.0.0) (2024-08-29)
+
+
+### Bug Fixes
+
+* [#78](https://github.com/hemengke1997/use-antd-resizable-header/issues/78) ([a2659f6](https://github.com/hemengke1997/use-antd-resizable-header/commit/a2659f613340dbfb88243db2fb5e32cf34d23fc4))
+
+
+
 ## [2.9.5](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.4...v2.9.5) (2024-01-31)
 
 
@@ -342,8 +351,6 @@
 
 ### Features
 
-* 新增拖拽宽度保存至本地功能 ([c717369](https://github.com/hemengke1997/use-antd-resizable-header/commit/c717369d2f4f8d1123eb1b0142b197b590ec7986))
-* 自由设置不可拖动列，支持最后一列可拖动 ([34a1189](https://github.com/hemengke1997/use-antd-resizable-header/commit/34a118937cef0c7c024c9a04bd20cc02c878ea39))
 * add cacheOption ([da9a659](https://github.com/hemengke1997/use-antd-resizable-header/commit/da9a6591caec2b1612d8eee6354c10bb2dcbad43))
 * add column width cache to aviod width reset after render ([7f73ec9](https://github.com/hemengke1997/use-antd-resizable-header/commit/7f73ec99df09f8ef368390a5c1049382ba199287))
 * cannot drag the last column ([de124c8](https://github.com/hemengke1997/use-antd-resizable-header/commit/de124c8d43828d938782118b9aa5d3f2da0c6b31))
@@ -355,6 +362,8 @@
 * trigger mount when window resize ([83d2d87](https://github.com/hemengke1997/use-antd-resizable-header/commit/83d2d870e53c8e31db9cfdcedbd8c9714c69ea69))
 * trigger mount when window resize ([017aeab](https://github.com/hemengke1997/use-antd-resizable-header/commit/017aeab5160bd9b20f5360a626a9eb47cf9b520f))
 * use postcss ([2011f93](https://github.com/hemengke1997/use-antd-resizable-header/commit/2011f932f44b0f0e92be5ea5157edc36d7a0597e))
+* 新增拖拽宽度保存至本地功能 ([c717369](https://github.com/hemengke1997/use-antd-resizable-header/commit/c717369d2f4f8d1123eb1b0142b197b590ec7986))
+* 自由设置不可拖动列，支持最后一列可拖动 ([34a1189](https://github.com/hemengke1997/use-antd-resizable-header/commit/34a118937cef0c7c024c9a04bd20cc02c878ea39))
 
 
 ### Performance Improvements

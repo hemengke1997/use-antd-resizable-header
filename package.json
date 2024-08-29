@@ -1,6 +1,6 @@
 {
   "name": "use-antd-resizable-header",
-  "version": "2.9.5",
+  "version": "3.0.0",
   "description": "antd resizable header column hook",
   "type": "module",
   "keywords": [
