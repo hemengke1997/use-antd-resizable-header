@@ -103,6 +103,10 @@ export function Component() {
 
   const { components, resizableColumns, tableWidth, resetColumns } = useAntdResizableHeader({
     columns: useMemo(() => columns, [times]),
+    columnsState: {
+      persistenceKey: 'basic',
+      persistenceType: 'sessionStorage',
+    },
   })
 
   return (

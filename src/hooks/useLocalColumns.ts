@@ -102,8 +102,8 @@ function useLocalColumns<T extends ResizableColumnType>({
   }, [resizableColumns])
 
   // reset
-  const resetLocalColumns = useMemoizedFn(() => {
-    setLocalColumns([...(columnsProp || [])])
+  const resetLocalColumns = useMemoizedFn((resetStorage: boolean = true) => {
+    setLocalColumns([...((resetStorage ? columns : columnsProp) || [])])
   })
 
   return {

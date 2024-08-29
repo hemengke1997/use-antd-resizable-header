@@ -46,9 +46,9 @@ function useAntdResizableHeader<ColumnType extends ResizableColumnType = Resizab
 
   const [shouldRender, forceRender] = useReducer((s) => s + 1, 0)
 
-  const resetColumns = useMemoizedFn(() => {
+  const resetColumns = useMemoizedFn((resetStorage: boolean = true) => {
     widthCache.current = new Map()
-    resetLocalColumns()
+    resetLocalColumns(resetStorage)
   })
 
   const _onResizeEnd = useMemoizedFn((id?: string | number) => (width: number) => {
