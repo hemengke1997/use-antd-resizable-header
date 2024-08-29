@@ -1,0 +1,58 @@
+@import 'react-resizable/css/styles.css';
+
+$namespace: antd-resizable-header;
+
+.$(namespace) {
+  position: relative;
+
+  &:last-child &__handler {
+    right: 0px;
+  }
+
+  &__content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-clip: padding-box;
+  }
+
+  &__handler {
+    position: absolute;
+    right: -5px;
+    bottom: 0;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    width: 10px;
+    height: 100%;
+    cursor: col-resize;
+
+    &:active,
+    &:hover {
+      z-index: 99;
+      cursor: col-resize;
+
+      .$(namespace)__handler__line {
+        background: var(--resizable-line-background, #000);
+        pointer-events: none;
+      }
+    }
+
+    &__line {
+      width: 4px;
+      height: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  &__title {
+    position: relative;
+    z-index: 0;
+
+    &--ellipsis {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}
