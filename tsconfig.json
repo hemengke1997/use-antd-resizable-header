@@ -1,10 +1,10 @@
 {
   "extends": "@minko-fe/tsconfig/tsconfig.lib.json",
   "compilerOptions": {
-    "jsx": "react",
     "baseUrl": ".",
     "noImplicitAny": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false
-  }
+  },
+  "exclude": ["playground"]
 }

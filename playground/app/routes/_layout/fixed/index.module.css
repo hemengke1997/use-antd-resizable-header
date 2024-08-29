@@ -1,0 +1,11 @@
+.table {
+  :global {
+    .ant-table-thead {
+      > tr {
+        .ant-table-cell-fix-left:first-child {
+          z-index: 3;
+        }
+      }
+    }
+  }
+}

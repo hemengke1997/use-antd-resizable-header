@@ -1,12 +1,13 @@
-import React, { type FC, type ThHTMLAttributes, memo, useEffect } from 'react'
+import { memo, type ThHTMLAttributes, useEffect, useRef } from 'react'
 import { Resizable, type ResizeCallbackData } from 'react-resizable'
-import { type OptionsType, type UARHColumnType } from './useAntdResizableHeader'
-import { isString } from './utils'
-import { useOverflowDetector } from './utils/useOverflowDetector'
-import { useSafeState } from './utils/useSafeState'
-import './index.css'
+import { useMemoizedFn } from './hooks/useMemoizedFn'
+import { useSafeState } from './hooks/useSafeState'
+import { type ResizableColumnType } from './type'
+import { isNumber, isString } from './utils'
+import { clsx } from './utils/clsx'
+import { NameSpace } from './utils/constant'
 
-type OnMountType = (
+type InternalOnResizeEntType = (
   width: number,
   extraProps?: {
     overflow?: boolean
@@ -14,30 +15,29 @@ type OnMountType = (
 ) => void
 
 type ComponentProp = {
-  onMount: OnMountType
-  onResize: OnMountType
+  _onResizeEnd: InternalOnResizeEntType
   onResizeStart?: (width: number) => void
   onResizeEnd?: (width: number) => void
-  triggerRender: number
+  shouldRender: number
   width: number
   minWidth: number
   maxWidth: number
-  tooltipRender?: OptionsType['tooltipRender']
-} & UARHColumnType &
+  onColChange?: (width: number) => void
+} & ResizableColumnType &
   ThHTMLAttributes<HTMLTableCellElement>
 
-const ResizableHeader: FC<ComponentProp> = (props) => {
+function ResizableHeader(props: ComponentProp) {
   const {
     width,
     minWidth,
     maxWidth,
     resizable,
-    hideInTable,
-    onResize,
+    hide,
+    _onResizeEnd,
     onResizeStart,
     onResizeEnd,
-    onMount,
-    triggerRender,
+    onColChange,
+    shouldRender,
     className,
     style,
     onClick,
@@ -46,28 +46,88 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     colSpan,
     title,
     scope,
-    tooltipRender,
     ...rest
   } = props
 
   const [resizeWidth, setResizeWidth] = useSafeState<number>(0)
+  const [colWidth, setColWidth] = useSafeState<number>(0)
 
-  const { overflow, ref } = useOverflowDetector({})
+  const thRef = useRef<HTMLTableCellElement>(null)
+
+  const onColWidthChanged = useMemoizedFn((callback?: (width: number) => void) => {
+    const fn = () => {
+      if (thRef.current) {
+        const thElement = thRef.current
+        const tableElement = thElement.closest('table')
+
+        if (tableElement) {
+          const colgroup = tableElement.querySelector('colgroup')
+          const cols = colgroup?.querySelectorAll('col')
+
+          const rows = tableElement.querySelector('thead')?.rows || []
+          const cellPositions: HTMLTableCellElement[][] = []
+
+          for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].cells
+            let colIndex = 0
+
+            for (let j = 0; j < cells.length; j++) {
+              const cell = cells[j]
+              const rowspan = cell.rowSpan || 1
+              const colspan = cell.colSpan || 1
+              while (cellPositions[i] && cellPositions[i][colIndex]) {
+                colIndex++
+              }
+              for (let r = 0; r < rowspan; r++) {
+                for (let c = 0; c < colspan; c++) {
+                  if (!cellPositions[i + r]) {
+                    cellPositions[i + r] = []
+                  }
+                  cellPositions[i + r][colIndex + c] = cell
+                }
+              }
+              colIndex += colspan
+            }
+          }
+
+          const cells = cellPositions[cellPositions.length - 1]
+          const colindex = cells.indexOf(thElement)
+
+          // let w = 0
+          // cols?.forEach((col) => {
+          //   w += col.clientWidth
+          // })
+          // w && onColChange?.(w)
+
+          if (colindex !== -1) {
+            const colWidth = cols?.[colindex]?.clientWidth
+            if (isNumber(colWidth)) {
+              setColWidth(colWidth)
+              setResizeWidth(colWidth)
+              callback?.(colWidth)
+            }
+          }
+        }
+      }
+    }
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(() => {
+        fn()
+      })
+    } else {
+      setTimeout(() => {
+        fn()
+      }, 1)
+    }
+  })
 
   useEffect(() => {
     if (width) {
-      setResizeWidth(width)
-      onMount?.(width, { overflow })
+      onColWidthChanged()
     }
-  }, [triggerRender])
+  }, [width, shouldRender])
 
-  useEffect(() => {
-    if (width) {
-      setResizeWidth(width)
-    }
-  }, [setResizeWidth, width])
-
-  if (hideInTable) {
+  if (hide) {
     return null
   }
 
@@ -75,12 +135,13 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     return (
       <th
         {...rest}
-        data-arh-disable='true'
+        data-resizable-col='false'
         style={style}
         className={className}
         onClick={onClick}
         rowSpan={rowSpan}
         colSpan={colSpan}
+        ref={thRef}
       >
         <span title={title}>{children}</span>
       </th>
@@ -94,8 +155,10 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
   }
 
   const onStart = ({}, data: ResizeCallbackData) => {
-    setResizeWidth(data.size.width)
+    if (resizeWidth >= maxWidth || resizeWidth <= minWidth) return
     setBodyStyle(true)
+
+    setResizeWidth(data.size.width)
     onResizeStart?.(data.size.width)
   }
 
@@ -104,12 +167,20 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
   }
 
   const onStop = () => {
-    if (resizeWidth <= 0) return
-    onResize(resizeWidth, {
-      overflow,
-    })
     setBodyStyle(false)
-    onResizeEnd?.(resizeWidth)
+
+    if (resizeWidth <= 0) return
+
+    let w = resizeWidth
+    if (w >= maxWidth) {
+      w = maxWidth > width ? maxWidth : width
+    } else if (w <= minWidth) {
+      w = minWidth < width ? minWidth : width
+    }
+
+    _onResizeEnd(w)
+    onResizeEnd?.(w)
+    onColWidthChanged()
   }
 
   const isSimpleChildren = () => {
@@ -122,42 +193,34 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
     return false
   }
 
-  const content = (
-    <div
-      {...rest}
-      ref={tooltipRender ? (ref as any) : null}
-      className={`resizable-title${isSimpleChildren() ? ' ellipsis' : ''}`}
-      children={children}
-    ></div>
-  )
-
   return (
     <th
+      ref={thRef}
       scope={scope}
-      className={`resizable-container ${className}`}
+      className={clsx(NameSpace.CSS, className)}
       style={{
         ...style,
         overflow: 'unset',
       }}
-      data-uarh-enable='true'
+      data-resizable-col='true'
       onClick={onClick}
       rowSpan={rowSpan}
       colSpan={colSpan}
     >
       <Resizable
-        className='resizable-box'
+        className={`${NameSpace.CSS}__content`}
         width={resizeWidth}
-        minConstraints={[minWidth, 0]}
-        maxConstraints={[maxWidth, 0]}
+        minConstraints={[Math.min(minWidth, colWidth), 0]}
+        maxConstraints={[Math.max(maxWidth, colWidth), 0]}
         height={0}
         handle={
           <div
-            className='resizable-handler'
+            className={`${NameSpace.CSS}__handler`}
             onClick={(e) => {
               e.stopPropagation()
             }}
           >
-            <div className='resizable-line' />
+            <div className={`${NameSpace.CSS}__handler__line`} />
           </div>
         }
         draggableOpts={{ enableUserSelectHack: false }}
@@ -167,13 +230,11 @@ const ResizableHeader: FC<ComponentProp> = (props) => {
       >
         <div style={{ width: resizeWidth, height: '100%' }} />
       </Resizable>
-      {tooltipRender
-        ? tooltipRender({
-            children: content,
-            open: overflow ? undefined : false,
-            title: children,
-          })
-        : content}
+      <div
+        {...rest}
+        className={`${NameSpace.CSS}__title${isSimpleChildren() ? '--ellipsis' : ''}`}
+        children={children}
+      ></div>
     </th>
   )
 }

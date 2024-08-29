@@ -1,3 +1,4 @@
+import fs from 'node:fs'
 import { defineConfig } from 'tsup'
 
 const env = process.env.NODE_ENV
@@ -18,10 +19,13 @@ export default defineConfig((options) => ({
   bundle: true,
   splitting: true,
   treeshake: true,
-  minify: !options.watch && 'terser',
+  minify: false,
   banner(ctx) {
     return {
-      js: ctx.format === 'cjs' ? `require('./index.css');` : `import './index.css';`,
+      js: ctx.format === 'cjs' ? `require('./style.css');` : `import './style.css';`,
     }
+  },
+  async onSuccess() {
+    fs.renameSync('dist/index.css', 'dist/style.css')
   },
 }))
