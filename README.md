@@ -9,7 +9,8 @@
 ## 在线地址
 
 [Demo](https://hemengke1997.github.io/use-antd-resizable-header/)
-[Stackblitz](https://stackblitz.com/edit/use-antd-resizable-header-demo?file=src/App.tsx)
+
+[Stackblitz](https://stackblitz.com/edit/use-antd-resizable-header-demo?file=src%2FApp.tsx)
 
 ## 安装
 
