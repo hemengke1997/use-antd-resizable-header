@@ -117,7 +117,7 @@ export function Component() {
           resetColumns()
         }}
       >
-        重置
+        Reset
       </Button>
     </div>
   )
