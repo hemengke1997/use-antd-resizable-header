@@ -43,7 +43,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "tsc --noEmit && eslint . --fix",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "bump": "bumpp package.json -c --no-push -t --all -x \"npm run changelog\""
   },
   "peerDependencies": {

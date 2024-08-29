@@ -1,5 +1,44 @@
 # [3.0.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.5...v3.0.0) (2024-08-29)
 
+## Breaking Changes
+
+- 废弃了 `cache`
+- 废弃了 `tooltipRender`
+- css 采用 BEM 命名方式
+- css 变量改为 `--resizable-line-background`
+- css 文件重名为 `style.css`
+- `ResizableUniqIdPrefix` 从 `resizable-table-id` 重命名为 `resizable-col-id`
+
+## Feat
+
+- 新增 `refresh` 方法，用于手动刷新组件
+- 新增 `debounceWaitTime`，用于设置 resize窗口时 debounce 的等待时间
+- `resetColumns` 新增入参 `resetStorage` 选项，可以重置storage中的列宽度，默认为 `true`
+- 可给单独列设置以下选项
+```tsx
+type ResizableConfig = {
+  /**
+   * @description 列宽度
+   */
+  width?: WidthType
+  /**
+   * @description 默认列宽度
+   */
+  defaultWidth?: number
+  /**
+   * @description 是否可以拖动
+   */
+  resizable?: boolean
+  /**
+   * @description 最小拖动宽度
+   */
+  minConstraints?: number
+  /**
+   * @description 最大拖动宽度
+   */
+  maxConstraints?: number
+}
+```
 
 ### Bug Fixes
 
