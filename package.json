@@ -42,7 +42,9 @@
     "build:pages": "pnpm run build && cd playground && pnpm run build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "lint": "tsc --noEmit && eslint . --fix",
+    "prepare": "simple-git-hooks",
+    "commitlint": "commitlint -e",
+    "lint": "tsc --noEmit && eslint .",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "bump": "bumpp package.json -c --no-push -t --all -x \"npm run changelog\""
   },
@@ -55,6 +57,7 @@
     "react-resizable": "^3.0.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.4.0",
     "@minko-fe/commitlint-config": "^2.1.2",
     "@minko-fe/eslint-config": "^4.0.0",
     "@minko-fe/prettier-config": "^2.2.3",
@@ -82,12 +85,17 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rimraf": "^6.0.1",
+    "simple-git-hooks": "^2.11.1",
     "terser": "^5.31.6",
     "tsup": "^8.2.4",
     "tsup-plugin-bundleless": "^0.4.0",
     "typescript": "^5.5.4",
     "vite": "^5.4.2",
     "vitest": "^2.0.5"
+  },
+  "simple-git-hooks": {
+    "commit-msg": "npm run commitlint",
+    "pre-commit": "npm run lint"
   },
   "prettier": "@minko-fe/prettier-config",
   "commitlint": {
