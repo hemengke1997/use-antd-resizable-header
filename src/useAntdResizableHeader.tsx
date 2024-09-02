@@ -11,7 +11,7 @@ import ResizableHeader from './ResizableHeader'
 import { type CacheType, type OptionsType, type ResizableColumnType } from './type'
 import { depthFirstSearchWidthSet, isColHidden, isEmpty, isString, isUndefined } from './utils'
 import { DefaultWidth } from './utils/constant'
-import { validateColumnsFlex } from './utils/validateOptions'
+import { validateColumns } from './utils/validateOptions'
 
 function useAntdResizableHeader<ColumnType extends ResizableColumnType = ResizableColumnType>(
   props: OptionsType<ColumnType>,
@@ -27,7 +27,7 @@ function useAntdResizableHeader<ColumnType extends ResizableColumnType = Resizab
     debounceWaitTime = 1000,
   } = props
 
-  validateColumnsFlex(columnsProp)
+  validateColumns(columnsProp)
 
   // cache for avoid column's width reset after re-render
   const widthCache = useRef<Map<string | number, CacheType>>(new Map())
@@ -47,7 +47,7 @@ function useAntdResizableHeader<ColumnType extends ResizableColumnType = Resizab
   const [shouldRender, forceRender] = useReducer((s) => s + 1, 0)
 
   const resetColumns = useMemoizedFn((resetStorage: boolean = true) => {
-    widthCache.current = new Map()
+    widthCache.current.clear()
     resetLocalColumns(resetStorage)
   })
 

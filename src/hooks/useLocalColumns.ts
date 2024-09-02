@@ -10,7 +10,7 @@ interface LocalColumnsProp<T> {
   columns?: T[]
 }
 
-function mergeColumns<T extends any[]>(src: T, target: T, mergeKey: string): T {
+function mergeColumns<T extends ResizableColumnType[]>(src: T, target: T, mergeKey: string): T {
   const res = src
 
   if (Array.isArray(res) && Array.isArray(target)) {
