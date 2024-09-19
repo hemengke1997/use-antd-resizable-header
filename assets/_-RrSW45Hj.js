@@ -1,0 +1,1 @@
+import{r as e,u as o}from"./index-fIK6Az22.js";var r=!!(typeof window<"u"&&window.document&&window.document.createElement),u=r?e.useLayoutEffect:e.useEffect;function n(){const t=o();return u(()=>{t("/",{replace:!0})},[]),null}export{n as default};

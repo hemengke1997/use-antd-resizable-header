@@ -1,0 +1,1 @@
+System.register(["./index-legacy-hQPjQI-J.js"],(function(e,t){"use strict";var n,r,s;return{setters:[function(e){n=e.j,r=e.O,s=e.S}],execute:function(){e({HydrateFallback:function(){return n.jsx("div",{})},default:function(){return n.jsxs(n.Fragment,{children:[n.jsx(r,{}),n.jsx(s,{})]})}})}}}));
