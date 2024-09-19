@@ -1,5 +1,5 @@
-import { useIsomorphicLayoutEffect } from 'ahooks'
 import { useNavigate } from 'react-router-dom'
+import { useIsomorphicLayoutEffect } from 'ahooks'
 
 export default function NotFound() {
   const navigate = useNavigate()

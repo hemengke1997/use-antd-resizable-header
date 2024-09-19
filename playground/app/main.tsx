@@ -1,6 +1,6 @@
 import { startTransition } from 'react'
-import ReactDOM from 'react-dom/client'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
+import ReactDOM from 'react-dom/client'
 import { routes } from 'virtual:remix-flat-routes'
 import './index.css'
 

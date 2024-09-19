@@ -59,8 +59,8 @@ npm i use-antd-resizable-header
 ### Antd Table
 
 ```tsx
-import { Table, type TableColumnsType } from 'antd'
 import { useMemo } from 'react'
+import { Table, type TableColumnsType } from 'antd'
 import { type ResizableColumnsType, useAntdResizableHeader } from 'use-antd-resizable-header'
 
 
@@ -93,8 +93,8 @@ function App() {
 ### ProTable
 
 ```tsx
-import { type ProColumns, ProTable } from '@ant-design/pro-components'
 import { useMemo } from 'react'
+import { type ProColumns, ProTable } from '@ant-design/pro-components'
 
 type Columns = ResizableColumnsType<ProColumns[]>
 
