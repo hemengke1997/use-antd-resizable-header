@@ -26,6 +26,57 @@ type ComponentProp = {
 } & ResizableColumnType &
   ThHTMLAttributes<HTMLTableCellElement>
 
+function resolveThWidthByColgroup(thElement: HTMLTableCellElement) {
+  const tableElement = thElement.closest('table')
+
+  if (tableElement) {
+    const colgroup = tableElement.querySelector('colgroup')
+    const cols = colgroup?.querySelectorAll('col')
+
+    const rows = tableElement.querySelector('thead')?.rows || []
+    const cellPositions: HTMLTableCellElement[][] = []
+
+    for (let i = 0; i < rows.length; i++) {
+      const cells = rows[i].cells
+      let colIndex = 0
+
+      for (let j = 0; j < cells.length; j++) {
+        const cell = cells[j]
+        const rowspan = cell.rowSpan || 1
+        const colspan = cell.colSpan || 1
+        while (cellPositions[i] && cellPositions[i][colIndex]) {
+          colIndex++
+        }
+        for (let r = 0; r < rowspan; r++) {
+          for (let c = 0; c < colspan; c++) {
+            if (!cellPositions[i + r]) {
+              cellPositions[i + r] = []
+            }
+            cellPositions[i + r][colIndex + c] = cell
+          }
+        }
+        colIndex += colspan
+      }
+    }
+
+    const cells = cellPositions[cellPositions.length - 1]
+    const colindex = cells.indexOf(thElement)
+
+    // let w = 0
+    // cols?.forEach((col) => {
+    //   w += col.clientWidth
+    // })
+    // w && onColChange?.(w)
+
+    if (colindex !== -1) {
+      const colWidth = cols?.[colindex]?.clientWidth
+      if (isNumber(colWidth)) {
+        return colWidth
+      }
+    }
+  }
+}
+
 function ResizableHeader(props: ComponentProp) {
   const {
     width,
@@ -57,56 +108,11 @@ function ResizableHeader(props: ComponentProp) {
   const onColWidthChanged = useMemoizedFn((callback?: (width: number) => void) => {
     const fn = () => {
       if (thRef.current) {
-        const thElement = thRef.current
-        const tableElement = thElement.closest('table')
-
-        if (tableElement) {
-          const colgroup = tableElement.querySelector('colgroup')
-          const cols = colgroup?.querySelectorAll('col')
-
-          const rows = tableElement.querySelector('thead')?.rows || []
-          const cellPositions: HTMLTableCellElement[][] = []
-
-          for (let i = 0; i < rows.length; i++) {
-            const cells = rows[i].cells
-            let colIndex = 0
-
-            for (let j = 0; j < cells.length; j++) {
-              const cell = cells[j]
-              const rowspan = cell.rowSpan || 1
-              const colspan = cell.colSpan || 1
-              while (cellPositions[i] && cellPositions[i][colIndex]) {
-                colIndex++
-              }
-              for (let r = 0; r < rowspan; r++) {
-                for (let c = 0; c < colspan; c++) {
-                  if (!cellPositions[i + r]) {
-                    cellPositions[i + r] = []
-                  }
-                  cellPositions[i + r][colIndex + c] = cell
-                }
-              }
-              colIndex += colspan
-            }
-          }
-
-          const cells = cellPositions[cellPositions.length - 1]
-          const colindex = cells.indexOf(thElement)
-
-          // let w = 0
-          // cols?.forEach((col) => {
-          //   w += col.clientWidth
-          // })
-          // w && onColChange?.(w)
-
-          if (colindex !== -1) {
-            const colWidth = cols?.[colindex]?.clientWidth
-            if (isNumber(colWidth)) {
-              setColWidth(colWidth)
-              setResizeWidth(colWidth)
-              callback?.(colWidth)
-            }
-          }
+        const colWidth = resolveThWidthByColgroup(thRef.current)
+        if (colWidth) {
+          setColWidth(colWidth)
+          setResizeWidth(colWidth)
+          callback?.(colWidth)
         }
       }
     }
@@ -156,13 +162,13 @@ function ResizableHeader(props: ComponentProp) {
 
   const onStart = ({}, data: ResizeCallbackData) => {
     if (resizeWidth >= maxWidth || resizeWidth <= minWidth) return
-    setBodyStyle(true)
 
     setResizeWidth(data.size.width)
     onResizeStart?.(data.size.width)
   }
 
   const onSelfResize = ({}, data: ResizeCallbackData) => {
+    setBodyStyle(true)
     setResizeWidth(data.size.width)
   }
 

@@ -1,4 +1,4 @@
-import { definePlugins } from '@minko-fe/postcss-config'
+import { definePlugins } from 'postcss-config-preset'
 
 export default {
   plugins: definePlugins(),
