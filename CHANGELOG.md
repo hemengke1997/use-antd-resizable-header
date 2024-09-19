@@ -8,8 +8,8 @@
 
 ### Features
 
+* tree-shaking
 * log error on dataIndex repeated ([555ffab](https://github.com/hemengke1997/use-antd-resizable-header/commit/555ffaba4de2007a853e295dad7dc266d0b2641c))
-
 
 
 # [3.0.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.5...v3.0.0) (2024-08-29)
