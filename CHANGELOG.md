@@ -1,3 +1,17 @@
+# [3.1.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.0.0...v3.1.0) (2024-09-19)
+
+
+### Bug Fixes
+
+* cursor disappeared on click ([0bfa921](https://github.com/hemengke1997/use-antd-resizable-header/commit/0bfa921317bb3e4a493737c0fb9a51c138d3d257))
+
+
+### Features
+
+* log error on dataIndex repeated ([555ffab](https://github.com/hemengke1997/use-antd-resizable-header/commit/555ffaba4de2007a853e295dad7dc266d0b2641c))
+
+
+
 # [3.0.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v2.9.5...v3.0.0) (2024-08-29)
 
 ## Breaking Changes
