@@ -62,12 +62,6 @@ function resolveThWidthByColgroup(thElement: HTMLTableCellElement) {
     const cells = cellPositions[cellPositions.length - 1]
     const colindex = cells.indexOf(thElement)
 
-    // let w = 0
-    // cols?.forEach((col) => {
-    //   w += col.clientWidth
-    // })
-    // w && onColChange?.(w)
-
     if (colindex !== -1) {
       const colWidth = cols?.[colindex]?.clientWidth
       if (isNumber(colWidth)) {
@@ -100,7 +94,7 @@ function ResizableHeader(props: ComponentProp) {
     ...rest
   } = props
 
-  const [resizeWidth, setResizeWidth] = useSafeState<number>(0)
+  const [resizeWidth, setResizeWidth] = useSafeState<number>(Number(width) || 0)
   const [colWidth, setColWidth] = useSafeState<number>(0)
 
   const thRef = useRef<HTMLTableCellElement>(null)
@@ -129,6 +123,7 @@ function ResizableHeader(props: ComponentProp) {
 
   useEffect(() => {
     if (width) {
+      setResizeWidth(Number(width))
       onColWidthChanged()
     }
   }, [width, shouldRender])
