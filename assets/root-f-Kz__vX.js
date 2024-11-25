@@ -1,1 +1,0 @@
-import{j as t,O as r,S as s}from"./index-fIK6Az22.js";function a(){return t.jsxs(t.Fragment,{children:[t.jsx(r,{}),t.jsx(s,{})]})}function e(){return t.jsx("div",{})}export{e as HydrateFallback,a as default};

@@ -1,1 +1,0 @@
-System.register(["./index-legacy-hQPjQI-J.js"],(function(e,t){"use strict";var n,u;return{setters:[function(e){n=e.u,u=e.r}],execute:function(){e("default",(function(){var e=n();return u.useEffect((function(){e("basic")}),[]),null}))}}}));

@@ -1,0 +1,1 @@
+import{j as t,O as r,l as s}from"./vendor-oS-g8BHz.js";function a(){return t.jsxs(t.Fragment,{children:[t.jsx(r,{}),t.jsx(s,{})]})}function e(){return t.jsx("div",{})}export{e as HydrateFallback,a as default};
