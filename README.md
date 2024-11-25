@@ -62,6 +62,7 @@ npm i use-antd-resizable-header
 import { useMemo } from 'react'
 import { Table, type TableColumnsType } from 'antd'
 import { type ResizableColumnsType, useAntdResizableHeader } from 'use-antd-resizable-header'
+import 'use-antd-resizable-header/dist/style.css'
 
 
 type Columns = ResizableColumnsType<TableColumnsType>
@@ -95,6 +96,8 @@ function App() {
 ```tsx
 import { useMemo } from 'react'
 import { type ProColumns, ProTable } from '@ant-design/pro-components'
+import { type ResizableColumnsType, useAntdResizableHeader } from 'use-antd-resizable-header'
+import 'use-antd-resizable-header/dist/style.css'
 
 type Columns = ResizableColumnsType<ProColumns[]>
 
@@ -121,7 +124,6 @@ function App() {
 ## 修改拖拽背景颜色
 
 ```css
-/* index.css */
 --resizable-line-background: red;
 ```
 

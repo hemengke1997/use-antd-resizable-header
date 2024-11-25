@@ -1,5 +1,5 @@
 import type { TableColumnsType } from 'antd'
-import React from 'react'
+import type React from 'react'
 import { Table } from 'antd'
 import { type ResizableColumnsType, useAntdResizableHeader } from 'use-antd-resizable-header'
 import styles from './index.module.css'

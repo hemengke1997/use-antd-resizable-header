@@ -9,30 +9,30 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
-    "@ant-design/pro-components": "^2.7.19",
+    "@ant-design/pro-components": "^2.8.2",
     "ahooks": "^3.8.1",
-    "antd": "^5.20.6",
+    "antd": "^5.22.2",
     "lodash-es": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "umi-request": "^1.4.0",
     "use-antd-resizable-header": "workspace:*",
-    "vite-config-preset": "^1.1.0"
+    "vite-config-preset": "^1.4.1"
   },
   "devDependencies": {
     "@minko-fe/tsconfig": "^2.1.1",
     "@types/lodash-es": "^4.17.12",
-    "@types/react": "^18.3.7",
-    "@types/react-dom": "^18.3.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
-    "@vitejs/plugin-legacy": "^5.4.2",
-    "@vitejs/plugin-react": "^4.3.1",
-    "postcss": "^8.4.47",
+    "@vitejs/plugin-legacy": "^5.4.3",
+    "@vitejs/plugin-react": "^4.3.3",
+    "postcss": "^8.4.49",
     "postcss-config-preset": "^1.0.0",
-    "tailwindcss": "^3.4.12",
-    "typescript": "^5.6.2",
-    "vite": "^5.4.6",
-    "vite-plugin-remix-flat-routes": "^3.5.4"
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vite-plugin-remix-flat-routes": "^4.2.0-beta.2"
   }
 }

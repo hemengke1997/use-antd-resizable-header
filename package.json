@@ -19,7 +19,7 @@
   },
   "author": "hemengke1997",
   "files": [
-    "dist/"
+    "dist"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -40,9 +40,7 @@
       ]
     }
   },
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": false,
   "scripts": {
     "dev": "rimraf dist && tsup --watch",
     "build": "rimraf dist && tsup",
@@ -63,9 +61,9 @@
     "react-resizable": "^3.0.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.5.0",
+    "@commitlint/cli": "^19.6.0",
     "@minko-fe/commitlint-config": "^2.1.2",
-    "@minko-fe/eslint-config": "^4.0.2",
+    "@minko-fe/eslint-config": "^4.1.1",
     "@minko-fe/prettier-config": "^2.2.3",
     "@minko-fe/tsconfig": "^2.1.1",
     "@testing-library/dom": "^8.20.1",
@@ -73,19 +71,19 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/lodash.debounce": "^4.0.9",
-    "@types/node": "^22.5.5",
-    "@types/react": "^18.3.7",
-    "@types/react-dom": "^18.3.0",
+    "@types/node": "^22.9.3",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@types/react-resizable": "^3.0.8",
-    "@vitest/ui": "^2.1.1",
-    "antd": "^5.20.6",
+    "@vitest/ui": "^2.1.5",
+    "antd": "^5.22.2",
     "autoprefixer": "^10.4.20",
-    "bumpp": "^9.5.2",
+    "bumpp": "^9.8.1",
     "conventional-changelog-cli": "^5.0.0",
-    "eslint": "^9.10.0",
+    "eslint": "^9.15.0",
     "jsdom": "^21.1.2",
     "lodash.debounce": "^4.0.8",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.49",
     "postcss-import": "^16.1.0",
     "postcss-nested": "^6.2.0",
     "postcss-simple-vars": "^7.0.1",
@@ -93,12 +91,12 @@
     "react-dom": "^18.3.1",
     "rimraf": "^6.0.1",
     "simple-git-hooks": "^2.11.1",
-    "terser": "^5.33.0",
-    "tsup": "^8.3.0",
-    "tsup-plugin-bundleless": "^1.0.1",
-    "typescript": "^5.6.2",
-    "vite": "^5.4.6",
-    "vitest": "^2.1.1"
+    "terser": "^5.36.0",
+    "tsup": "8.3.0",
+    "tsup-plugin-bundleless": "^1.2.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
   },
   "simple-git-hooks": {
     "commit-msg": "npm run commitlint",

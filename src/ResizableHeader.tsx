@@ -236,11 +236,9 @@ function ResizableHeader(props: ComponentProp) {
       >
         <div style={{ width: resizeWidth, height: '100%' }} />
       </Resizable>
-      <div
-        {...rest}
-        className={`${NameSpace.CSS}__title${isSimpleChildren() ? '--ellipsis' : ''}`}
-        children={children}
-      ></div>
+      <div {...rest} className={`${NameSpace.CSS}__title${isSimpleChildren() ? '--ellipsis' : ''}`}>
+        {children}
+      </div>
     </th>
   )
 }

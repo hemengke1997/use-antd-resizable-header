@@ -6,5 +6,5 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false
   },
-  "exclude": ["playground"]
+  "exclude": ["playground/**", "**/node_modules", "**/dist"]
 }
