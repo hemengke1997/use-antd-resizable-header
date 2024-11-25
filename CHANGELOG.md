@@ -1,3 +1,12 @@
+# [3.2.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.1.0...v3.2.0) (2024-11-25)
+
+
+### Bug Fixes
+
+* inline css file ([c1701a3](https://github.com/hemengke1997/use-antd-resizable-header/commit/c1701a3e69c1865a1c37ab646cf4af6e3a564b7f))
+
+
+
 # [3.1.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.0.0...v3.1.0) (2024-09-19)
 
 
