@@ -14,6 +14,10 @@ export default function () {
           <Button>Basic Demo</Button>
         </NavLink>
 
+        <NavLink to='row-selection-order'>
+          <Button>RowSelection Order Demo</Button>
+        </NavLink>
+
         <NavLink to='header-group'>
           <Button>Header Group Demo</Button>
         </NavLink>
