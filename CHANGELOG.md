@@ -1,3 +1,19 @@
+## [3.2.2](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.2.1...v3.2.2) (2025-01-07)
+
+
+### Bug Fixes
+
+* JSON.stringify 处理有循环依赖的对象会报错 ([82a0f44](https://github.com/hemengke1997/use-antd-resizable-header/commit/82a0f44d3db176d863aa305bee689c51257bb7d9))
+* object cycle ([e8932f7](https://github.com/hemengke1997/use-antd-resizable-header/commit/e8932f71bb96d4d624ec1b438699ce20ec9afc7a))
+* 开启持久化后列顺序失效问题 ([246941c](https://github.com/hemengke1997/use-antd-resizable-header/commit/246941c667143bf8638d0179e1849a13763951cc))
+
+
+### Features
+
+* 补全列顺序 playground ([e43ee94](https://github.com/hemengke1997/use-antd-resizable-header/commit/e43ee943e5e373396618742f49a57865aaed79da))
+
+
+
 ## [3.2.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.2.0...v3.2.1) (2025-01-07)
 
 
