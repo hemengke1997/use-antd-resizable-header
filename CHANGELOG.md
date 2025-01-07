@@ -1,3 +1,13 @@
+## [3.2.1](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.2.0...v3.2.1) (2025-01-07)
+
+
+### Bug Fixes
+
+* [#107](https://github.com/hemengke1997/use-antd-resizable-header/issues/107) ([96ae6aa](https://github.com/hemengke1997/use-antd-resizable-header/commit/96ae6aaedeffd304461ee2f82dec7a614f2ded94))
+* [#107](https://github.com/hemengke1997/use-antd-resizable-header/issues/107) ([33bfe4f](https://github.com/hemengke1997/use-antd-resizable-header/commit/33bfe4f72d63966920ceb64fa9a7c6c002dbfb8c))
+
+
+
 # [3.2.0](https://github.com/hemengke1997/use-antd-resizable-header/compare/v3.1.0...v3.2.0) (2024-11-25)
 
 
