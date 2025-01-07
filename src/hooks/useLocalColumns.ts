@@ -24,6 +24,10 @@ function mergeColumns<T extends ResizableColumnType[]>(src: T, target: T, mergeK
             const resDataIndex = Array.isArray(res[i].dataIndex) ? res[i].dataIndex.join('-') : res[i].dataIndex
             return targetDataIndex === resDataIndex
           })?.[mergeKey] || res[i][mergeKey]
+        // {} 有可能修改成 { [mergeKey]: undefined }，影响 Table.SELECTION_COLUMN 和 Table.EXPANDABLE_COLUMN 的判断
+        if (res[i][mergeKey] === undefined) {
+          delete res[i][mergeKey]
+        }
       }
     })
   }
