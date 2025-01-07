@@ -42,6 +42,10 @@ export function isFunction(data: unknown): data is Function {
   return typeof data === 'function'
 }
 
+export function isObject(data: unknown): data is Record<string, any> {
+  return Object.prototype.toString.call(data) === '[object Object]'
+}
+
 export function isEmpty(data: unknown) {
   if (typeof data !== 'object' || data === null) {
     return true
@@ -66,5 +70,5 @@ export function isColHidden(col: ResizableColumnType) {
 // 而当组件和业务的 Table 不是同一个引用时，只通过引用值判断会导致内置列被过滤掉
 // fix #107
 export function isReservedColumn(item: ResizableColumnType) {
-  return item && item.constructor === Object && Object.keys(item).length === 0
+  return item && isObject(item) && Object.keys(item).length === 0
 }
