@@ -60,3 +60,12 @@ export function isColHidden(col: ResizableColumnType) {
   // antd@5.13.0 table hidden
   return col.hideInTable || col.hidden
 }
+
+// Table.SELECTION_COLUMN 和 Table.EXPANDABLE_COLUMN 为 {}，会被过滤掉，需要保留
+// 因 Antd 侧只想用 Table.SELECTION_COLUMN 和 Table.EXPANDABLE_COLUMN 的引用值是否相等来判断是否为内置列
+// 而当组件和业务的 Table 不是同一个引用时，只通过引用值判断会导致内置列被过滤掉
+// 故采用 JSON.stringify 判断是否为内置列
+// fix #107
+export function isReservedColumn(item: ResizableColumnType) {
+  return JSON.stringify(item) === '{}'
+}

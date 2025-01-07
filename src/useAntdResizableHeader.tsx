@@ -9,7 +9,7 @@ import { useSafeState } from './hooks/useSafeState'
 import { useUpdateEffect } from './hooks/useUpdateEffect'
 import ResizableHeader from './ResizableHeader'
 import { type CacheType, type OptionsType, type ResizableColumnType } from './type'
-import { depthFirstSearchWidthSet, isColHidden, isEmpty, isString, isUndefined } from './utils'
+import { depthFirstSearchWidthSet, isColHidden, isEmpty, isReservedColumn, isString, isUndefined } from './utils'
 import { DefaultWidth } from './utils/constant'
 import { validateColumns } from './utils/validateOptions'
 
@@ -97,11 +97,6 @@ function useAntdResizableHeader<ColumnType extends ResizableColumnType = Resizab
   })
 
   const getColumns = useMemoizedFn((list: ColumnType[]) => {
-    // Table.SELECTION_COLUMN 和 Table.EXPANDABLE_COLUMN 为 {}，会被过滤掉，需要保留
-    // 因 Antd 侧只想用 Table.SELECTION_COLUMN 和 Table.EXPANDABLE_COLUMN 的引用值是否相等来判断是否为内置列
-    // 而当组件和业务的 Table 不是同一个引用时，只通过引用值判断会导致内置列被过滤掉
-    // 故采用 JSON.stringify 判断是否为内置列
-    const isReservedColumn = (item) => JSON.stringify(item) === '{}'
     const trulyColumns = list?.filter((item) => !isEmpty(item) || isReservedColumn(item))
 
     const c = trulyColumns.map((col) => {
