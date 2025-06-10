@@ -3,6 +3,7 @@
     .ant-table-thead {
       > tr {
         .ant-table-cell-fix-left:first-child {
+          /* 多列fixed需自行调整z-index，越靠前的列，z-index越大 */
           z-index: 3;
         }
       }
